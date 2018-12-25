@@ -121,32 +121,32 @@
 			<artifactId>spring-boot-starter-log4j2</artifactId>
 		</dependency>
 
-		<!-- lucene -->
-		<dependency>
-			<groupId>org.apache.lucene</groupId>
-			<artifactId>lucene-core</artifactId>
-			<version>4.10.3</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.lucene</groupId>
-			<artifactId>lucene-highlighter</artifactId>
-			<version>4.10.3</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.lucene</groupId>
-			<artifactId>lucene-queryparser</artifactId>
-			<version>4.10.3</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.lucene</groupId>
-			<artifactId>lucene-analyzers-common</artifactId>
-			<version>4.10.3</version>
-		</dependency>
-		<dependency>
-			<groupId>com.janeluo</groupId>
-			<artifactId>ikanalyzer</artifactId>
-			<version>2012_u6</version>
-		</dependency>
+		<!-- lucene 7.1版本以下存在依赖项安全漏洞 【git提示】-->
+		<!--<dependency>-->
+			<!--<groupId>org.apache.lucene</groupId>-->
+			<!--<artifactId>lucene-core</artifactId>-->
+			<!--<version>4.10.3</version>-->
+		<!--</dependency>-->
+		<!--<dependency>-->
+			<!--<groupId>org.apache.lucene</groupId>-->
+			<!--<artifactId>lucene-highlighter</artifactId>-->
+			<!--<version>4.10.3</version>-->
+		<!--</dependency>-->
+		<!--<dependency>-->
+			<!--<groupId>org.apache.lucene</groupId>-->
+			<!--<artifactId>lucene-queryparser</artifactId>-->
+			<!--<version>4.10.3</version>-->
+		<!--</dependency>-->
+		<!--<dependency>-->
+			<!--<groupId>org.apache.lucene</groupId>-->
+			<!--<artifactId>lucene-analyzers-common</artifactId>-->
+			<!--<version>4.10.3</version>-->
+		<!--</dependency>-->
+		<!--<dependency>-->
+			<!--<groupId>com.janeluo</groupId>-->
+			<!--<artifactId>ikanalyzer</artifactId>-->
+			<!--<version>2012_u6</version>-->
+		<!--</dependency>-->
 		<!--热部署-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
