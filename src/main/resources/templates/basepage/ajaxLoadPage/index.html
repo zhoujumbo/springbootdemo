@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>局部刷新</title>
+    <meta charset="utf-8">
+</head>
+<body>
+
+<div class="listWrap">
+    <ul class="listMenu">
+        <li class="current" data-id="page1">页面1</li>
+        <li data-id="page2">页面2</li>
+        <li data-id="page3">页面3</li>
+        <li data-id="page4">页面4</li>
+    </ul>
+    <div id="content"></div>
+</div>
+
+    <script src="/libs/jquery/jquery-1.10.1.js"></script>
+    <script>
+        ;(function($){
+
+            $(".listWrap").on("click", "li", function(){
+                var sId = $(this).data("id");  //获取data-id的值
+                window.location.hash = sId;  //设置锚点
+                loadInner(sId);
+            });
+            function loadInner(sId){
+                var sId = window.location.hash;
+                var pathn, i;
+                switch(sId){
+                    case "#page1": pathn = "page1.html"; i = 0; break;
+                    case "#page2": pathn = "page2.html"; i = 1; break;
+                    case "#page3": pathn = "page1.html"; i = 2; break;
+                    case "#page4": pathn = "page2.html"; i = 3; break;
+                    default: pathn = "page1.html"; i = 0; break;
+                }
+                $("#content").load(pathn, function(){
+//                    $.getScript('basepage/js/*****.js');  //
+                }); //加载相对应的内容
+                $(".listMenu li").eq(i).addClass("current").siblings().removeClass("current"); //当前列表高亮
+            }
+            window.location.hash = $('.current').data("id");
+            var sId = window.location.hash;
+            loadInner(sId);
+
+        // 方法2
+//            $.ajax( {
+//
+//                url: url, //这里是静态页的地址
+//
+//                type: "GET", //静态页用get方法，否则服务器会抛出405错误
+//
+//                success: function(data){
+//
+//                    var result = $(data).find("另一个html页面的指定的一部分");
+//
+//                    $("本页面p").html(result);
+//
+//                }
+//
+//            });
+        // 方法3
+            // DOM显示隐藏
+
+
+
+        })(jQuery);
+
+
+    </script>
+</body>
+</html>

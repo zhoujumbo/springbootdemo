@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- 全局参数配置 -->
+<!-- 	<environments default="development">
+		<environment id="development">
+			<transactionManager type="jdbc"/>
+			<dataSource typt="POOLED">
+			<property name="driver" value="com.mysql.jdbc.Driver"/>
+			<property name="url" value="jdbc:mysql://172.31.26.1:13351/bdzh"/>
+			<property name="username" value="usr_bdzh"/>
+			<property name="password" value="usr_bdzh"/>
+			</dataSource>
+		</environment>
+	</environments> -->
+	<settings>
+		<!-- 解决空值映射问题 -->
+		<setting name="callSettersOnNulls" value="true"/>
+		<setting name="cacheEnabled" value="true" />
+		<setting name="lazyLoadingEnabled" value="true" />
+		<setting name="aggressiveLazyLoading" value="true"/>
+		<setting name="multipleResultSetsEnabled" value="true" />
+		<setting name="useColumnLabel" value="true" />
+		<setting name="useGeneratedKeys" value="false" />
+		<setting name="aggressiveLazyLoading" value="true"/>
+		<setting name="defaultExecutorType" value="SIMPLE" />
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
+		<setting name="defaultStatementTimeout" value="25000" />
+		<setting name="localCacheScope" value="SESSION"/>
+		<setting name="logImpl" value="LOG4J" />
+	</settings>
+	
+	<!-- 自定义别名 -->
+	<typeAliases>
+		<!-- 针对单个别名的定义 
+		type:类型的路径
+		alias:别名
+		
+		<typeAlias type="cn.creaway.mybatis.po.User" alias="user"/>
+		-->
+		
+		<!-- 针对批量别名定义 
+		name:指定包名，mybatis会自动扫描该包下的pojo类,给相应的类设置一个别名，别名就是类名(首字母大写或者小写都可以)
+		-->
+		<!--<package name="com.zdbd.entity"/>-->
+		<typeAlias alias="Integer" type="java.lang.Integer" />
+		<typeAlias alias="Long" type="java.lang.Long" />
+		<typeAlias alias="HashMap" type="java.util.HashMap" />
+		<typeAlias alias="LinkedHashMap" type="java.util.LinkedHashMap" />
+		<typeAlias alias="ArrayList" type="java.util.ArrayList" />
+		<typeAlias alias="LinkedList" type="java.util.LinkedList" />
+	</typeAliases>
+	
+	<!-- 加载映射文件 -->
+	<!--<mappers>-->
+		<!--<mapper resource="sqlmap/User.xml"/>
+		--><!--  <mapper resource="mapper/UserMapper.xml"/> -->
+		<!-- 通过mapper接口加载映射文件
+		遵循规范:mapper接口名称和mapper.xml映射文件名称保持一致，且在同一个目录中
+		上边规范的前提是:使用的是mapper代理方法
+		 
+		 <mapper class="cn.creaway.mybatis.mapper.UserMapper"/>
+		 -->
+		 <!-- 通过mapper接口批量加载映射文件
+		 name:指定包名,mybatis会自动扫描包下的所有mapper接口进行加载
+		 遵循规范:mapper接口名称和mapper.xml映射文件名称保持一致，且在同一个目录中
+		上边规范的前提是:使用的是mapper代理方法
+		 
+		  <package name="com.zwgkpage.dao"/>
+		   -->
+	<!--</mappers>-->
+	<!-- 加载拦截器 -->
+	<plugins>
+		<plugin interceptor="interceptor.MybatisInterceptor"></plugin>
+	</plugins>
+</configuration>
