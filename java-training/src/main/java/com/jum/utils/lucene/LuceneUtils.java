@@ -15,6 +15,9 @@ import org.wltea.analyzer.lucene.IKAnalyzer;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 /**
@@ -32,11 +35,12 @@ public class LuceneUtils {
     static {
         try {
             //初始化索引文件存放目录对象
-            directory = FSDirectory.open(new File(INDEX_DIR));
+            directory = FSDirectory.open(Paths.get(INDEX_DIR));
             //初始化IK分词器
             analyzer = new IKAnalyzer();
             //初始化索引的写配置对象
-            IndexWriterConfig indexWriterConfig = new IndexWriterConfig(Version.LATEST, analyzer);
+//            IndexWriterConfig indexWriterConfig = new IndexWriterConfig(Version.LATEST, analyzer);
+            IndexWriterConfig indexWriterConfig = new IndexWriterConfig(analyzer);
             //初始化索引的写对象
             indexWriter = new IndexWriter(directory, indexWriterConfig);
             // 虚拟机退出时关闭

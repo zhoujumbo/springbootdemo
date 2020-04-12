@@ -1,7 +1,5 @@
 package com.demo.iostream;
 
-import org.junit.jupiter.api.Test;
-
 import java.io.*;
 import java.util.StringTokenizer;
 
@@ -30,7 +28,7 @@ public class Example02 {
 
     }
 
-    @Test
+//    @Test
     public void outputStream(){
 
         System.out.println("测试outputStream");
@@ -53,7 +51,7 @@ public class Example02 {
         }
     }
 
-    @Test
+//    @Test
     public void fileReadAndWrite(){
 
         System.out.println("测试FileReadAndWrite");
@@ -76,7 +74,7 @@ public class Example02 {
         }
     }
 
-    @Test
+//    @Test
     public void bufferedReaderAndWriter(){
 
         System.out.println("测试BufferedReaderAnWriter");

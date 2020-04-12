@@ -1,10 +1,9 @@
 package com.demo.thread.demo1;
 
-import org.junit.jupiter.api.Test;
 
 public class ProducerConsumer {
 
-    @Test
+//    @Test
     public void test(){
 
         Godown godown = new Godown(30);

@@ -1,18 +1,13 @@
 package com.demo.iostream.util;
 
-import org.apache.tools.zip.ZipEntry;
-import org.apache.tools.zip.ZipFile;
-import org.apache.tools.zip.ZipOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+
+import java.io.*;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Enumeration;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
+import java.util.zip.ZipOutputStream;
 
 
 /**
@@ -282,7 +277,8 @@ public class FileUtil {
 
         ZipFile zipFile = new ZipFile(zipFileName);
         try {
-            Enumeration<?> e = zipFile.getEntries();
+//            Enumeration<?> e = zipFile.getEntries();
+            Enumeration<?> e = zipFile.entries();
             ZipEntry zipEntry = null;
             createDirectory(outputDirectory, "");
             while (e.hasMoreElements()) {

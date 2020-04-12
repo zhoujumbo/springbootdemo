@@ -2,14 +2,13 @@ package com.demo.thread;
 
 import com.demo.thread.demo1.DeadlockRisk;
 import com.demo.thread.demo1.DoSomething;
-import org.junit.jupiter.api.Test;
 
 /**
  * 简单线程使用
  */
 public class TestRunnable {
 
-    @Test
+//    @Test
     public void test1() throws InterruptedException {
 
         DoSomething ds1 = new DoSomething("zhou");
@@ -23,7 +22,7 @@ public class TestRunnable {
         Thread.sleep(1000);
     }
 
-    @Test
+//    @Test
     public void test2() throws InterruptedException{
 
         DeadlockRisk deadlockRisk = new DeadlockRisk();
