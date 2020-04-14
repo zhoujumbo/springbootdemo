@@ -79,6 +79,12 @@
 			<artifactId>spring-data-commons</artifactId>
 		</dependency>
 
+		<!-- 配置文件信息加密 -->
+		<dependency>
+			<groupId>com.github.ulisesbocchio</groupId>
+			<artifactId>jasypt-spring-boot-starter</artifactId>
+		</dependency>
+
 	</dependencies>
 	<build>
 		<finalName>training</finalName>
