@@ -1,8 +1,9 @@
 package com.java;
 
-import com.customer.basic.support.commons.business.json.util.FastJsonUtil;
+import com.fortunetree.basic.support.commons.business.jackson.JacksonUtil;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -39,12 +40,12 @@ public class Java8Demo {
     }
 
     @Test
-    public void testChangeData(){
-        System.out.println(FastJsonUtil.bean2JsonStr(persons));
+    public void testChangeData() throws IOException {
+        System.out.println(JacksonUtil.toJson(persons));
         persons.stream().forEach(p ->
             p.setAge(100)
         );
-        System.out.println(FastJsonUtil.bean2JsonStr(persons));
+        System.out.println(JacksonUtil.toJson(persons));
 
         // 结论：当然可以修改原数据中的值
     }

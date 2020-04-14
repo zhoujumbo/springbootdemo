@@ -1,13 +1,13 @@
 package com.java;
 
-import com.customer.basic.support.commons.business.json.util.FastJsonUtil;
-import com.customer.blindbox.core.common.constants.OSSImgZoom;
+import com.fortunetree.basic.support.commons.business.jackson.JacksonUtil;
 import lombok.Builder;
 import lombok.Data;
 import org.junit.Test;
 import org.springframework.beans.BeanUtils;
 import org.springframework.util.AntPathMatcher;
 
+import java.io.IOException;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -18,11 +18,11 @@ import static junit.framework.TestCase.assertTrue;
 public class TestDemo {
 
 
-    @Test
-    public void oSSImgZoom(){
-        System.out.println(OSSImgZoom.getJson());
-
-    }
+//    @Test
+//    public void oSSImgZoom(){
+//        System.out.println(OSSImgZoom.getJson());
+//
+//    }
 
     @Test
     public void antPathMatcherTest(){
@@ -174,7 +174,7 @@ public class TestDemo {
     }
 
     @Test
-    public void testClassCopy(){
+    public void testClassCopy() throws IOException {
 
         C c = C.builder()
                 .c1("cccccc")
@@ -190,19 +190,19 @@ public class TestDemo {
                 .a2("aaaa002")
                 .b(b)
                 .c(c).build();
-        System.out.println(FastJsonUtil.bean2JsonStr(a));
+        System.out.println(JacksonUtil.toJson(a));
 
         D d = D.builder().build();
-        System.out.println(FastJsonUtil.bean2JsonStr(d));
+        System.out.println(JacksonUtil.toJson(d));
         E e = E.builder().build();
-        System.out.println(FastJsonUtil.bean2JsonStr(e));
+        System.out.println(JacksonUtil.toJson(e));
 
         BeanUtils.copyProperties(a,d);
-        System.out.println("a:::"+FastJsonUtil.bean2JsonStr(a));
-        System.out.println("d:::"+FastJsonUtil.bean2JsonStr(d));
+        System.out.println("a:::"+JacksonUtil.toJson(a));
+        System.out.println("d:::"+JacksonUtil.toJson(d));
         BeanUtils.copyProperties(a,e);
-        System.out.println("a:::"+FastJsonUtil.bean2JsonStr(a));
-        System.out.println("e:::"+FastJsonUtil.bean2JsonStr(e));
+        System.out.println("a:::"+JacksonUtil.toJson(a));
+        System.out.println("e:::"+JacksonUtil.toJson(e));
 
 
 //        BeanUtils
