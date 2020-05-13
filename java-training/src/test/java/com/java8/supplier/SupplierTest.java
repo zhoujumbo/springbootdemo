@@ -1,12 +1,10 @@
 package com.java8.supplier;
 
-import ch.qos.logback.core.spi.FilterReply;
-import lombok.Data;
-import org.apache.poi.ss.formula.functions.T;
+import jdk.nashorn.internal.objects.annotations.Getter;
 import org.junit.Test;
-import org.springframework.data.util.Lazy;
 import org.springframework.lang.Nullable;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Supplier;
@@ -95,7 +93,6 @@ public class SupplierTest {
     }
 
 
-    @Data
     public class TestSupplier{
         TestSupplier(){
             System.out.println("构造创建");
@@ -103,6 +100,14 @@ public class SupplierTest {
 
         private int var1 = 1;
 
+        public int getVar1() {
+            return var1;
+        }
+
+        public TestSupplier setVar1(int var1) {
+            this.var1 = var1;
+            return this;
+        }
     }
 
 
@@ -204,7 +209,9 @@ public class SupplierTest {
 //            .map(Sku::getPrice)
 //            .orElseGet(() -> 0L);
 
-//    Optional作为一种判空的优雅解决方案，会在我们的日常开发中经常使用到，上面两种写法，使用更多的应该是code1：sku或者sku.price中只要任意一个为空，最终价格都为0;code2写法，在这种情况下，会显得很鸡肋，而且也不好理解，为什么有了orElse方法，还额外提供一个orElseGet方法。
+//    Optional作为一种判空的优雅解决方案，会在我们的日常开发中经常使用到，
+// 上面两种写法，使用更多的应该是code1：sku或者sku.price中只要任意一个为空，
+// 最终价格都为0;code2写法，在这种情况下，会显得很鸡肋，而且也不好理解，为什么有了orElse方法，还额外提供一个orElseGet方法。
 //
 //    再看下面两种方式，稍稍有些区别
 
@@ -237,3 +244,38 @@ public class SupplierTest {
 
     }
 }
+
+
+
+/**
+ * class demo
+ *
+ */
+
+//@Getter
+//public class FinanceDetailCount<T> implements Supplier<T> {
+//    private Supplier<T> supplier;
+//
+//    public static <T> FinanceDetailCount<T> of(Supplier<T> supplier) {
+//        Objects.requireNonNull(supplier, "supplier is null");
+//        if (supplier instanceof FinanceDetailCount) {
+//            return (FinanceDetailCount) supplier;
+//        } else {
+//            return new FinanceDetailCount(supplier);
+//        }
+//    }
+//
+//    private FinanceDetailCount(Supplier<T> supplier) {
+//        this.supplier = supplier;
+//    }
+//
+//    @Override
+//    public T get() {
+//        return supplier.get();
+//    }
+//
+//    public FinanceDetailCount exec(){
+//        // do-something
+//        return this;
+//    }
+//}
