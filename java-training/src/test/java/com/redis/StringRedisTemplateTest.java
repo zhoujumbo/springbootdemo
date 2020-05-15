@@ -2,9 +2,13 @@ package com.redis;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.connection.RedisZSetCommands;
+import org.springframework.data.redis.core.DefaultTypedTuple;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.ZSetOperations;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -128,6 +132,54 @@ public class StringRedisTemplateTest {
      */
     @Test
     public void test06() {
+
+        // add(K key, V value, double score)  添加元素到变量中同时指定元素的分值。
+        redisTemplate.opsForZSet().add("zSetValue","A",1);
+        redisTemplate.opsForZSet().add("zSetValue","B",3);
+        redisTemplate.opsForZSet().add("zSetValue","C",2);
+        redisTemplate.opsForZSet().add("zSetValue","D",5);
+
+        // range(K key, long start, long end)   获取变量指定区间的元素。
+        Set zSetValue = redisTemplate.opsForZSet().range("zSetValue",0,-1);
+        System.out.println("通过range(K key, long start, long end)方法获取指定区间的元素:" + zSetValue);
+
+        // rangeByLex(K key, RedisZSetCommands.Range range) 用于获取满足非score的排序取值。这个排序只有在有相同分数的情况下才能使用，如果有不同的分数则返回值不确定。
+        RedisZSetCommands.Range range = new RedisZSetCommands.Range();
+//range.gt("A");
+        range.lt("D");
+        zSetValue = redisTemplate.opsForZSet().rangeByLex("zSetValue", range);
+        System.out.println("通过rangeByLex(K key, RedisZSetCommands.Range range)方法获取满足非score的排序取值元素:" + zSetValue);
+
+        // rangeByLex(K key, RedisZSetCommands.Range range, RedisZSetCommands.Limit limit)
+        //           用于获取满足非score的设置下标开始的长度排序取值。
+        RedisZSetCommands.Limit limit = new RedisZSetCommands.Limit();
+        limit.count(2);
+        //起始下标为0
+        limit.offset(1);
+        zSetValue = redisTemplate.opsForZSet().rangeByLex("zSetValue", range,limit);
+        System.out.println("通过rangeByLex(K key, RedisZSetCommands.Range range, RedisZSetCommands.Limit limit)方法获取满足非score的排序取值元素:" + zSetValue);
+
+        // add(K key, Set<ZSetOperations.TypedTuple<V>> tuples)
+        //   通过TypedTuple方式新增数据。
+        ZSetOperations.TypedTuple<Object> typedTuple1 = new DefaultTypedTuple<Object>("E",6.0);
+        ZSetOperations.TypedTuple<Object> typedTuple2 = new DefaultTypedTuple<Object>("F",7.0);
+        ZSetOperations.TypedTuple<Object> typedTuple3 = new DefaultTypedTuple<Object>("G",5.0);
+        Set<ZSetOperations.TypedTuple<Object>> typedTupleSet = new HashSet<ZSetOperations.TypedTuple<Object>>();
+        typedTupleSet.add(typedTuple1);
+        typedTupleSet.add(typedTuple2);
+        typedTupleSet.add(typedTuple3);
+        redisTemplate.opsForZSet().add("typedTupleSet",typedTupleSet);
+        zSetValue = redisTemplate.opsForZSet().range("typedTupleSet",0,-1);
+        System.out.println("通过add(K key, Set<ZSetOperations.TypedTuple<V>> tuples)方法添加元素:" + zSetValue);
+
+        // rangeByScore(K key, double min, double max)
+        //    根据设置的score获取区间值。
+        zSetValue = redisTemplate.opsForZSet().rangeByScore("zSetValue",1,2);
+        System.out.println("通过rangeByScore(K key, double min, double max)方法根据设置的score获取区间值:" + zSetValue);
+
+        //
+
+
     }
 
     /**
