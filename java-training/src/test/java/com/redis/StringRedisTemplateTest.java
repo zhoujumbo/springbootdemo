@@ -8,10 +8,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ZSetOperations;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -34,7 +31,7 @@ public class StringRedisTemplateTest {
      * redisTemplate.opsForHash();　　 //操作hash
      * redisTemplate.opsForList();　　 //操作list
      * redisTemplate.opsForSet();　　  //操作set
-     * redisTemplate.opsForZSet();　 　//操作有序set
+     * redisTemplate.opsForZSet();　 　//操作有序zset
      */
 
     /**
@@ -66,10 +63,62 @@ public class StringRedisTemplateTest {
     @Test
     public void test02() {
 
+        // set(K key, V value)  新增一个字符串类型的值，key是键，value是值
+        stringRedisTemplate.opsForValue().set("test", "100");
+
+        // set(K key, V value, long timeout, TimeUnit unit)  设置变量值的过期时间
         stringRedisTemplate.opsForValue().set("test", "100",60*10, TimeUnit.SECONDS);//向redis里存入数据和设置缓存时间
 
-
+        // get(Object key)  获取key键对应的值
         stringRedisTemplate.opsForValue().get("test"); //根据key获取缓存中的val
+
+        // append(K key, String value)  在原有的值基础上新增字符串到末尾
+        stringRedisTemplate.opsForValue().append("key", "appendValue");
+
+        // get(K key, long start, long end) 截取key键对应值得字符串，从开始下标位置开始到结束下标的位置(包含结束下标)的字符串
+        stringRedisTemplate.opsForValue().get("key", 0, 3);
+
+        // getAndSet(K key, V value)  获取原来key键对应的值并重新赋新值
+        stringRedisTemplate.opsForValue().getAndSet("key", "ccc");
+
+        // setBit(K key, long offset, boolean value)  key键对应的值value对应的ascii码,在offset的位置(从左向右数)变为value
+        redisTemplate.opsForValue().setBit("key",1,false);
+
+        // getBit(K key, long offset) 判断指定的位置ASCII码的bit位是否为1
+        boolean bitBoolean = redisTemplate.opsForValue().getBit("key",1);
+
+        // size(K key) 获取指定字符串的长度
+        Long stringValueLength = redisTemplate.opsForValue().size("key");
+
+        // increment(K key, double delta) 以增量的方式将double值存储在变量中
+        double stringValueDouble = redisTemplate.opsForValue().increment("doubleKey",5);
+
+        // increment(K key, long delta)  以增量的方式将long值存储在变量中
+        double stringValueLong = redisTemplate.opsForValue().increment("longKey",6);
+
+        // setIfAbsent(K key, V value)  如果键不存在则新增,存在则不改变已经有的值
+        boolean absentBoolean = redisTemplate.opsForValue().setIfAbsent("absentKey","fff");
+
+        // set(K key, V value, long offset)  覆盖从指定位置开始的值
+        redisTemplate.opsForValue().set("absentKey","dd",1);
+
+        // multiSet(Map<? extends K,? extends V> map)  设置map集合到redis
+        Map valueMap = new HashMap();
+        valueMap.put("valueMap1","map1");
+        valueMap.put("valueMap2","map2");
+        valueMap.put("valueMap3","map3");
+        redisTemplate.opsForValue().multiSet(valueMap);
+
+        // multiGet(Collection<K> keys)   根据集合取出对应的value值
+        List paraList = new ArrayList();
+        paraList.add("valueMap1");
+        paraList.add("valueMap2");
+        paraList.add("valueMap3");
+        List<String> valueList = redisTemplate.opsForValue().multiGet(paraList);
+
+        // multiSetIfAbsent(Map<? extends K,? extends V> map)    如果对应的map集合名称不存在，则添加；如果存在则不做修改
+        redisTemplate.opsForValue().multiSetIfAbsent(valueMap);
+
     }
 
     /**
