@@ -3,10 +3,7 @@ package com.redis;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.connection.RedisZSetCommands;
-import org.springframework.data.redis.core.DefaultTypedTuple;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.data.redis.core.ZSetOperations;
+import org.springframework.data.redis.core.*;
 
 import java.util.*;
 import java.util.concurrent.TimeUnit;
@@ -82,56 +79,136 @@ public class StringRedisTemplateTest {
         stringRedisTemplate.opsForValue().getAndSet("key", "ccc");
 
         // setBit(K key, long offset, boolean value)  key键对应的值value对应的ascii码,在offset的位置(从左向右数)变为value
-        redisTemplate.opsForValue().setBit("key",1,false);
+        stringRedisTemplate.opsForValue().setBit("key",1,false);
 
         // getBit(K key, long offset) 判断指定的位置ASCII码的bit位是否为1
-        boolean bitBoolean = redisTemplate.opsForValue().getBit("key",1);
+        boolean bitBoolean = stringRedisTemplate.opsForValue().getBit("key",1);
 
         // size(K key) 获取指定字符串的长度
-        Long stringValueLength = redisTemplate.opsForValue().size("key");
+        Long stringValueLength = stringRedisTemplate.opsForValue().size("key");
 
         // increment(K key, double delta) 以增量的方式将double值存储在变量中
-        double stringValueDouble = redisTemplate.opsForValue().increment("doubleKey",5);
+        double stringValueDouble = stringRedisTemplate.opsForValue().increment("doubleKey",5);
 
         // increment(K key, long delta)  以增量的方式将long值存储在变量中
-        double stringValueLong = redisTemplate.opsForValue().increment("longKey",6);
+        double stringValueLong = stringRedisTemplate.opsForValue().increment("longKey",6);
 
         // setIfAbsent(K key, V value)  如果键不存在则新增,存在则不改变已经有的值
-        boolean absentBoolean = redisTemplate.opsForValue().setIfAbsent("absentKey","fff");
+        boolean absentBoolean = stringRedisTemplate.opsForValue().setIfAbsent("absentKey","fff");
 
         // set(K key, V value, long offset)  覆盖从指定位置开始的值
-        redisTemplate.opsForValue().set("absentKey","dd",1);
+        stringRedisTemplate.opsForValue().set("absentKey","dd",1);
 
         // multiSet(Map<? extends K,? extends V> map)  设置map集合到redis
         Map valueMap = new HashMap();
         valueMap.put("valueMap1","map1");
         valueMap.put("valueMap2","map2");
         valueMap.put("valueMap3","map3");
-        redisTemplate.opsForValue().multiSet(valueMap);
+        stringRedisTemplate.opsForValue().multiSet(valueMap);
 
         // multiGet(Collection<K> keys)   根据集合取出对应的value值
         List paraList = new ArrayList();
         paraList.add("valueMap1");
         paraList.add("valueMap2");
         paraList.add("valueMap3");
-        List<String> valueList = redisTemplate.opsForValue().multiGet(paraList);
+        List<String> valueList = stringRedisTemplate.opsForValue().multiGet(paraList);
 
         // multiSetIfAbsent(Map<? extends K,? extends V> map)    如果对应的map集合名称不存在，则添加；如果存在则不做修改
-        redisTemplate.opsForValue().multiSetIfAbsent(valueMap);
+        stringRedisTemplate.opsForValue().multiSetIfAbsent(valueMap);
 
     }
 
     /**
      * opsForSet
+     * https://docs.spring.io/spring-data/redis/docs/current/api/org/springframework/data/redis/core/SetOperations.html#randomMember-K-
      */
     @Test
     public void test03() {
 
+        // add(K key, V... values)  向变量中批量添加值
         stringRedisTemplate.opsForSet().add("red_123", "1","2","3");//向指定key中存放set集合
 
-        stringRedisTemplate.opsForSet().isMember("red_123", "1");//根据key查看集合中是否存在指定数据
+        // isMember(K key, Object o) 检查给定的元素是否在变量中
+        boolean isMember = stringRedisTemplate.opsForSet().isMember("red_123", "1");//根据key查看集合中是否存在指定数据
 
-        stringRedisTemplate.opsForSet().members("red_123");//根据key获取set集合
+        // members(K key) 获取变量中的值
+        Set set = stringRedisTemplate.opsForSet().members("red_123");//根据key获取set集合
+
+        // size(K key) 获取变量中值的长度
+        long size = stringRedisTemplate.opsForSet().size("key");
+
+        // randomMember(K key)  随机获取变量中的元素
+        Object randomMember = redisTemplate.opsForSet().randomMember("setValue");
+
+        // randomMembers(K key, long count)  随机获取变量中指定个数的元素
+        List randomMembers = redisTemplate.opsForSet().randomMembers("setValue",2);
+
+        // move(K key, V value, K destKey) 转移变量的元素值到目的变量
+        boolean isMove = redisTemplate.opsForSet().move("setValue","A","destSetValue");
+
+        // pop(K key) 弹出变量中的元素
+        Object popValue = redisTemplate.opsForSet().pop("setValue");
+
+        // remove(K key, Object... values) 批量移除变量中的元素
+        long removeCount = redisTemplate.opsForSet().remove("setValue","E","F","G");
+
+        // scan(K key, ScanOptions options) 匹配获取键值对，ScanOptions.NONE为获取全部键值对；
+        // ScanOptions.scanOptions().match("C").build()匹配获取键位map1的键值对,不能模糊匹配
+        //Cursor<Object> cursor = redisTemplate.opsForSet().scan("setValue", ScanOptions.NONE);
+        Cursor<Object> cursor = redisTemplate.opsForSet().scan("setValue", ScanOptions.scanOptions().match("C").build());
+        while (cursor.hasNext()){
+            Object object = cursor.next();
+            System.out.println("通过scan(K key, ScanOptions options)方法获取匹配的值:" + object);
+        }
+
+        // difference(K key, Collection<K> otherKeys) 通过集合求差值
+        List list = new ArrayList();
+        list.add("destSetValue");
+        Set differenceSet = redisTemplate.opsForSet().difference("setValue",list);
+        System.out.println("通过difference(K key, Collection<K> otherKeys)方法获取变量中与给定集合中变量不一样的值:" + differenceSet);
+
+        // difference(K key, K otherKey)  通过给定的key求2个set变量的差值
+        differenceSet = redisTemplate.opsForSet().difference("setValue","destSetValue");
+        System.out.println("通过difference(K key, Collection<K> otherKeys)方法获取变量中与给定变量不一样的值:" + differenceSet);
+
+        // differenceAndStore(K key, K otherKey, K destKey)  将求出来的差值元素保存
+        redisTemplate.opsForSet().differenceAndStore("setValue","destSetValue","storeSetValue");
+        set = redisTemplate.opsForSet().members("storeSetValue");
+        System.out.println("通过differenceAndStore(K key, K otherKey, K destKey)方法将求出来的差值元素保存:" + set);
+
+        // differenceAndStore(K key, Collection<K> otherKeys, K destKey)
+        //    将求出来的差值元素保存
+        redisTemplate.opsForSet().differenceAndStore("setValue",list,"storeSetValue");
+        set = redisTemplate.opsForSet().members("storeSetValue");
+        System.out.println("通过differenceAndStore(K key, Collection<K> otherKeys, K destKey)方法将求出来的差值元素保存:" + set);
+
+        // distinctRandomMembers(K key, long count) 获取去重的随机元素
+        set = redisTemplate.opsForSet().distinctRandomMembers("setValue",2);
+        System.out.println("通过distinctRandomMembers(K key, long count)方法获取去重的随机元素:" + set);
+
+        // intersect(K key, K otherKey)  获取2个变量中的交集
+        set = redisTemplate.opsForSet().intersect("setValue","destSetValue");
+        System.out.println("通过intersect(K key, K otherKey)方法获取交集元素:" + set);
+
+        // intersect(K key, Collection<K> otherKeys)
+        //    获取多个变量之间的交集
+        set = redisTemplate.opsForSet().intersect("setValue",list);
+        System.out.println("通过intersect(K key, Collection<K> otherKeys)方法获取交集元素:" + set);
+
+        // intersectAndStore(K key, K otherKey, K destKey)
+        //     获取2个变量交集后保存到最后一个参数上
+        redisTemplate.opsForSet().intersectAndStore("setValue","destSetValue","intersectValue");
+        set = redisTemplate.opsForSet().members("intersectValue");
+        System.out.println("通过intersectAndStore(K key, K otherKey, K destKey)方法将求出来的交集元素保存:" + set);
+
+        // intersectAndStore(K key, Collection<K> otherKeys, K destKey)
+        //     获取多个变量的交集并保存到最后一个参数上
+        redisTemplate.opsForSet().intersectAndStore("setValue",list,"intersectListValue");
+        set = redisTemplate.opsForSet().members("intersectListValue");
+        System.out.println("通过intersectAndStore(K key, Collection<K> otherKeys, K destKey)方法将求出来的交集元素保存:" + set);
+
+        //
+
     }
 
     /**
