@@ -16,19 +16,21 @@
             position: relative;
             width: 100%;
         }
+
         .w3layouts-header-title {
             z-index: 1000;
             position: absolute;
             top: 50%;
             left: 50%;
             text-align: center;
-            -webkit-transform: translate(-50%,-50%);
-            -ms-transform: translate(-50%,-50%);
-            transform: translate(-50%,-50%);
+            -webkit-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
             -webkit-backface-visibility: hidden;
             -ms-backface-visibility: hidden;
             backface-visibility: hidden;
         }
+
         .w3layouts-header-title h2 {
             font-weight: 200;
             font-size: 3.5em;
@@ -66,8 +68,8 @@
 <script src="/libs/banner/classie.js"></script>
 <script>
 
-    ;(function(){
-        var banner = $.getJSON("/data/news.json", "", function(data) {
+    ;(function () {
+        var banner = $.getJSON("/data/news.json", "", function (data) {
             console.log(data)
 //            $.each(data.first, function(i, item) {
 //                var str = '<div>姓名:' + item.name + '性别：' + item.sex + '</div>';

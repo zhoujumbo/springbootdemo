@@ -18,34 +18,32 @@ import org.apache.commons.io.IOUtils;
  * @see HttpAccessUtil
  * @since
  */
-public class HttpAccessUtil{
+public class HttpAccessUtil {
 
     /**
      * 采取post方式提交序列化后的object对象 </br>
      * 另请参考：java.io.ObjectInputStream/ObjectOutputStream
-     * @param requestUrl 请求地址
+     *
+     * @param requestUrl       请求地址
      * @param connTimeoutMills 设置连接主机超时，单位：毫秒
      * @param readTimeoutMills 设置从主机读取数据超时，单位：毫秒
      * @param serializedObject 序列化后的object对象
-     *
      * @return remoteHttp返回的结果
      */
     public static String httpPostSerialObject(String requestUrl, int connTimeoutMills,
-                                              int readTimeoutMills, Object serializedObject) throws Exception
-    {
+                                              int readTimeoutMills, Object serializedObject) throws Exception {
         HttpURLConnection httpUrlConn = null;
         InputStream inputStream = null;
         InputStreamReader inputStreamReader = null;
         BufferedReader bufferedReader = null;
         ObjectOutputStream oos = null;
         StringBuffer buffer = new StringBuffer();
-        try
-        {
+        try {
             URL url = new URL(requestUrl);
-            httpUrlConn = (HttpURLConnection)url.openConnection();
+            httpUrlConn = (HttpURLConnection) url.openConnection();
             // 设置content_type=SERIALIZED_OBJECT
             // 如果不设此项,在传送序列化对象时,当WEB服务默认的不是这种类型时可能抛java.io.EOFException
-            httpUrlConn.setRequestProperty("Content-Type","application/x-java-serialized-object");
+            httpUrlConn.setRequestProperty("Content-Type", "application/x-java-serialized-object");
             httpUrlConn.setConnectTimeout(connTimeoutMills);
             httpUrlConn.setReadTimeout(readTimeoutMills);
             // 设置是否向httpUrlConn输出，因为是post请求，参数要放在http正文内，因此需要设为true, 默认情况下是false
@@ -59,8 +57,7 @@ public class HttpAccessUtil{
             httpUrlConn.setRequestMethod("POST");
             httpUrlConn.connect();
 
-            if (serializedObject != null)
-            {
+            if (serializedObject != null) {
                 // 此处getOutputStream会隐含的进行connect，即：如同调用上面的connect()方法，
                 // 所以在开发中不调用上述的connect()也可以，不过建议最好显式调用
                 // write object(impl Serializable) using ObjectOutputStream
@@ -78,31 +75,22 @@ public class HttpAccessUtil{
             bufferedReader = new BufferedReader(inputStreamReader);
 
             String str = null;
-            while ((str = bufferedReader.readLine()) != null)
-            {
+            while ((str = bufferedReader.readLine()) != null) {
                 buffer.append(str);
             }
-        }
-        catch (Exception e)
-        {
-            System.out.println(requestUrl + " error "+ e);
+        } catch (Exception e) {
+            System.out.println(requestUrl + " error " + e);
             throw e;
-        }
-        finally
-        {
-            try
-            {
+        } finally {
+            try {
                 IOUtils.closeQuietly(bufferedReader);
                 IOUtils.closeQuietly(inputStreamReader);
                 IOUtils.closeQuietly(inputStream);
                 IOUtils.closeQuietly(oos);
-                if (httpUrlConn != null)
-                {
+                if (httpUrlConn != null) {
                     httpUrlConn.disconnect();
                 }
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 System.out.println(e);
             }
         }

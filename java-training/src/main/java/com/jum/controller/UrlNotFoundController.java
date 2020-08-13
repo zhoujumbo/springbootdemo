@@ -15,10 +15,10 @@ public class UrlNotFoundController {
 
     @RequestMapping("*")
     @ResponseBody
-    public Map<String, Object> test404(){
+    public Map<String, Object> test404() {
         Map<String, Object> result = new HashMap<String, Object>();
-        result.put("errorCode","404");
-        result.put("errorMsg","服务器错误");
+        result.put("errorCode", "404");
+        result.put("errorMsg", "服务器错误");
         return result;
     }
 }

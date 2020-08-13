@@ -58,19 +58,23 @@ public class AESTest {
 
     /**
      * IV生成器
+     *
      * @return
      */
     static byte[] getIV() throws NoSuchAlgorithmException {
         return IV.getBytes();
     }
+
     static byte[] getIV(String iv) {
-        if(isEmpty(iv) || iv.length()!=16){
+        if (isEmpty(iv) || iv.length() != 16) {
             throw new CipherAesException("IV错误");
         }
         return iv.getBytes();
     }
+
     /**
      * SecretKey生成器
+     *
      * @param keySeed
      * @return
      */
@@ -86,7 +90,7 @@ public class AESTest {
 //            keySeed = "acb#$123";// 默认种子
             keySeed = "customer2019!@#$";// 默认种子
         }
-        if(isEmpty(algorithm)){
+        if (isEmpty(algorithm)) {
             algorithm = "AES";
         }
         try {
@@ -112,8 +116,6 @@ public class AESTest {
     }
 
 
-
-
     String str0 = "a*jal)kzx囙国为国宽"; // 14
     String str1 = "123456781234囙为国宽"; // 16
     String str2 = "a*jal)k32J8czx囙国为国宽"; // 19
@@ -128,13 +130,13 @@ public class AESTest {
     public void method1() throws Exception {
 //        String content = str2;
         String content = "12345678abcdefgh12345678abcdefgh12345678abcdefgh";
-        System.out.println("原始数据长度:"+content.length());
+        System.out.println("原始数据长度:" + content.length());
         try {
             /*
              * 加密
              */
             //5.生成AES密钥
-            SecretKey key = getKey(encryptKey, (String)null);
+            SecretKey key = getKey(encryptKey, (String) null);
             System.out.println("密钥的长度为：" + key.getEncoded().length);
             //6.根据指定算法AES获取密码器
             Cipher cipher = Cipher.getInstance(KEY_ALGORITHM);
@@ -167,7 +169,7 @@ public class AESTest {
         } catch (InvalidKeyException e) {
             e.printStackTrace();
         } catch (IllegalBlockSizeException e) {
-           e.printStackTrace();
+            e.printStackTrace();
         } catch (BadPaddingException e) {
             e.printStackTrace();
         } catch (UnsupportedEncodingException e) {
@@ -186,19 +188,19 @@ public class AESTest {
     @Test
     public void method2() throws Exception {
         String content = str1;
-        System.out.println("原始数据长度:"+content.length());
+        System.out.println("原始数据长度:" + content.length());
         try {
             /*
              * 加密
              */
-            SecretKey key = getKey(encryptKey, (String)null);
+            SecretKey key = getKey(encryptKey, (String) null);
             System.out.println("密钥的长度为：" + key.getEncoded().length);
 
             Cipher cipher = Cipher.getInstance(ALGORITHM_ECB_NOPADDING);
 //            Cipher cipher = Cipher.getInstance(ALGORITHM_CBC_NoPadding);
             cipher.init(Cipher.ENCRYPT_MODE, key); //, new IvParameterSpec(getIV())
             byte[] byte_encode = content.getBytes("utf-8");
-            System.out.println("待加密数组长度:"+byte_encode.length);
+            System.out.println("待加密数组长度:" + byte_encode.length);
             byte[] byte_AES = cipher.doFinal(byte_encode);
             String AES_encode = new String(base64Encode(byte_AES));
             System.out.println("method1-加密：" + AES_encode);
@@ -223,23 +225,23 @@ public class AESTest {
      * use IV
      */
     @Test
-    public  void method3() throws Exception {
+    public void method3() throws Exception {
         String str = "a1";
         String content = "a1";
-        System.out.println("原始数据:"+content);
-        System.out.println("原始数据长度:"+content.length());
+        System.out.println("原始数据:" + content);
+        System.out.println("原始数据长度:" + content.length());
         try {
             /*
              * 加密
              */
-            SecretKey key = getKey(encryptKey, (String)null);
+            SecretKey key = getKey(encryptKey, (String) null);
             System.out.println("密钥的长度为：" + key.getEncoded().length);
 
             Cipher cipher = Cipher.getInstance(ALGORITHM_CBC);
 //            cipher.init(Cipher.ENCRYPT_MODE, key, new IvParameterSpec(getIV())); //, new IvParameterSpec(getIV())
             cipher.init(Cipher.ENCRYPT_MODE, key, new IvParameterSpec("1111111111111111".getBytes())); //, new IvParameterSpec(getIV())
             byte[] byte_encode = content.getBytes("utf-8");
-            System.out.println("待加密数组长度:"+byte_encode.length);
+            System.out.println("待加密数组长度:" + byte_encode.length);
             byte[] byte_AES = cipher.doFinal(byte_encode);
             String AES_encode = new String(base64Encode(byte_AES));
             System.out.println("method1-加密：" + AES_encode);
@@ -263,23 +265,23 @@ public class AESTest {
      * 使用CFB_NOPADDING 算法 加密，默认模式
      */
     @Test
-    public  void method4() throws Exception {
+    public void method4() throws Exception {
 //        String content = "这是一个测hi是啊1234324i！@#￥.%*()&$#=+-?<,/_&";
         String content = "222222222222222";
-        System.out.println("原始数据:"+content);
-        System.out.println("原始数据长度:"+content.length());
+        System.out.println("原始数据:" + content);
+        System.out.println("原始数据长度:" + content.length());
         try {
             /*
              * 加密
              */
-            SecretKey key = getKey(encryptKey, (String)null);
+            SecretKey key = getKey(encryptKey, (String) null);
             System.out.println("密钥的长度为：" + key.getEncoded().length);
 
 //            Cipher cipher = Cipher.getInstance(ALGORITHM_CFB_PKCS5Padding);
             Cipher cipher = Cipher.getInstance(ALGORITHM_CFB_NOPADDING);
             cipher.init(Cipher.ENCRYPT_MODE, key, new IvParameterSpec(getIV())); //, new IvParameterSpec(getIV())
             byte[] byte_encode = content.getBytes("utf-8");
-            System.out.println("待加密数组长度:"+byte_encode.length);
+            System.out.println("待加密数组长度:" + byte_encode.length);
             byte[] byte_AES = cipher.doFinal(byte_encode);
             String AES_encode = new String(base64Encode(byte_AES));
             System.out.println("method1-加密：" + AES_encode);
@@ -304,37 +306,37 @@ public class AESTest {
     public void method5() throws Exception {
         String[] keys = {
                 "这是一个测hi是啊1234324i!！@#￥.%*(  )&$#=+-?<,/_&"
-                ,"r"
-                ,"root"
-                ,"qwertyuiopasdfg"
-                ,"这是一个测试，呵呵。"
-                ,"222222222222222"
-                ,"22222222222222X"
-                ,"111111111111111111"
-                ,"11111111111111111X"
-                ,"18311119999"
-                ,"ksjdhflksadjfkajdkjfalkdhflakjdflakjdfhlakdhflkajdhflakdjflakdhfakjdfhlajdhflakjdhfalkjdfhaljkdhflaoiuvadf=-sdf"
+                , "r"
+                , "root"
+                , "qwertyuiopasdfg"
+                , "这是一个测试，呵呵。"
+                , "222222222222222"
+                , "22222222222222X"
+                , "111111111111111111"
+                , "11111111111111111X"
+                , "18311119999"
+                , "ksjdhflksadjfkajdkjfalkdhflakjdflakjdfhlakdhflkajdhflakdjflakdhfakjdfhlajdhflakjdhfalkjdfhaljkdhflaoiuvadf=-sdf"
         };
         for (String key : keys) {
             System.out.print(key + " | ");
-            String encryptString = AESUtil.encode(key,"abc123");
+            String encryptString = AESUtil.encode(key, "abc123");
             System.out.print(encryptString + " | ");
-            String decryptString = AESUtil.decode(encryptString,"abc123");
+            String decryptString = AESUtil.decode(encryptString, "abc123");
             System.out.println(decryptString);
         }
     }
 
 
-
     /**
      * AES加密
-     * @param content 待加密的内容
+     *
+     * @param content    待加密的内容
      * @param encryptKey 加密密钥
      * @return 加密后的byte[]
      * @throws Exception
      */
     public static byte[] aesEncryptToBytes(String content, String encryptKey) throws Exception {
-        if(isEmpty(content) || isEmpty(encryptKey)){
+        if (isEmpty(content) || isEmpty(encryptKey)) {
             return null;
         }
         KeyGenerator kgen = KeyGenerator.getInstance(KEY_ALGORITHM);
@@ -345,10 +347,12 @@ public class AESTest {
 
         return cipher.doFinal(content.getBytes("utf-8"));
     }
+
     /**
      * AES解密
+     *
      * @param encryptBytes 待解密的byte[]
-     * @param decryptKey 解密密钥
+     * @param decryptKey   解密密钥
      * @return 解密后的String
      * @throws Exception
      */
@@ -362,27 +366,31 @@ public class AESTest {
 
         return new String(decryptBytes);
     }
+
     /**
      * base 64 加密
+     *
      * @param bytes 待编码的byte[]
      * @return 编码后的base 64 code
      */
-    public static String base64Encode(byte[] bytes){
+    public static String base64Encode(byte[] bytes) {
         return new BASE64Encoder().encode(bytes);
     }
 
     /**
      * base 64 解密
+     *
      * @param base64Code 待解码的base 64 code
      * @return 解码后的byte[]
      * @throws Exception
      */
-    public static byte[] base64Decode(String base64Code) throws Exception{
+    public static byte[] base64Decode(String base64Code) throws Exception {
         return isEmpty(base64Code) ? null : new BASE64Decoder().decodeBuffer(base64Code);
     }
 
     /**
      * 将base 64 code AES解密
+     *
      * @param encryptStr 待解密的base 64 code
      * @param decryptKey 解密密钥
      * @return 解密后的string
@@ -394,7 +402,8 @@ public class AESTest {
 
     /**
      * AES加密为base 64 code
-     * @param content 待加密的内容
+     *
+     * @param content    待加密的内容
      * @param encryptKey 加密密钥
      * @return 加密后的base 64 code
      * @throws Exception
@@ -402,8 +411,10 @@ public class AESTest {
     public static String aesEncrypt(String content, String encryptKey) throws Exception {
         return base64Encode(aesEncryptToBytes(content, encryptKey));
     }
+
     /**
      * From java lang3
+     *
      * @param cs
      * @return
      */
@@ -413,6 +424,7 @@ public class AESTest {
 
     /**
      * From java lang3
+     *
      * @param cs
      * @return
      */

@@ -39,7 +39,7 @@ public class ControllerTest {
     }
 
     @Before
-    public void setup(){
+    public void setup() {
         mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
     }
 
@@ -280,6 +280,7 @@ public class ControllerTest {
 //                .andReturn().getResponse().getContentAsString();
 //        System.out.println(">>>>>>>>>> goodsGridTest >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n"+result);
     }
+
     // 商品集合
     @Test
     public void goodsListTest() throws Exception {
@@ -293,6 +294,7 @@ public class ControllerTest {
 //                .andReturn().getResponse().getContentAsString();
 //        System.out.println(">>>>>>>>>> goodsListTest >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n"+result);
     }
+
     // 商品新增
     @Test
     public void goodsSaveTest() throws Exception {
@@ -315,6 +317,7 @@ public class ControllerTest {
 //                .andReturn().getResponse().getContentAsString();  //将相应的数据转换为字符串
 //        System.out.println(">>>>>>>>>> goodsSaveTest >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n"+result);
     }
+
     // 商品更新
     @Test
     public void goodsUpdateTest() throws Exception {
@@ -338,6 +341,7 @@ public class ControllerTest {
 //                .andReturn().getResponse().getContentAsString();  //将相应的数据转换为字符串
 //        System.out.println(">>>>>>>>>> goodsUpdateTest >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n"+result);
     }
+
     // 商品删除
     @Test
     public void goodsDelTest() throws Exception {
@@ -350,6 +354,7 @@ public class ControllerTest {
 //                .andReturn().getResponse().getContentAsString();  //将相应的数据转换为字符串
 //        System.out.println(">>>>>>>>>> goodsUpdateTest >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n"+result);
     }
+
     // 商品下载
     @Test
     public void goodsDownloadTest() throws Exception {
@@ -362,6 +367,7 @@ public class ControllerTest {
 //        ).andExpect(status().isOk())//返回的状态是200
 //                .andReturn().getResponse().getContentAsString();
     }
+
     // 商品同步
     @Test
     public void goodsSyncTest() throws Exception {
@@ -375,16 +381,6 @@ public class ControllerTest {
 //                .andReturn().getResponse().getContentAsString();
 //        System.out.println(">>>>>>>>>> goodsSyncTest >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n"+result);
     }
-
-
-
-
-
-
-
-
-
-
 
 
 }

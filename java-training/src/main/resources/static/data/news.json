@@ -1,21 +1,23 @@
 [
   {
-    "id":1,
-    "title":"每一滴水都折射出一个多彩的世界，每一双眼睛都嵌进一个多彩的世界",
-    "imgSrc":"img/1.jpg",
-    "url":"http://www.baidu.com",
-    "alt":"Image 1"
-  },{
-    "id":1,
-    "title":"每两滴水都折射出一个多彩的世界，每一双眼睛都嵌进一个多彩的世界",
-    "imgSrc":"img/2.jpg",
-    "url":"http://www.baidu.com",
-    "alt":"Image 1"
-  },{
-  "id":1,
-  "title":"每三滴水都折射出一个多彩的世界，每一双眼睛都嵌进一个多彩的世界都嵌进一个多彩的世都嵌进一个多彩的世",
-  "imgSrc":"img/3.jpg",
-  "url":"http://www.baidu.com",
-  "alt":"Image 1"
+    "id": 1,
+    "title": "每一滴水都折射出一个多彩的世界，每一双眼睛都嵌进一个多彩的世界",
+    "imgSrc": "img/1.jpg",
+    "url": "http://www.baidu.com",
+    "alt": "Image 1"
+  },
+  {
+    "id": 1,
+    "title": "每两滴水都折射出一个多彩的世界，每一双眼睛都嵌进一个多彩的世界",
+    "imgSrc": "img/2.jpg",
+    "url": "http://www.baidu.com",
+    "alt": "Image 1"
+  },
+  {
+    "id": 1,
+    "title": "每三滴水都折射出一个多彩的世界，每一双眼睛都嵌进一个多彩的世界都嵌进一个多彩的世都嵌进一个多彩的世",
+    "imgSrc": "img/3.jpg",
+    "url": "http://www.baidu.com",
+    "alt": "Image 1"
   }
 ]

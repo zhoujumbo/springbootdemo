@@ -6,13 +6,14 @@ package com.demo.nonlinear.node;
  * Date   2018/5/27
  */
 public class BiTreeNode {
-    public Object data;			//结点的数据域
-    public BiTreeNode lchild;	//左子结点域
-    public BiTreeNode rchild;	//右子结点域
+    public Object data;            //结点的数据域
+    public BiTreeNode lchild;    //左子结点域
+    public BiTreeNode rchild;    //右子结点域
 
     public BiTreeNode() {
         this(null);
     }
+
     public BiTreeNode(Object data) {
         this(data, null, null);
     }

@@ -12,8 +12,8 @@ import org.jasypt.util.text.BasicTextEncryptor;
 public class Jasypt {
 
     /**
-     *
      * ENC(6eaMh/RX5oXUVca9ignvtg==)
+     *
      * @param args
      */
     public static void main(String[] args) {

@@ -1,18 +1,13 @@
 package com.java;
 
 
-import com.jibug.cetty.sample.SampleApplication;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.ScanOptions;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
@@ -20,8 +15,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest(classes = SampleApplication.class)
+//@RunWith(SpringJUnit4ClassRunner.class)
+//@SpringBootTest(classes = SampleApplication.class)
 @Transactional
 public class RedisSetTest {
 
@@ -59,7 +54,6 @@ public class RedisSetTest {
         //打印集合2
         printSet("chinese-games");
     }
-
 
 
     @Test
@@ -156,29 +150,29 @@ public class RedisSetTest {
 
         long bTime1 = System.currentTimeMillis();
         redisTemplate.executePipelined((RedisCallback<String>) connection -> {
-            for(int i =0;i<10000;i++){
+            for (int i = 0; i < 10000; i++) {
                 connection.set(redisTemplate.getStringSerializer().serialize(key)
-                        , redisTemplate.getStringSerializer().serialize("abc"+i));
+                        , redisTemplate.getStringSerializer().serialize("abc" + i));
             }
             return null;
-        },new StringRedisSerializer());
+        }, new StringRedisSerializer());
         long eTime1 = System.currentTimeMillis();
-        System.out.println("共耗时："+(eTime1-bTime1));
+        System.out.println("共耗时：" + (eTime1 - bTime1));
 
         long bTime2 = System.currentTimeMillis();
 //        Set<String> a =  redisTemplate.opsForSet().members(key);
         List<Object> a = redisTemplate.executePipelined(new RedisCallback<String>() {
             @Override
             public String doInRedis(RedisConnection connection) throws DataAccessException {
-                for(int i =0;i<10000;i++){
+                for (int i = 0; i < 10000; i++) {
                     connection.get(redisTemplate.getStringSerializer().serialize(key));
                 }
                 return null;
             }
-        },new StringRedisSerializer());
+        }, new StringRedisSerializer());
         long eTime2 = System.currentTimeMillis();
-        System.out.println("共耗时："+(eTime2-bTime2));
-        System.out.println("size::"+a.size());
+        System.out.println("共耗时：" + (eTime2 - bTime2));
+        System.out.println("size::" + a.size());
 
         long bTime3 = System.currentTimeMillis();
 //        Set<String> a =  redisTemplate.opsForSet().members(key);
@@ -187,18 +181,18 @@ public class RedisSetTest {
             public String doInRedis(RedisConnection connection) throws DataAccessException {
                 connection.openPipeline();
                 try {
-                    for(int i =0;i<10000;i++){
+                    for (int i = 0; i < 10000; i++) {
                         connection.get(redisTemplate.getStringSerializer().serialize(key));
                     }
-                }finally {
+                } finally {
                     connection.closePipeline();
                 }
                 return null;
             }
-        },new StringRedisSerializer());
+        }, new StringRedisSerializer());
         long eTime3 = System.currentTimeMillis();
-        System.out.println("共耗时："+(eTime3-bTime3));
-        System.out.println("size::"+aa.size());
+        System.out.println("共耗时：" + (eTime3 - bTime3));
+        System.out.println("size::" + aa.size());
 
 
 //        System.out.println("size::"+conn.hLen(redisTemplate.getStringSerializer().serialize(key)));
@@ -220,14 +214,14 @@ public class RedisSetTest {
 
         long bTime1 = System.currentTimeMillis();
         redisTemplate.executePipelined((RedisCallback<String>) connection -> {
-            for(int i =0;i<10000;i++){
+            for (int i = 0; i < 10000; i++) {
                 connection.sAdd(redisTemplate.getStringSerializer().serialize(key)
-                        ,redisTemplate.getStringSerializer().serialize("abc"));
+                        , redisTemplate.getStringSerializer().serialize("abc"));
             }
             return null;
         });
         long eTime1 = System.currentTimeMillis();
-        System.out.println("共耗时："+(eTime1-bTime1));
+        System.out.println("共耗时：" + (eTime1 - bTime1));
 
 //        long bTime2 = System.currentTimeMillis();
 //        List<Object> a = redisTemplate.executePipelined((RedisCallback<String>) connection -> {
@@ -245,19 +239,20 @@ public class RedisSetTest {
             connection.openPipeline();
             connection.sMembers(redisTemplate.getStringSerializer().serialize(key));
             return null;
-        },new StringRedisSerializer());
+        }, new StringRedisSerializer());
         long eTime3 = System.currentTimeMillis();
-        System.out.println("共耗时："+(eTime3-bTime3));
-        System.out.println("size::"+aa.size());
+        System.out.println("共耗时：" + (eTime3 - bTime3));
+        System.out.println("size::" + aa.size());
 
         conn.del(redisTemplate.getStringSerializer().serialize(key));
     }
 
     /**
-     *  打印集合
+     * 打印集合
+     *
+     * @param key
      * @date 2019年2月12日
      * @author baipengfei
-     * @param key
      */
     private void printSet(String key) {
         //获取所有成员
@@ -280,7 +275,7 @@ public class RedisSetTest {
                     throws DataAccessException {
                 for (String str : list) {
                     byte[] rawStr = valueSerializer.serialize(str);
-                //在set中添加数据
+                    //在set中添加数据
                     connection.sAdd(rawKey, rawStr);
                 }
                 connection.closePipeline();
@@ -289,8 +284,6 @@ public class RedisSetTest {
         });
         return null;
     }
-
-
 
 
 }

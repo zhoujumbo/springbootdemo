@@ -1,8 +1,6 @@
 package com.java;
 
 import com.fortunetree.basic.support.commons.business.jackson.JacksonUtil;
-import lombok.Builder;
-import lombok.Data;
 import org.junit.Test;
 import org.springframework.beans.BeanUtils;
 import org.springframework.util.AntPathMatcher;
@@ -25,7 +23,7 @@ public class TestDemo {
 //    }
 
     @Test
-    public void antPathMatcherTest(){
+    public void antPathMatcherTest() {
         AntPathMatcher antPathMatcher = new AntPathMatcher();
         assertTrue(antPathMatcher.match("/{spring:\\d+}/{id:\\d+}", "/12/3"));
 
@@ -108,7 +106,7 @@ public class TestDemo {
 
         assertFalse(antPathMatcher.match("/x/x/**/bla", "/x/x/x/"));
 
-        assertTrue(antPathMatcher.match("/foo/bar/**", "/foo/bar")) ;
+        assertTrue(antPathMatcher.match("/foo/bar/**", "/foo/bar"));
 
         assertTrue(antPathMatcher.match("", ""));
 
@@ -117,30 +115,22 @@ public class TestDemo {
     }
 
 
-
-
-
-
-
-
-
     @Test
-    public void test2(){
-        Pattern p=Pattern.compile("^[0-2]{1}$");
-        Matcher m=p.matcher("a");
-        if(!m.find()){
+    public void test2() {
+        Pattern p = Pattern.compile("^[0-2]{1}$");
+        Matcher m = p.matcher("a");
+        if (!m.find()) {
             System.out.println("参数不对");
-        }else{
+        } else {
             System.out.println("参数通过");
         }
     }
 
 
     @Test
-    public void testJSTErpStore(){
+    public void testJSTErpStore() {
 
 //        System.out.println(jstStoreService.getStoreInfo(JstConstamts.nicks));
-
 
 
 //        String str = "{\"shops\":[{\"shop_id\":10497387,\"shop_name\":\"拆呗\",\"shop_site\":\"商家自有商城\",\"shop_url\":\"\",\"created\":\"2019-08-19 17:02:38\",\"nick\":\"拆王\",\"session_expired\":null,\"session_uid\":null,\"short_name\":\"拆呗\"}],\"code\":0,\"issuccess\":true,\"msg\":null}";
@@ -155,18 +145,18 @@ public class TestDemo {
 
 
     @Test
-    public void testMapFunc(){
+    public void testMapFunc() {
 
-        Map<String,List<String>> listMap = new HashMap<>();
+        Map<String, List<String>> listMap = new HashMap<>();
 //        System.out.println(listMap.putIfAbsent("aaa","bbb"));
 //        System.out.println(listMap.computeIfAbsent ("aaa",k->"aaa"));
 //        System.out.println(listMap.computeIfAbsent ("aaa",k->"bbb"));
 //        System.out.println(listMap.get ("aaa"));
 //        System.out.println(listMap.computeIfAbsent ("ccc",k->"ccc"));
 
-        List<String> item = Arrays.asList("a","a","a","d","e","f","g");
-        item.parallelStream().forEach(i->{
-            listMap.computeIfAbsent(i ,k->new ArrayList<>()).add(i);
+        List<String> item = Arrays.asList("a", "a", "a", "d", "e", "f", "g");
+        item.parallelStream().forEach(i -> {
+            listMap.computeIfAbsent(i, k -> new ArrayList<>()).add(i);
         });
 
         System.out.println(listMap.get("a"));
@@ -176,33 +166,33 @@ public class TestDemo {
     @Test
     public void testClassCopy() throws IOException {
 
-        C c = C.builder()
-                .c1("cccccc")
-                .c2(1)
-                .build();
-
-        B b = B.builder()
-                .b1("bbbbbb1111")
-                .b2(2)
-                .c(c).build();
-        A a = A.builder()
-                .a1("aaaa001")
-                .a2("aaaa002")
-                .b(b)
-                .c(c).build();
-        System.out.println(JacksonUtil.toJson(a));
-
-        D d = D.builder().build();
-        System.out.println(JacksonUtil.toJson(d));
-        E e = E.builder().build();
-        System.out.println(JacksonUtil.toJson(e));
-
-        BeanUtils.copyProperties(a,d);
-        System.out.println("a:::"+JacksonUtil.toJson(a));
-        System.out.println("d:::"+JacksonUtil.toJson(d));
-        BeanUtils.copyProperties(a,e);
-        System.out.println("a:::"+JacksonUtil.toJson(a));
-        System.out.println("e:::"+JacksonUtil.toJson(e));
+//        C c = C.builder()
+//                .c1("cccccc")
+//                .c2(1)
+//                .build();
+//
+//        B b = B.builder()
+//                .b1("bbbbbb1111")
+//                .b2(2)
+//                .c(c).build();
+//        A a = A.builder()
+//                .a1("aaaa001")
+//                .a2("aaaa002")
+//                .b(b)
+//                .c(c).build();
+//        System.out.println(JacksonUtil.toJson(a));
+//
+//        D d = D.builder().build();
+//        System.out.println(JacksonUtil.toJson(d));
+//        E e = E.builder().build();
+//        System.out.println(JacksonUtil.toJson(e));
+//
+//        BeanUtils.copyProperties(a, d);
+//        System.out.println("a:::" + JacksonUtil.toJson(a));
+//        System.out.println("d:::" + JacksonUtil.toJson(d));
+//        BeanUtils.copyProperties(a, e);
+//        System.out.println("a:::" + JacksonUtil.toJson(a));
+//        System.out.println("e:::" + JacksonUtil.toJson(e));
 
 
 //        BeanUtils
@@ -210,36 +200,35 @@ public class TestDemo {
 }
 
 
-
-
-@Data
-@Builder(toBuilder = true)
-class A{
+//@Data
+//@Builder(toBuilder = true)
+class A {
     private String a1;
     private String a2;
     private String a3;
     private B b;
     private C c;
 }
-@Data
-@Builder(toBuilder = true)
-class B{
+
+//@Data
+//@Builder(toBuilder = true)
+class B {
     private String b1;
     private int b2;
     private C c;
 }
 
-@Data
-@Builder(toBuilder = true)
-class C{
+//@Data
+//@Builder(toBuilder = true)
+class C {
     private String c1;
     private int c2;
 
 }
 
-@Data
-@Builder(toBuilder = true)
-class D{
+//@Data
+//@Builder(toBuilder = true)
+class D {
     private String a1;
     private int a2;
     private String a3;
@@ -247,9 +236,9 @@ class D{
     private C c;
 }
 
-@Data
-@Builder(toBuilder = true)
-class E{
+//@Data
+//@Builder(toBuilder = true)
+class E {
     private String e1;
     private String a3;
     private B bb;

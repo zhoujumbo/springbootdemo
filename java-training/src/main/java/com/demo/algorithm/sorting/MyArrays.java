@@ -27,13 +27,13 @@ public class MyArrays {
         if (arr.length == 0) {
             return arr;
         }
-        int i, j ,temp;
+        int i, j, temp;
         for (i = 1; i < arr.length; i++) {
-            temp = arr[i];				//暂存待插入数据
+            temp = arr[i];                //暂存待插入数据
             for (j = i - 1; j >= 0 && arr[j] > temp; j--) {
-                arr[j + 1] = arr[j];	//将前面比arr[i]大的数据向后移动
+                arr[j + 1] = arr[j];    //将前面比arr[i]大的数据向后移动
             }
-            arr[j + 1] = temp;			//插入到j+1的位置
+            arr[j + 1] = temp;            //插入到j+1的位置
         }
         return arr;
     }
@@ -50,7 +50,7 @@ public class MyArrays {
         }
         int i, j, temp;
         for (int k = 0; k < d.length; k++) {
-            int dk = d[k];			//取增量，注意最后一次增量值必须是1
+            int dk = d[k];            //取增量，注意最后一次增量值必须是1
             for (i = dk; i < arr.length; i++) {
                 temp = arr[i];
                 for (j = i - dk; j >= 0 && arr[j] > temp; j -= dk) {
@@ -76,9 +76,9 @@ public class MyArrays {
         boolean flag = true;
         for (i = 1; i < arr.length && flag; i++) {
             flag = false;
-            for (j = 0; j < arr.length-i; j++) {
+            for (j = 0; j < arr.length - i; j++) {
                 if (arr[j] > arr[j + 1]) {
-                    swap(arr, j, j+1);
+                    swap(arr, j, j + 1);
                     flag = true;
                 }//一次交换都未发生时，为false，表明已排序好
             }
@@ -95,17 +95,18 @@ public class MyArrays {
     public static int[] quickSort(int[] arr, int low, int high) {
         if (low < high) {
             int pivotLoc = partition(arr, low, high);
-            quickSort(arr, low, pivotLoc-1);	//低子表递归排序
-            quickSort(arr, pivotLoc+1, high);	//高字表递归排序
+            quickSort(arr, low, pivotLoc - 1);    //低子表递归排序
+            quickSort(arr, pivotLoc + 1, high);    //高字表递归排序
         }
         return arr;
     }
+
     //一趟快速排序
     private static int partition(int[] arr, int i, int j) {
-        int pivot = arr[i];		//暂存基准数据
+        int pivot = arr[i];        //暂存基准数据
         while (i != j) {
             while (i < j && arr[j] >= pivot) {
-                j--;			//从后遍历查找小于基准的数据
+                j--;            //从后遍历查找小于基准的数据
             }
             if (i < j) {
                 arr[i] = arr[j];
@@ -113,7 +114,7 @@ public class MyArrays {
             }
 
             while (i < j && arr[i] <= pivot) {
-                i++;			//从前遍历查找大于基准的数据
+                i++;            //从前遍历查找大于基准的数据
             }
             if (i < j) {
                 arr[j] = arr[i];
@@ -136,7 +137,7 @@ public class MyArrays {
         }
         for (int i = 0; i < arr.length; i++) {
             int min = i;
-            for (int j = i+1; j < arr.length; j++) {
+            for (int j = i + 1; j < arr.length; j++) {
                 if (arr[j] < arr[i])
                     min = j;
             }
@@ -160,6 +161,7 @@ public class MyArrays {
         int[] right = Arrays.copyOfRange(arr, mid, arr.length);
         return merge(mergeSort(left), mergeSort(right));
     }
+
     //将两段排序好的数组结合成一个排序数组
     private static int[] merge(int[] left, int[] right) {
         int[] r = new int[left.length + right.length];
@@ -181,7 +183,7 @@ public class MyArrays {
      */
     public static void main(String[] args) {
 
-        int[] arr = {7,2,4,5,3,6,2,8};
+        int[] arr = {7, 2, 4, 5, 3, 6, 2, 8};
         int[] brr = MyArrays.insertSort(arr);
         System.out.println(Arrays.toString(brr));
 
@@ -192,7 +194,7 @@ public class MyArrays {
         brr = MyArrays.bubbleSort(arr);
         System.out.println(Arrays.toString(brr));
 
-        brr = MyArrays.quickSort(arr, 0, arr.length-1);
+        brr = MyArrays.quickSort(arr, 0, arr.length - 1);
         System.out.println(Arrays.toString(brr));
 
         brr = MyArrays.selectSort(arr);

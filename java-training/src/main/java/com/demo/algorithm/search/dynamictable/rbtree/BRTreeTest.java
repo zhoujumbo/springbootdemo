@@ -14,11 +14,11 @@ public class BRTreeTest {
         RBTree<Integer> tree = new RBTree<Integer>();
 
         System.out.printf("== 原始数据: ");
-        for(i=0; i<ilen; i++)
+        for (i = 0; i < ilen; i++)
             System.out.printf("%d ", a[i]);
         System.out.printf("\n");
 
-        for(i=0; i<ilen; i++) {
+        for (i = 0; i < ilen; i++) {
             tree.insert(a[i]);
             // 设置mDebugInsert=true,测试"添加函数"
             if (mDebugInsert) {
@@ -47,8 +47,7 @@ public class BRTreeTest {
 
         // 设置mDebugDelete=true,测试"删除函数"
         if (mDebugDelete) {
-            for(i=0; i<ilen; i++)
-            {
+            for (i = 0; i < ilen; i++) {
                 tree.remove(a[i]);
 
                 System.out.printf("== 删除节点: %d\n", a[i]);

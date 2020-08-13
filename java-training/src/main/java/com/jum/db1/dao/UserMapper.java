@@ -4,6 +4,7 @@ import com.jum.db1.entity.User;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+
 @Component
 public interface UserMapper {
     int deleteByPrimaryKey(Integer uuid);

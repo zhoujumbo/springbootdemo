@@ -1,7 +1,8 @@
 package com.demo.nonlinear.tree;
 
-import com.lzz.linear.queue.link.LinkQueue;
-import com.lzz.nonlinear.node.BiTreeNode;
+
+import com.demo.linear.queue.link.LinkQueue;
+import com.demo.nonlinear.node.BiTreeNode;
 
 /**
  * 二叉树的链式存储结构
@@ -9,7 +10,7 @@ import com.lzz.nonlinear.node.BiTreeNode;
  * Date   2018/5/27
  */
 public class BiTree {
-    private BiTreeNode root;	//树的根结点
+    private BiTreeNode root;    //树的根结点
 
     public BiTree() {
         root = null;
@@ -22,6 +23,7 @@ public class BiTree {
     public void setRoot(BiTreeNode root) {
         this.root = root;
     }
+
     public BiTreeNode getRoot() {
         return root;
     }
@@ -31,7 +33,7 @@ public class BiTree {
      */
     public BiTree(String preOrder, String inOrder, int preIndex, int inIndex, int count) {
         if (count > 0) {
-            char r = preOrder.charAt(preIndex);			//取先根遍历序列中的第一个结点作为根结点
+            char r = preOrder.charAt(preIndex);            //取先根遍历序列中的第一个结点作为根结点
             int i = 0;
             for (; i < count; i++) {
                 if (r == inOrder.charAt(i + inIndex)) { //寻找根结点在中根遍历序列中的位置
@@ -39,15 +41,16 @@ public class BiTree {
                 }
             }
             root = new BiTreeNode(r);
-            root.lchild = new BiTree(preOrder, inOrder, preIndex+1, inIndex, i).root;
-            root.rchild = new BiTree(preOrder, inOrder, preIndex+i+1, inIndex+i+1, count-i-1).root;
+            root.lchild = new BiTree(preOrder, inOrder, preIndex + 1, inIndex, i).root;
+            root.rchild = new BiTree(preOrder, inOrder, preIndex + i + 1, inIndex + i + 1, count - i - 1).root;
         }
     }
 
     /**
      * 由标明空子树的先根遍历序列 创建一个二叉树
      */
-    private static int index = 0;	//记录preStr的索引值
+    private static int index = 0;    //记录preStr的索引值
+
     public BiTree(String preStr) {
 
     }
@@ -58,11 +61,12 @@ public class BiTree {
     public void preRootTraverse() {
         preRootTraverse(root);
     }
+
     private void preRootTraverse(BiTreeNode T) {
         if (T != null) {
-            System.out.print(T.data);		//访问根结点
-            preRootTraverse(T.lchild);		//遍历左子树
-            preRootTraverse(T.rchild);		//遍历右子树
+            System.out.print(T.data);        //访问根结点
+            preRootTraverse(T.lchild);        //遍历左子树
+            preRootTraverse(T.rchild);        //遍历右子树
         }
     }
 
@@ -100,11 +104,12 @@ public class BiTree {
     public void inRootTraverse() {
         inRootTraverse(root);
     }
+
     public void inRootTraverse(BiTreeNode T) {
         if (T != null) {
-            inRootTraverse(T.lchild);		//遍历左子树
-            System.out.print(T.data);		//访问根结点
-            inRootTraverse(T.rchild);		//遍历右子树
+            inRootTraverse(T.lchild);        //遍历左子树
+            System.out.print(T.data);        //访问根结点
+            inRootTraverse(T.rchild);        //遍历右子树
         }
     }
 
@@ -139,11 +144,12 @@ public class BiTree {
     public void postRootTraverse() {
         postRootTraverse(root);
     }
+
     private void postRootTraverse(BiTreeNode T) {
         if (T != null) {
-            postRootTraverse(T.lchild);		//遍历左子树
-            postRootTraverse(T.rchild);		//遍历右子树
-            System.out.print(T.data);		//访问根结点
+            postRootTraverse(T.lchild);        //遍历左子树
+            postRootTraverse(T.rchild);        //遍历右子树
+            System.out.print(T.data);        //访问根结点
         }
     }
 
@@ -205,13 +211,13 @@ public class BiTree {
             LinkQueue queue = new LinkQueue();
             queue.insert(T);
             while (!queue.isEmpty()) {
-                T = (BiTreeNode) queue.poll();		//取首结点(父结点)，打印结点数据
+                T = (BiTreeNode) queue.poll();        //取首结点(父结点)，打印结点数据
                 System.out.print(T.data);
                 if (T.lchild != null) {
-                    queue.insert(T.lchild);			//左子结点非空，入队列
+                    queue.insert(T.lchild);            //左子结点非空，入队列
                 }
                 if (T.rchild != null) {
-                    queue.insert(T.rchild);			//右子结点非空，入队列
+                    queue.insert(T.rchild);            //右子结点非空，入队列
                 }
             }
         }
@@ -252,8 +258,8 @@ public class BiTree {
      */
     public int getDepth(BiTreeNode T) {
         if (T != null) {
-            int lDepth = getDepth(T.lchild);				//遍历左子树
-            int rDepth = getDepth(T.rchild);				//遍历右子树
+            int lDepth = getDepth(T.lchild);                //遍历左子树
+            int rDepth = getDepth(T.rchild);                //遍历右子树
             return (lDepth > rDepth ? lDepth : rDepth) + 1; //访问根结点
         }
         return 0;

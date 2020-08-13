@@ -3,7 +3,6 @@ package com.java8.predicate;
 import java.util.Objects;
 
 
-
 /**
  * 表示一个参数的predicate（布尔值函数）.
  *
@@ -11,7 +10,6 @@ import java.util.Objects;
  * whose functional method is {@link #test(Object)}.
  *
  * @param <T> predicate的输入类型
- *
  * @since 1.8
  */
 //@FunctionalInterface
@@ -27,14 +25,14 @@ public interface PredicateSourceTest<T> {
     boolean test(T t);
 
     /**
-     *返回表示短路逻辑的组合谓词
-      *此谓词与另一个的AND。 评估组成时
-      *谓词，如果此谓词为{@code false}，则{@code other}
-      *谓词不评估。
-      *
-      * <p>对两个谓词求值期间抛出的任何异常都进行中继
-      *给来电者； 如果对该谓词的评估抛出异常，则
-      * {@code other}谓词不会被评估。
+     * 返回表示短路逻辑的组合谓词
+     *       *此谓词与另一个的AND。 评估组成时
+     *       *谓词，如果此谓词为{@code false}，则{@code other}
+     *       *谓词不评估。
+     *       *
+     *       * <p>对两个谓词求值期间抛出的任何异常都进行中继
+     *       *给来电者； 如果对该谓词的评估抛出异常，则
+     *       * {@code other}谓词不会被评估。
      *
      * @param other a predicate that will be logically-ANDed with this
      *              predicate
@@ -83,9 +81,9 @@ public interface PredicateSourceTest<T> {
      * Returns a predicate that tests if two arguments are equal according
      * to {@link Objects#equals(Object, Object)}.
      *
-     * @param <T> the type of arguments to the predicate
+     * @param <T>       the type of arguments to the predicate
      * @param targetRef the object reference with which to compare for equality,
-     *               which may be {@code null}
+     *                  which may be {@code null}
      * @return a predicate that tests if two arguments are equal according
      * to {@link Objects#equals(Object, Object)}
      */

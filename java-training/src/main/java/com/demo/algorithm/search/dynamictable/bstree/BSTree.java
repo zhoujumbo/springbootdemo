@@ -1,20 +1,21 @@
 package com.demo.algorithm.search.dynamictable.bstree;
 
 /**
- *  二叉排序树BSTree
- *  定义：
- *  (1) 若左子树不为空，则左子树上所有结点的值均小于根结点的值
- *  (2) 若右子树不为空，则右子树上所有节点的值均大于根结点的值
- *  (3) 左右子树也都是二叉排序树
+ * 二叉排序树BSTree
+ * 定义：
+ * (1) 若左子树不为空，则左子树上所有结点的值均小于根结点的值
+ * (2) 若右子树不为空，则右子树上所有节点的值均大于根结点的值
+ * (3) 左右子树也都是二叉排序树
  * Author lzz
  * Date   2018/5/27
  */
 public class BSTree {
-    public BiTreeNode root;	//树的根结点
+    public BiTreeNode root;    //树的根结点
 
     public BSTree() {
         root = null;
     }
+
     public BSTree(BiTreeNode root) {
         this.root = root;
     }
@@ -25,11 +26,12 @@ public class BSTree {
     public void preRootTraverse() {
         preRootTraverse(root);
     }
+
     private void preRootTraverse(BiTreeNode T) {
         if (T != null) {
-            System.out.print(T.data+" ");	//访问根结点
-            preRootTraverse(T.lchild);		//遍历左子树
-            preRootTraverse(T.rchild);		//遍历右子树
+            System.out.print(T.data + " ");    //访问根结点
+            preRootTraverse(T.lchild);        //遍历左子树
+            preRootTraverse(T.rchild);        //遍历右子树
         }
     }
 
@@ -39,11 +41,12 @@ public class BSTree {
     public void inRootTraverse() {
         inRootTraverse(root);
     }
+
     private void inRootTraverse(BiTreeNode T) {
         if (T != null) {
-            inRootTraverse(T.lchild);		//遍历左子树
-            System.out.print(T.data+" ");	//访问根结点
-            inRootTraverse(T.rchild);		//遍历右子树
+            inRootTraverse(T.lchild);        //遍历左子树
+            System.out.print(T.data + " ");    //访问根结点
+            inRootTraverse(T.rchild);        //遍历右子树
         }
     }
 
@@ -53,11 +56,12 @@ public class BSTree {
     public void postRootTraverse() {
         postRootTraverse(root);
     }
+
     private void postRootTraverse(BiTreeNode T) {
         if (T != null) {
-            postRootTraverse(T.lchild);		//遍历左子树
-            postRootTraverse(T.rchild);		//遍历右子树
-            System.out.print(T.data+" ");	//访问根结点
+            postRootTraverse(T.lchild);        //遍历左子树
+            postRootTraverse(T.rchild);        //遍历右子树
+            System.out.print(T.data + " ");    //访问根结点
         }
     }
 
@@ -65,27 +69,28 @@ public class BSTree {
      * 二叉排序树查找算法
      * 1. 查找树为空，则查找失败
      * 2. 查找时非空：
-     *		(1) k<结点域值，则在左子树查找
-     *		(2) k>结点域值，则在右子树查找
-     *		(3) k=结点域值，查找成功
+     * (1) k<结点域值，则在左子树查找
+     * (2) k>结点域值，则在右子树查找
+     * (3) k=结点域值，查找成功
      */
     public Integer searchBST(Integer key) {
         if (key == null) {
-            return null;						//查找失败
+            return null;                        //查找失败
         }
         return searchBST(root, key);
     }
+
     private Integer searchBST(BiTreeNode T, Integer key) {
         if (T == null) {
-            return null;						//查找失败
+            return null;                        //查找失败
         }
         if (key < T.data) {
-            return searchBST(T.lchild, key);	//在左子树中查找
+            return searchBST(T.lchild, key);    //在左子树中查找
         }
         if (key > T.data) {
-            return searchBST(T.rchild, key);	//在右子树中查找
+            return searchBST(T.rchild, key);    //在右子树中查找
         }
-        return T.data;							//查找成功
+        return T.data;                            //查找成功
     }
 
     /**
@@ -95,14 +100,15 @@ public class BSTree {
      */
     public boolean insertBST(Integer key) {
         if (key == null) {
-            return false;						//插入失败
+            return false;                        //插入失败
         }
         if (root == null) {
-            root = new BiTreeNode(key);			//树为空，直接插入
+            root = new BiTreeNode(key);            //树为空，直接插入
             return true;
         }
         return insertBST(root, key);
     }
+
     private boolean insertBST(BiTreeNode T, Integer key) {
         if (key < T.data) {
             if (T.lchild == null) {
@@ -120,7 +126,7 @@ public class BSTree {
                 return insertBST(T.rchild, key);
             }
         }
-        return false;							//结点存在，不用插入
+        return false;                            //结点存在，不用插入
     }
 
     /**
@@ -132,6 +138,7 @@ public class BSTree {
         }
         return removeBST(root, key, null);
     }
+
     private Integer removeBST(BiTreeNode T, Integer key, BiTreeNode parent) {
         if (T == null) {
             return null;

@@ -3,9 +3,6 @@ package com.java;
 import com.fortunetree.basic.support.commons.business.jackson.JacksonUtil;
 import com.fortunetree.basic.support.commons.business.validator.DateValidator;
 import com.fortunetree.basic.support.commons.business.validator.ValidationUtil;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 import org.junit.Test;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -18,31 +15,31 @@ public class ValidationTest {
 
     @Test
     public void test1() throws IOException {
-        Account account = new Account();
-        account.setAlias("kalakala");
-        account.setUserName("wokalakala");
-        account.setPassWord("密码");
-        System.out.println(JacksonUtil.toJson(account));
+//        Account account = new Account();
+//        account.setAlias("kalakala");
+//        account.setUserName("wokalakala");
+//        account.setPassWord("密码");
+//        System.out.println(JacksonUtil.toJson(account));
     }
 
 
     @Test
     public void test2() throws IOException {
-        Account account = new Account();
-        account.setAlias("kalakala");
-        account.setUserName("wokalakalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-        account.setPassWord("密码");
-        ValidationUtil.ValidResult validResult = ValidationUtil.validateBean(account);
-        if(validResult.hasErrors()){
-            String errors = validResult.getErrorsStr();
-            System.out.println(errors);
-        }
-
-        ValidationUtil.ValidResult validResult2 = ValidationUtil.validateBean(account, Group1.class);
-        if(validResult2.hasErrors()){
-            String errors = validResult2.getErrorsStr();
-            System.out.println(errors);
-        }
+//        Account account = new Account();
+//        account.setAlias("kalakala");
+//        account.setUserName("wokalakalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+//        account.setPassWord("密码");
+//        ValidationUtil.ValidResult validResult = ValidationUtil.validateBean(account);
+//        if (validResult.hasErrors()) {
+//            String errors = validResult.getErrorsStr();
+//            System.out.println(errors);
+//        }
+//
+//        ValidationUtil.ValidResult validResult2 = ValidationUtil.validateBean(account, Group1.class);
+//        if (validResult2.hasErrors()) {
+//            String errors = validResult2.getErrorsStr();
+//            System.out.println(errors);
+//        }
     }
 
 
@@ -73,17 +70,15 @@ public class ValidationTest {
  * PS:
  * AllArgsConstructor 全参构造函数
  * NoArgsConstructor 无参构造函数
- *
+ * <p>
  * 建议自定义 错误信息 message = "id不能为空"
  * 多业务环境使用分组校验  分组必须用接口限定 groups = {Group1.class}
  * 自定义校验   @DateValidator(dateFormat = "yyyy-MM-dd",groups = {Group1.class})
- *
- *
  */
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+//@Data
+//@AllArgsConstructor
+//@NoArgsConstructor
 class Account {
 
     @NotNull(message = "id不能为空", groups = {Group1.class})
@@ -91,7 +86,7 @@ class Account {
 
     @NotNull
 //    @Length(max = 20,message = "长度必须小于20")
-    @Length(max = 10,message = "长度必须小于10", groups = {Group1.class})
+    @Length(max = 10, message = "长度必须小于10", groups = {Group1.class})
     private String userName;
 
     @NotNull
@@ -102,7 +97,7 @@ class Account {
     private Date createTime;
 
 
-    @DateValidator(dateFormat = "yyyy-MM-dd",groups = {Group1.class})
+    @DateValidator(dateFormat = "yyyy-MM-dd", groups = {Group1.class})
     private String editTIME;
 
     private String alias;
@@ -117,4 +112,5 @@ class Account {
     private Boolean isSpecial;
 }
 
-interface Group1{}
+interface Group1 {
+}

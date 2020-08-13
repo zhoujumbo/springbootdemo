@@ -16,7 +16,7 @@ import org.junit.Test;
 public class JsoupTest {
 
     @Test
-    public void getBaidu(){
+    public void getBaidu() {
 
 //        try {
 //            Document result = Jsoup.connect("http://www.douban.com/tag/%E5%B0%8F%E8%AF%B4/?focus=book")
@@ -31,9 +31,6 @@ public class JsoupTest {
 //        }
 
     }
-
-
-
 
 
 }

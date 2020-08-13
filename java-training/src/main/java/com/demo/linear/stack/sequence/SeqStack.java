@@ -38,7 +38,7 @@ public class SeqStack {
         if (isEmpty()) {
             return null;
         }
-        return stackElem[top-1];
+        return stackElem[top - 1];
     }
 
     //入栈操作
@@ -46,22 +46,22 @@ public class SeqStack {
         if (top == stackElem.length) {
             throw new RuntimeException("栈已满");
         }
-        stackElem[top++] = obj;		//数据放入栈顶top，然后top再+1
+        stackElem[top++] = obj;        //数据放入栈顶top，然后top再+1
     }
 
     //出栈操作（删除并返回栈顶元素）
     public Object pop() {
         if (isEmpty()) {
-            return -1;		//表示空栈
+            return -1;        //表示空栈
         }
-        return stackElem[--top];	//top-1指向栈顶，然后返回栈顶元素
+        return stackElem[--top];    //top-1指向栈顶，然后返回栈顶元素
     }
 
     /*
      * 打印所有元素
      */
     public void display() {
-        for (int i = top-1; i >= 0; i--) {
+        for (int i = top - 1; i >= 0; i--) {
             System.out.print(stackElem[i] + " ");
         }
         System.out.println();

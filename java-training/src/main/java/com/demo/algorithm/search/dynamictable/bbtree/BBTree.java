@@ -8,6 +8,7 @@ package com.demo.algorithm.search.dynamictable.bbtree;
 public class BBTree<T> {
     public Node<T> root = null;
     public int degree;
+
     public BBTree(int t) {
         degree = t;
     }
@@ -18,20 +19,23 @@ public class BBTree<T> {
  * m阶B树的结点类
  */
 class Node<T> {
-    public int keyNum;			//关键字个数
-    public boolean isLeaf;		//是否为树叶
-    public T[] key;				//关键字数组
-    public Node[] child;		//子树指针数组
+    public int keyNum;            //关键字个数
+    public boolean isLeaf;        //是否为树叶
+    public T[] key;                //关键字数组
+    public Node[] child;        //子树指针数组
 
-    public Node parent;			//双亲结点数组
-    public Node(int m) {		//设置m阶次
+    public Node parent;            //双亲结点数组
+
+    public Node(int m) {        //设置m阶次
         keyNum = 0;
-        isLeaf = true;key = (T[]) (new Object[2*m-1]);
-        child = new Node[2*m];
+        isLeaf = true;
+        key = (T[]) (new Object[2 * m - 1]);
+        child = new Node[2 * m];
         parent = null;
     }
 
 }
+
 /**
  * 查找结果类
  */

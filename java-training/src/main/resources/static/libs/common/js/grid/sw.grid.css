@@ -1,135 +1,438 @@
-@charset "UTF-8";  /* VERSION = '3.1.1' */
-.common_grid_scroll { color: #000; }
+@charset "UTF-8"; /* VERSION = '3.1.1' */
+.common_grid_scroll {
+    color: #000;
+}
 
-.common_grid_scroll { position: relative; border-color: #3f8ab9; height: 100%; width: 100%; overflow: auto; }
+.common_grid_scroll {
+    position: relative;
+    border-color: #3f8ab9;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+}
 
-.common_grid_scroll .common_head { width: 100%; }
+.common_grid_scroll .common_head {
+    width: 100%;
+}
 
-.common_grid_scroll .common_grid_div { position: relative; }
+.common_grid_scroll .common_grid_div {
+    position: relative;
+}
 
-.common_grid_scroll table { width: 100%; overflow: hidden; table-layout: fixed; border-collapse: collapse; border-radius: 5px }
+.common_grid_scroll table {
+    width: 100%;
+    overflow: hidden;
+    table-layout: fixed;
+    border-collapse: collapse;
+    border-radius: 5px
+}
 
 /*.common_grid_scroll table thead { background: #0391db; }*/
-.common_grid_scroll table thead { background: rgba(19, 40, 61, 0.2); }
+.common_grid_scroll table thead {
+    background: rgba(19, 40, 61, 0.2);
+}
 
-.common_grid_scroll table thead .common_sortHead { cursor: pointer !important; }
+.common_grid_scroll table thead .common_sortHead {
+    cursor: pointer !important;
+}
 
-.common_grid_scroll table thead .common_sortHead .common_sort { position: absolute; height: 100% !important; display: flex; align-items: center; justify-content: center; flex-direction: column; flex-wrap: nowrap; right: 0; top: 0; }
+.common_grid_scroll table thead .common_sortHead .common_sort {
+    position: absolute;
+    height: 100% !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    right: 0;
+    top: 0;
+}
 
-.common_grid_scroll table thead .common_sortHead .common_sort i { color: #8D907D; display: flex; align-items: center; justify-content: center; flex-direction: row; flex-wrap: nowrap; }
+.common_grid_scroll table thead .common_sortHead .common_sort i {
+    color: #8D907D;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
 
-.common_grid_scroll table thead .common_sortHead .common_sortSelected { color: #e8e9ea !important; }
+.common_grid_scroll table thead .common_sortHead .common_sortSelected {
+    color: #e8e9ea !important;
+}
 
-.common_grid_scroll table tbody tr { background-color: rgba(19, 40, 61, 0.2); }
+.common_grid_scroll table tbody tr {
+    background-color: rgba(19, 40, 61, 0.2);
+}
 
-.common_grid_scroll table tbody tr:nth-child(2n) { background-color: rgba(25, 51, 76, 0.1); }
+.common_grid_scroll table tbody tr:nth-child(2n) {
+    background-color: rgba(25, 51, 76, 0.1);
+}
 
-.common_grid_scroll table tbody tr:hover { background-color: rgba(19, 40, 61, 0.3); }
+.common_grid_scroll table tbody tr:hover {
+    background-color: rgba(19, 40, 61, 0.3);
+}
 
-.common_grid_scroll table tbody .common_trSel { background: rgba(87, 152, 213, 0.6) !important; }
+.common_grid_scroll table tbody .common_trSel {
+    background: rgba(87, 152, 213, 0.6) !important;
+}
 
-.common_grid_scroll table .common_td_th, .common_grid_scroll table th, .common_grid_scroll table td { position: relative; overflow: hidden; }
+.common_grid_scroll table .common_td_th, .common_grid_scroll table th, .common_grid_scroll table td {
+    position: relative;
+    overflow: hidden;
+}
 
-.common_grid_scroll table th { cursor: default; }
+.common_grid_scroll table th {
+    cursor: default;
+}
 
-.common_grid_scroll table th > div { display: flex; align-items: center; justify-content: center; flex-direction: row; flex-wrap: nowrap; }
+.common_grid_scroll table th > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
 
-.common_grid_scroll table td:hover { background-color: rgba(87, 152, 213, 0.3); }
+.common_grid_scroll table td:hover {
+    background-color: rgba(87, 152, 213, 0.3);
+}
 
-.common_grid_scroll table td > div { padding: 0; position: relative; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; width: 100%; height: 100%; }
+.common_grid_scroll table td > div {
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 100%;
+    height: 100%;
+}
 
-.common_grid_scroll .common_checkbox_container { text-align: center; position: relative; display: flex; align-items: center; justify-content: center; flex-direction: row; flex-wrap: nowrap; }
+.common_grid_scroll .common_checkbox_container {
+    text-align: center;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
 
-.common_grid_scroll .common_checkbox_container .common_grid_check_label { width: 100%; height: auto; cursor: pointer; }
+.common_grid_scroll .common_checkbox_container .common_grid_check_label {
+    width: 100%;
+    height: auto;
+    cursor: pointer;
+}
 
-.common_grid_scroll .common_checkbox_container .common_grid_check_label:after { content: "\f096"; }
+.common_grid_scroll .common_checkbox_container .common_grid_check_label:after {
+    content: "\f096";
+}
 
-.common_grid_scroll .common_checkbox_container .common_head_checkbox { display: none; }
+.common_grid_scroll .common_checkbox_container .common_head_checkbox {
+    display: none;
+}
 
-.common_grid_scroll .common_checkbox_container input[type=checkbox]:checked + .common_grid_check_label:after { content: "\f046"; }
+.common_grid_scroll .common_checkbox_container input[type=checkbox]:checked + .common_grid_check_label:after {
+    content: "\f046";
+}
 
-.common_grid_scroll .common_grid_div input[type='text'], .common_grid_scroll .common_grid_div textarea, .common_grid_scroll .common_grid_div input[type='text'].Wdate { background-color: #fff; }
+.common_grid_scroll .common_grid_div input[type='text'], .common_grid_scroll .common_grid_div textarea, .common_grid_scroll .common_grid_div input[type='text'].Wdate {
+    background-color: #fff;
+}
 
-.common_grid_scroll .common_click_td { cursor: pointer; text-decoration: underline; color: #ff0; }
+.common_grid_scroll .common_click_td {
+    cursor: pointer;
+    text-decoration: underline;
+    color: #ff0;
+}
 
-.common_grid_scroll .common_click_td:hover { color: #4E87AD; }
+.common_grid_scroll .common_click_td:hover {
+    color: #4E87AD;
+}
 
-.common_grid_scroll .common_editTd { overflow: visible; display: flex; align-items: center; justify-content: center; flex-direction: row; flex-wrap: nowrap; }
+.common_grid_scroll .common_editTd {
+    overflow: visible;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
 
-.common_grid_scroll .common_editContent { display: flex; align-items: center; justify-content: center; flex-direction: row; flex-wrap: nowrap; }
+.common_grid_scroll .common_editContent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
 
-.common_grid_scroll .common_editContent .common_editBtn { cursor: pointer; display: flex; align-items: center; justify-content: center; flex-direction: row; flex-wrap: nowrap; }
+.common_grid_scroll .common_editContent .common_editBtn {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
 
-.common_grid_scroll .common_editContent .common_editBtn:hover { transform: scale(1.3); color: #ff0; }
+.common_grid_scroll .common_editContent .common_editBtn:hover {
+    transform: scale(1.3);
+    color: #ff0;
+}
 
-.common_grid_scroll .common_editContent .common_gridSave { display: none; }
+.common_grid_scroll .common_editContent .common_gridSave {
+    display: none;
+}
 
-.common_grid_scroll .common_editContent .common_gridCancle { display: none; }
+.common_grid_scroll .common_editContent .common_gridCancle {
+    display: none;
+}
 
-.common_loadingMask { position: absolute; z-index: 1; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; flex-direction: row; flex-wrap: nowrap; background: rgba(198, 198, 198, 0.3); }
+.common_loadingMask {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    background: rgba(198, 198, 198, 0.3);
+}
 
-.grid-common_win_small { position: absolute; z-index: 100; background-color: rgba(255, 255, 254, 0.7);}
-.grid-common_win_small .common_win_small_title { font-style: normal; width: 100%; margin: 0; }
-.grid-common_win_small .common_win_small_msg { display: flex; align-items: center; justify-content: center; flex-direction: row; flex-wrap: nowrap; width: 100%; }
-.grid-common_win_small .common_winSmallBtnContent { width: 100%; display: flex; justify-content: center; }
-.grid-common_win_small .common_win_small_btn { position: relative; overflow: hidden; color: #3F3F3F; outline: none; background: none; transition: box-shadow 0.5s; }
-.grid-common_win_small .common_win_small_btn:active { color: #ff0; }
-.grid-common_win_small .common_win_small_btn:hover { background-color: rgba(198, 198, 198, 0.5); }
+.grid-common_win_small {
+    position: absolute;
+    z-index: 100;
+    background-color: rgba(255, 255, 254, 0.7);
+}
 
-.common_tbar_content * { margin: 0;padding: 0; }
-.common_tbar_content { position: relative; display: flex; width: 100%; align-items: center; }
-.common_tbar_content .common_Btn { flex-shrink: 0; }
-.common_tbar_content .common_table_page_input { font-family: Microsoft YaHei, serif; text-align: center; flex-shrink: 0; color: #000;  outline: none; background: rgba(2, 42, 81, 0); margin-bottom: 0; }
-.common_tbar_content .common_tbBtn { cursor: pointer; text-align: center; font-weight: bold; flex-shrink: 0; }
-.common_tbar_content .common_tbBtn:hover { transform: scale(1.3); color: #ff0; }
-.common_tbar_content .common_tbBtn:active { transform: scale(1); }
-.common_tbar_content .common_toolbartext { height: auto; }
+.grid-common_win_small .common_win_small_title {
+    font-style: normal;
+    width: 100%;
+    margin: 0;
+}
 
-.common_tbar_content .common_tbarMask { position: absolute; z-index: 1; top: 0; left: 0; width: 100%; height: 100%; background: rgba(2, 42, 81, 0.9); }
+.grid-common_win_small .common_win_small_msg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: 100%;
+}
+
+.grid-common_win_small .common_winSmallBtnContent {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.grid-common_win_small .common_win_small_btn {
+    position: relative;
+    overflow: hidden;
+    color: #3F3F3F;
+    outline: none;
+    background: none;
+    transition: box-shadow 0.5s;
+}
+
+.grid-common_win_small .common_win_small_btn:active {
+    color: #ff0;
+}
+
+.grid-common_win_small .common_win_small_btn:hover {
+    background-color: rgba(198, 198, 198, 0.5);
+}
+
+.common_tbar_content * {
+    margin: 0;
+    padding: 0;
+}
+
+.common_tbar_content {
+    position: relative;
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+
+.common_tbar_content .common_Btn {
+    flex-shrink: 0;
+}
+
+.common_tbar_content .common_table_page_input {
+    font-family: Microsoft YaHei, serif;
+    text-align: center;
+    flex-shrink: 0;
+    color: #000;
+    outline: none;
+    background: rgba(2, 42, 81, 0);
+    margin-bottom: 0;
+}
+
+.common_tbar_content .common_tbBtn {
+    cursor: pointer;
+    text-align: center;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.common_tbar_content .common_tbBtn:hover {
+    transform: scale(1.3);
+    color: #ff0;
+}
+
+.common_tbar_content .common_tbBtn:active {
+    transform: scale(1);
+}
+
+.common_tbar_content .common_toolbartext {
+    height: auto;
+}
+
+.common_tbar_content .common_tbarMask {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(2, 42, 81, 0.9);
+}
 
 
 /**
  * rem 长度大小设置
  * 注：以下rem单位以62.5%位基础字体大小
  */
-.common_grid_scroll { margin-top: 0.5rem; border-width: 0.07rem; }
+.common_grid_scroll {
+    margin-top: 0.5rem;
+    border-width: 0.07rem;
+}
 
-.common_grid_scroll .common_grid_table { border: 0.07rem solid; }
+.common_grid_scroll .common_grid_table {
+    border: 0.07rem solid;
+}
 
-.common_grid_scroll table thead { border-bottom: 0.07rem solid #3f8ab9; height: 2rem; }
+.common_grid_scroll table thead {
+    border-bottom: 0.07rem solid #3f8ab9;
+    height: 2rem;
+}
 
-.common_grid_scroll table thead .common_sortHead .common_sort { width: 1.2rem !important; }
+.common_grid_scroll table thead .common_sortHead .common_sort {
+    width: 1.2rem !important;
+}
 
-.common_grid_scroll table thead .common_sortHead .common_sort i { height: 1rem; width: 0.8rem; }
+.common_grid_scroll table thead .common_sortHead .common_sort i {
+    height: 1rem;
+    width: 0.8rem;
+}
 
-.common_grid_scroll table tbody tr { height: 3rem; }
+.common_grid_scroll table tbody tr {
+    height: 3rem;
+}
 
 /*.common_grid_scroll table .common_td_th, .common_grid_scroll table th, .common_grid_scroll table td { height: 3rem; border: 0.07rem solid #3f8ab9; padding: 0 0.5rem; }*/
-.common_grid_scroll table .common_td_th, .common_grid_scroll table th, .common_grid_scroll table td { height: 3rem; border: 0.07rem solid #fff; padding: 0 0.5rem; }
+.common_grid_scroll table .common_td_th, .common_grid_scroll table th, .common_grid_scroll table td {
+    height: 3rem;
+    border: 0.07rem solid #fff;
+    padding: 0 0.5rem;
+}
 
-.common_grid_scroll table th > div { font-size: 1.5rem; }
+.common_grid_scroll table th > div {
+    font-size: 1.5rem;
+}
 
-.common_grid_scroll table td > div { font-size: 1.2rem; line-height: 3rem; }
+.common_grid_scroll table td > div {
+    font-size: 1.2rem;
+    line-height: 3rem;
+}
 
-.common_grid_scroll .common_checkbox_th{ width:12.5rem; }
+.common_grid_scroll .common_checkbox_th {
+    width: 12.5rem;
+}
 
-.common_grid_scroll .common_checkbox_container .common_grid_check_label { font-size: 1rem; }
+.common_grid_scroll .common_checkbox_container .common_grid_check_label {
+    font-size: 1rem;
+}
 
-.common_grid_scroll .common_editContent .common_editBtn { width: 1.1rem; height: 1.1rem; margin: 0 0.125rem; }
+.common_grid_scroll .common_editContent .common_editBtn {
+    width: 1.1rem;
+    height: 1.1rem;
+    margin: 0 0.125rem;
+}
 
-.common_loadingMask { font-size: 2rem; }
+.common_loadingMask {
+    font-size: 2rem;
+}
 
-.grid-common_win_small { width: 30rem; height: 6rem; border: 0.15rem solid #c6c6c6; border-radius: 0.75rem; box-shadow: 0 0 2.2rem #c6c6c6; }
-.grid-common_win_small .common_win_small_title { font-size: 1.5rem; line-height: 1.5rem; height: 1.5rem; padding: 0 0 0 0.75rem; }
-.grid-common_win_small .common_win_small_msg { height: 2.5rem; padding: 0 0.75rem; }
-.grid-common_win_small .common_win_small_btn { font-size: 0.8rem; height: 2rem; padding-left: 0.5rem; padding-right: 0.5rem; border: 0.07rem solid #c6c6c6; border-radius: 0.25rem; }
-.grid-common_win_small .common_win_small_btn:hover { box-shadow: 0 0 0.75rem #c6c6c6; }
+.grid-common_win_small {
+    width: 30rem;
+    height: 6rem;
+    border: 0.15rem solid #c6c6c6;
+    border-radius: 0.75rem;
+    box-shadow: 0 0 2.2rem #c6c6c6;
+}
 
-.common_tbar_content { height: 1.75rem; }
-.common_tbar_content .common_Btn { margin-right: 0.5rem; }
-.common_tbar_content .common_table_page_input { font-size: 0.8rem; width: 2.5rem; height: 1.25rem; border: 0.07rem solid #000; border-radius: 0.25rem; }
-.common_tbar_content .common_tbBtn { width: 0.8rem; height: 0.8rem;font-size: 1.2rem; }
-.common_tbar_content .common_tbar_btns_line { height: 1rem ; width: 0.5rem; border-right: 0.07rem solid #000; margin-right: 0.5rem !important; }
+.grid-common_win_small .common_win_small_title {
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+    height: 1.5rem;
+    padding: 0 0 0 0.75rem;
+}
+
+.grid-common_win_small .common_win_small_msg {
+    height: 2.5rem;
+    padding: 0 0.75rem;
+}
+
+.grid-common_win_small .common_win_small_btn {
+    font-size: 0.8rem;
+    height: 2rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    border: 0.07rem solid #c6c6c6;
+    border-radius: 0.25rem;
+}
+
+.grid-common_win_small .common_win_small_btn:hover {
+    box-shadow: 0 0 0.75rem #c6c6c6;
+}
+
+.common_tbar_content {
+    height: 1.75rem;
+}
+
+.common_tbar_content .common_Btn {
+    margin-right: 0.5rem;
+}
+
+.common_tbar_content .common_table_page_input {
+    font-size: 0.8rem;
+    width: 2.5rem;
+    height: 1.25rem;
+    border: 0.07rem solid #000;
+    border-radius: 0.25rem;
+}
+
+.common_tbar_content .common_tbBtn {
+    width: 0.8rem;
+    height: 0.8rem;
+    font-size: 1.2rem;
+}
+
+.common_tbar_content .common_tbar_btns_line {
+    height: 1rem;
+    width: 0.5rem;
+    border-right: 0.07rem solid #000;
+    margin-right: 0.5rem !important;
+}
 
 
-.editAbleTh{ width:5rem !important; }
+.editAbleTh {
+    width: 5rem !important;
+}

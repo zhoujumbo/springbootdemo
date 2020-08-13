@@ -21,7 +21,7 @@ public class SpringJdbcTempTest {
     protected JdbcTemplate jdbcTemplate;
 
     @Test
-    public void test01(){
+    public void test01() {
 
 //        Connection conn = null;
 //        PreparedStatement  st = null;

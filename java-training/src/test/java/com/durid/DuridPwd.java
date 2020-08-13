@@ -8,7 +8,7 @@ public class DuridPwd {
 
 
     @Test
-    public void test01(){
+    public void test01() {
         //加密
         try {
             String miwenofter = ConfigTools.encrypt("111111");
@@ -20,7 +20,7 @@ public class DuridPwd {
     }
 
     @Test
-    public void test02(){
+    public void test02() {
         //解密
 //        try {
 ////            String mingwen = ConfigTools.decrypt("111111111111111111111111111111111111");
@@ -48,7 +48,6 @@ public class DuridPwd {
 //        } catch (Exception e) {
 //            e.printStackTrace();
 //        }
-
 
 
 //        String a = SHA1.encode("123456");

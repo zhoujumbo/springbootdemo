@@ -8,14 +8,15 @@ package com.demo.algorithm.search.dynamictable.bstree;
  * Date   2018/5/27
  */
 public class BiTreeNode {
-    public Integer data;		//结点的数据域
+    public Integer data;        //结点的数据域
 
-    public BiTreeNode lchild;	//左子结点域
-    public BiTreeNode rchild;	//右子结点域
+    public BiTreeNode lchild;    //左子结点域
+    public BiTreeNode rchild;    //右子结点域
 
     public BiTreeNode() {
         this(null);
     }
+
     public BiTreeNode(Integer data) {
         this(data, null, null);
     }

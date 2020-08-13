@@ -21,7 +21,7 @@ public class TestBase {
     protected MockMvc mockMvc;
 
     @Before
-    public void setup(){
+    public void setup() {
         mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
     }
 

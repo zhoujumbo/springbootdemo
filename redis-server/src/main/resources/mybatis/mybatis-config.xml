@@ -71,8 +71,5 @@
      <package name="com.zwgkpage.dao"/>
       -->
     <!--</mappers>-->
-    <!-- 加载拦截器 -->
-    <plugins>
-        <plugin interceptor="interceptor.MybatisInterceptor"></plugin>
-    </plugins>
+  
 </configuration>

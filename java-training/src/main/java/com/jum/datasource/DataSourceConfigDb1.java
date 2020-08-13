@@ -22,6 +22,7 @@ import javax.sql.DataSource;
 public class DataSourceConfigDb1 {
     /**
      * 配置test1数据库
+     *
      * @return
      */
     @Bean(name = "db1DataSource")
@@ -33,6 +34,7 @@ public class DataSourceConfigDb1 {
 
     /**
      * sql会话工厂
+     *
      * @param dataSource
      * @return
      * @throws Exception
@@ -44,14 +46,15 @@ public class DataSourceConfigDb1 {
         SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
         bean.setDataSource(dataSource);
         // mybatis 写配置文件
-		bean.setMapperLocations(
-				new PathMatchingResourcePatternResolver().getResources("classpath:mybatis/mapper/db1/*.xml"));
-		bean.setPlugins(new Interceptor[]{new MybatisInterceptor()});
+        bean.setMapperLocations(
+                new PathMatchingResourcePatternResolver().getResources("classpath:mybatis/mapper/db1/*.xml"));
+//        bean.setPlugins(new Interceptor[]{new MybatisInterceptor()});
         return bean.getObject();
     }
 
     /**
      * 事物管理
+     *
      * @param dataSource
      * @return
      */
@@ -62,7 +65,6 @@ public class DataSourceConfigDb1 {
     }
 
     /**
-     *
      * @param sqlSessionFactory
      * @return
      * @throws Exception

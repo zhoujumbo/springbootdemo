@@ -25,22 +25,23 @@ public class AssertUtilTest {
     private double pdouble;
     private List<String> pList;
     private Map<String, String> pMap;
+
     /**
      * apache.http.util.Asserts
      */
     @Test
-    public void test01(){
-        Asserts.check(true,"");
-        Asserts.notBlank(pString,"");
-        Asserts.notEmpty(pString,"");
-        Asserts.notNull(pList,"");
+    public void test01() {
+        Asserts.check(true, "");
+        Asserts.notBlank(pString, "");
+        Asserts.notEmpty(pString, "");
+        Asserts.notNull(pList, "");
     }
 
     /**
      * org.springframework.util.Assert
      */
     @Test
-    public void test02(){
+    public void test02() {
 
 //        Assert.isNull(pList, "");
 //        Assert.notNull();
@@ -60,7 +61,7 @@ public class AssertUtilTest {
      *
      */
     @Test
-    public void test03(){
+    public void test03() {
 
         // AssertUtils.notNull()  // 兼容对象和字符串判断
         // AssertUtils.notNull()  // 多参数  Object... expression

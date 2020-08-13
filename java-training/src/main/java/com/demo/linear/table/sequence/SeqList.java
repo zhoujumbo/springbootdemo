@@ -1,7 +1,6 @@
 package com.demo.linear.table.sequence;
 
 /**
- *
  * 模拟顺序表SeqList类
  * 对象数组+控制指针
  * Author lzz
@@ -68,7 +67,7 @@ public class SeqList {
         }
         //循环将插入位置后面的元素 向后移一位
         for (int j = curLen; j > i; j--) {
-            listElem[j] = listElem[j-1];
+            listElem[j] = listElem[j - 1];
         }
         //将元素插入到"腾出来的空位"
         listElem[i] = obj;
@@ -85,7 +84,7 @@ public class SeqList {
         }
         //循环将删除位置后面的元素 向前移一位
         for (int j = i; j < curLen - 1; j++) {
-            listElem[j] = listElem[j+1];
+            listElem[j] = listElem[j + 1];
         }
         //将当前表的长度-1
         curLen--;

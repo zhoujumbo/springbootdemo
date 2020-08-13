@@ -4,8 +4,6 @@ package com.java;/**
  * @Date: ${Time} ${Date}
  */
 
-import com.jibug.cetty.core.utils.FileUtil;
-import com.jibug.cetty.core.utils.ImageUtils2;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
@@ -36,7 +34,7 @@ public class FileTest {
 
     // 遍历文件和目录
     @Test
-    public void findDir(){
+    public void findDir() {
 
         try {
             Files.list(Paths.get(".")).forEach(System.out::println);
@@ -52,7 +50,7 @@ public class FileTest {
     }
 
     @Test
-    public void test01(){
+    public void test01() {
         //Files::isReularFile 找出目录中的文件
         try {
             Files.list(Paths.get(".")).filter(Files::isRegularFile).forEach(System.out::println);
@@ -62,19 +60,19 @@ public class FileTest {
     }
 
     @Test
-    public void test02(){
+    public void test02() {
         // file->file.isHidden() 找出隐藏文件
-        final File[] files = new File(".").listFiles(file->file.isHidden());
-        for(File file:files){
+        final File[] files = new File(".").listFiles(file -> file.isHidden());
+        for (File file : files) {
             System.out.println(file.getName());
         }
     }
 
     @Test
-    public void test03(){
+    public void test03() {
         // Files.newBufferedWriter 迅速创建一个BufferedWriter，可以使编码语法更简洁
-        Path path  = Paths.get(".\\test.txt");
-        try(BufferedWriter writer = Files.newBufferedWriter(path, StandardOpenOption.CREATE, StandardOpenOption.APPEND)){
+        Path path = Paths.get(".\\test.txt");
+        try (BufferedWriter writer = Files.newBufferedWriter(path, StandardOpenOption.CREATE, StandardOpenOption.APPEND)) {
             writer.write("Hello World!  222");
             writer.newLine();
             writer.write("The quick brown fox jumped over the lazy dog");
@@ -85,7 +83,7 @@ public class FileTest {
             e.printStackTrace();
         }
 
-        try (BufferedReader bfr=Files.newBufferedReader(path)){
+        try (BufferedReader bfr = Files.newBufferedReader(path)) {
             System.out.println(bfr.readLine());
         } catch (IOException e) {
             e.printStackTrace();
@@ -94,26 +92,26 @@ public class FileTest {
 
 
     @Test
-    public void test04(){
+    public void test04() {
         // Files.write() 使用简介的语法写入内容到文件
         try {
-            Files.write(Paths.get("D:\\test1.txt"),"Hello".getBytes("utf-8"));
+            Files.write(Paths.get("D:\\test1.txt"), "Hello".getBytes("utf-8"));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     @Test
-    public void test05(){
+    public void test05() {
         // 读取文件内容
         try {
 
             String fileName = ".\\test.txt";
 
-            if(!FileUtil.isExistsPath(fileName)){
-                System.out.println("文件不存在");
-                return;
-            }
+//            if (!FileUtil.isExistsPath(fileName)) {
+//                System.out.println("文件不存在");
+//                return;
+//            }
 
             //读取文件
             Stream<String> stringStream = Files
@@ -154,12 +152,12 @@ public class FileTest {
      * 返回的Path对象完全可以代替File类用于文件IO操作。
      */
     @Test
-    public void test06(){
+    public void test06() {
 
         //以当前路径作为Path对象
         Path p = Paths.get(".");
         //使用传入的字符串返回一个Path对象
-        Path p2 = Paths.get("D","ReviewIO","URL");
+        Path p2 = Paths.get("D", "ReviewIO", "URL");
         //对应的路径
         System.out.println("p对象的对应路径：" + p.toString());
         System.out.println("p2对象的对应路径：" + p2.toString());
@@ -170,7 +168,7 @@ public class FileTest {
         System.out.println("p绝对路径：" + p.toAbsolutePath());
         System.out.println("p2绝对路径：" + p2.toAbsolutePath());
         //获取父路径
-        System.out.println("p父路径："  + p.getParent());
+        System.out.println("p父路径：" + p.getParent());
         System.out.println("p2父路径：" + p2.getParent());
         //获取p2对象的文件名或者文件目录名
         System.out.println(p2.getFileName());
@@ -180,6 +178,7 @@ public class FileTest {
 
     /**
      * 文件复制
+     *
      * @throws IOException
      */
     @Test
@@ -192,8 +191,8 @@ public class FileTest {
 
          从文件复制到输出流：Files.copy(Path source, OutputStream out);
          */
-        Path source = Paths.get("F:","Java经典练习题.pdf");
-        Path dest = Paths.get("F:","files.txt");
+        Path source = Paths.get("F:", "Java经典练习题.pdf");
+        Path dest = Paths.get("F:", "files.txt");
         File f = new File("F:\\ok.pdf");
         f.createNewFile();//如果f对象对应路径不存在就创建一个。
         System.out.println("source对象的文件路径：" + source);
@@ -216,7 +215,7 @@ public class FileTest {
         System.out.println(Files.isExecutable(source));//文件是否可执行
         System.out.println(Files.isWritable(source));//文件是否可写
         //获取Paths对象对应的文件路径的文件储存
-        FileStore f1  = Files.getFileStore(Paths.get("F:"));
+        FileStore f1 = Files.getFileStore(Paths.get("F:"));
         FileStore e = Files.getFileStore(Paths.get("E:"));
         System.out.println("F盘的总大小" + f1.getTotalSpace());
         System.out.println("F盘的可用大小" + f1.getUsableSpace());
@@ -235,11 +234,13 @@ public class FileTest {
 
     private static class FindJavaVisitor extends SimpleFileVisitor<Path> {
         private List<Path> result;
-        public FindJavaVisitor(List<Path> result){
+
+        public FindJavaVisitor(List<Path> result) {
             this.result = result;
         }
+
         @Override
-        public FileVisitResult visitFile(Path file, BasicFileAttributes attrs){
+        public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
             // java 文件
 //            if(file.toString().endsWith(".java")){
 //                result.add(file.getFileName());
@@ -263,7 +264,7 @@ public class FileTest {
             StringUtils.substringBeforeLast(filePath, ".");
             String newPath = StringUtils.substringBeforeLast(filePath, ".") + "_1."
                     + StringUtils.substringAfterLast(filePath, ".");
-            ImageUtils2.cut3(filePath, newPath, width, height);
+//            ImageUtils2.cut3(filePath, newPath, width, height);
             result.add(file.getFileName());
             return FileVisitResult.CONTINUE;
         }
@@ -274,10 +275,10 @@ public class FileTest {
      * 注意创建目录和文件Files.createDirectories 和 Files.createFile不能混用，必须先有目录，才能在目录中创建文件
      */
     @Test
-    public void test09(){
+    public void test09() {
         try {
             Files.createDirectories(Paths.get("C://TEST"));
-            if(!Files.exists(Paths.get("C://TEST")))
+            if (!Files.exists(Paths.get("C://TEST")))
                 Files.createFile(Paths.get("C://TEST/test.txt"));
 //            Files.createDirectories(Paths.get("C://TEST/test2.txt"));
         } catch (IOException e) {
@@ -307,11 +308,11 @@ public class FileTest {
     }
 
     @Test
-    public void test11(){
+    public void test11() {
         try (
                 BufferedReader reader = Files.newBufferedReader(Paths.get("C:\\Members.sql"), StandardCharsets.UTF_8);
                 BufferedWriter writer = Files.newBufferedWriter(Paths.get("C:\\Members3.txt"), StandardCharsets.UTF_8);
-                ){
+        ) {
             String str = null;
             while ((str = reader.readLine()) != null) {
                 /**
@@ -334,11 +335,11 @@ public class FileTest {
      * 将list写入
      */
     @Test
-    public void test12(){
+    public void test12() {
         List<String> lines = Arrays.asList("这是第一行", "这是第二行");
-        writeFileToTarget("b.txt",lines);
-        writeFileToDest("c.txt",lines);
-        writeBufferFileToDest("e.txt",lines);
+        writeFileToTarget("b.txt", lines);
+        writeFileToDest("c.txt", lines);
+        writeBufferFileToDest("e.txt", lines);
     }
 
     /**
@@ -352,7 +353,7 @@ public class FileTest {
             //可以选择传入第三个OpenOptions参数,不传入默认CREATE和TRUNCATE_NEW,即如果文件不存在,创建该文件,如果存在,覆盖
 //            Files.write(path, lines);
             //还可以传入第三个参数,选择是否创建文件,是否在同名文件后拼接等
-             Files.write(path,lines, StandardOpenOption.CREATE,StandardOpenOption.APPEND );
+            Files.write(path, lines, StandardOpenOption.CREATE, StandardOpenOption.APPEND);
             System.out.println("已写入完成.path = " + path);
         } catch (IOException e) {
             e.printStackTrace();
@@ -388,7 +389,7 @@ public class FileTest {
     public static void writeBufferFileToDest(String destPath, List<String> lines) {
         try {
             Path path = Paths.get(destPath);
-            if (!Files.exists(path)){
+            if (!Files.exists(path)) {
                 Files.createFile(path);
             }
             BufferedWriter bufferedWriter = Files.newBufferedWriter(path);
@@ -408,9 +409,7 @@ public class FileTest {
     }
 
 
-
 }
-
 
 
 /**

@@ -15,13 +15,13 @@ import org.junit.Test;
  */
 public class MathTest {
     @Test
-    public void test(){
+    public void test() {
         System.out.println(Math.PI);//得到圆周率
         System.out.println(Math.E);//自然对底数
         //2的5次方
-        System.out.println(Math.pow(2,5));
+        System.out.println(Math.pow(2, 5));
         //使用位运算求2的5次方
-        System.out.println(1<<5);
+        System.out.println(1 << 5);
         //对16开平方根
         System.out.println(Math.sqrt(16));
         //求两值之间最大、最小

@@ -20,27 +20,27 @@ public class RestHelloController {
     private TestService testService;
 
     @RequestMapping("/getInfo")
-    public String getInfo(){
+    public String getInfo() {
 
-        try{
+        try {
             return "success";
-        }catch(Exception e){
+        } catch (Exception e) {
 
             throw new RuntimeException();
         }
     }
 
     @RequestMapping("/getMap")
-    public Map<String, Object> getMap(){
+    public Map<String, Object> getMap() {
         Map<String, Object> result = new HashMap<String, Object>();
-        result.put("resultCode","0");
-        result.put("resultMsg","success");
+        result.put("resultCode", "0");
+        result.put("resultMsg", "success");
         return result;
     }
 
     @RequestMapping("/errorTest")
-    public String testErrorException(){
-        int a = 1/0;
+    public String testErrorException() {
+        int a = 1 / 0;
         return "testErrorException";
     }
 

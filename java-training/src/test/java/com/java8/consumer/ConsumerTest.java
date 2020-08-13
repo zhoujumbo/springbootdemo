@@ -10,7 +10,7 @@ public class ConsumerTest {
 
 //    Consumer的语义是消费的意思
 //    接收一个泛型的参数T，然后调用accept，对这个参数做一系列的操作，没有返回值
-    
+
 //    @FunctionalInterface
 //    public interface Consumer<T> {
 //

@@ -10,10 +10,11 @@ import java.sql.SQLException;
 public class JdbcTemplateTest {
 
     private long begin = 33112001;//起始id
-    private long end = begin+100000;//每次循环插入的数据量
+    private long end = begin + 100000;//每次循环插入的数据量
     private String url = "jdbc:mysql://localhost:3306/mercadolibre?useServerPrepStmts=false&rewriteBatchedStatements=true&useUnicode=true&amp;characterEncoding=UTF-8";
     private String user = "root";
     private String password = "111111";
+
     /**
      * JDBC直接处理（开启事务、关闭事务）
      */
@@ -51,7 +52,7 @@ public class JdbcTemplateTest {
 //                    pstm.setString(6, RandomValue.getTel());
 //                    pstm.setString(7, RandomValue.getRoad());
 //                    //执行sql
-                    pstm.execute();
+            pstm.execute();
 //                    begin++;
 //                }
 //                //提交事务
@@ -68,7 +69,7 @@ public class JdbcTemplateTest {
             //提交事务
             conn.commit();
             //输出
-            System.out.println("共耗时："+(eTime1-bTime1));
+            System.out.println("共耗时：" + (eTime1 - bTime1));
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e1) {
@@ -91,7 +92,7 @@ public class JdbcTemplateTest {
             //连接mysql
             conn = DriverManager.getConnection(url, user, password);
             //将自动提交关闭
-             conn.setAutoCommit(false);
+            conn.setAutoCommit(false);
             //编写sql
             String sql = "SELECT goods_id,title,series,actual_price,creat_time,sales_volume FROM ml_goods_mx";
             //预编译sql
@@ -121,9 +122,9 @@ public class JdbcTemplateTest {
 //                    begin++;
 //                }
 //                //执行批处理
-               pstm.executeQuery();
+            pstm.executeQuery();
 ////                //提交事务
-                conn.commit();
+            conn.commit();
 //                //边界值自增10W
 //                end += 100000;
 //                //关闭分段计时
@@ -134,7 +135,7 @@ public class JdbcTemplateTest {
             //关闭总计时
             long eTime1 = System.currentTimeMillis();
             //输出
-            System.out.println("共耗时："+(eTime1-bTime1));
+            System.out.println("共耗时：" + (eTime1 - bTime1));
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e1) {
@@ -168,7 +169,7 @@ public class JdbcTemplateTest {
             //关闭总计时
             long eTime1 = System.currentTimeMillis();
             //输出
-            System.out.println("共耗时："+(eTime1-bTime1));
+            System.out.println("共耗时：" + (eTime1 - bTime1));
 //            int i = 0;
 //            while (iterator.hasNext()) {
 ////            System.err.println(iterator.next());
@@ -216,7 +217,6 @@ public class JdbcTemplateTest {
 //            e1.printStackTrace();
 //        }
     }
-
 
 
 }

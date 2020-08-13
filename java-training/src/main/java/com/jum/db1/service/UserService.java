@@ -13,7 +13,7 @@ public class UserService {
     private UserMapper userMapper;
 
 
-    public List<User> getUserInfo(Integer uuid){
+    public List<User> getUserInfo(Integer uuid) {
 
         return userMapper.selectByPrimaryKey(uuid);
 

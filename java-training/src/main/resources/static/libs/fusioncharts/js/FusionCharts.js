@@ -81,8 +81,7 @@
                         merge(obj1[item], obj2[item]);
                     }
                 }
-            }
-            else {
+            } else {
                 for (item in obj2) {
                     if (typeof obj2[item] === 'object') {
                         str = objectToStringFn.call(obj2[item]);
@@ -91,18 +90,15 @@
                                 obj1[item] = {};
                             }
                             merge(obj1[item], obj2[item]);
-                        }
-                        else if (str === "[object Array]") {
+                        } else if (str === "[object Array]") {
                             if (!(obj1[item] instanceof Array)) {
                                 obj1[item] = [];
                             }
                             merge(obj1[item], obj2[item]);
-                        }
-                        else {
+                        } else {
                             obj1[item] = obj2[item];
                         }
-                    }
-                    else {
+                    } else {
                         obj1[item] = obj2[item];
                     }
                 }
@@ -128,7 +124,7 @@
         if (deep === true) {
             merge(sink, source);
         }
-        // Copy all methods and properties of the object passed in parameter
+            // Copy all methods and properties of the object passed in parameter
         // to the object to which this function is attached.
         else {
             for (item in source) {
@@ -189,8 +185,8 @@
     // Specifies the order in which the parameters of the new
     // FusionCharts objects are interpreted and converted to options object.
     interpreters.stat = ['swfUrl', 'id', 'width', 'height',
-            'debugMode', 'registerWithJS', 'backgroundColor', 'scaleMode',
-            'lang', 'detectFlashVersion', 'autoInstallRedirect']
+        'debugMode', 'registerWithJS', 'backgroundColor', 'scaleMode',
+        'lang', 'detectFlashVersion', 'autoInstallRedirect']
 
     /**
      * Allows the core to process an arguments object based on a set of policies
@@ -224,7 +220,7 @@
                 for (prop in policies[policy]) {
                     value = options[policies[policy][prop][0]];
                     obj[policy][prop] = value === undefined ?
-                    policies[policy][prop][1] : value;
+                        policies[policy][prop][1] : value;
                 }
             }
         }
@@ -260,7 +256,7 @@
             // not called as constructor and it is passed an array that is marked
             // to do private communication, then share the global variable.
             if (arguments.length === 1 &&
-                    command instanceof Array && command[0] === 'private') {
+                command instanceof Array && command[0] === 'private') {
                 // Prevent overwriting and duplicate execution of modules.
                 if (modules[command[1]]) {
                     return undefined;
@@ -275,8 +271,7 @@
                 // Execute module function
                 if (typeof command[2] === 'function') {
                     return command[2].call(global, modules[command[1]]);
-                }
-                else {
+                } else {
                     return global;
                 }
             }
@@ -288,7 +283,7 @@
             // In case all above combination of arguments fail, we can unsafely
             // assume that user forgot the 'new' keyword.
             global.raiseError &&
-                global.raiseError(this, '25081840', 'run', '', new SyntaxError(
+            global.raiseError(this, '25081840', 'run', '', new SyntaxError(
                 "Use the \"new\" keyword while creating a new FusionCharts object"));
         }
 
@@ -307,14 +302,13 @@
             // If the above condition matches, then we can safely assume that
             // the first parameter is the options object.
             options = arguments[0];
-        }
-        else {
+        } else {
             // Parse command interpreter policies
             global.parseCommands(options, interpreters.stat, arguments);
 
             // Do a special treatment of swfUrl (first argument)
             if (global.core.options.sensePreferredRenderer && options.swfUrl &&
-                    options.swfUrl.match && !options.swfUrl.match(/[^a-z0-9]+/ig)) {
+                options.swfUrl.match && !options.swfUrl.match(/[^a-z0-9]+/ig)) {
                 options.type = options.swfUrl;
             }
         }
@@ -322,7 +316,7 @@
         // Incorporate the trailing object parameter as object-style
         // parameter input overrides.
         if (arguments.length > 1 &&
-                typeof arguments[arguments.length - 1] === 'object') {
+            typeof arguments[arguments.length - 1] === 'object') {
             delete options[interpreters.stat[arguments.length - 1]];
             global.extend(options, arguments[arguments.length - 1]);
         }
@@ -340,7 +334,7 @@
             global.raiseWarning(this, '06091847', 'param', '',
                 new Error('A FusionChart oject with the specified id \"' + this.id +
                     '\" already exists. Renaming it to ' + (this.id = global.uniqueId())
-                    ));
+                ));
         }
 
         // Use the "type" attribute if provided and override swfUrl.
@@ -445,37 +439,35 @@
                 setTimeout(notifyLibraryInit, 1);
             };
 
-            function checkInit () {
+            function checkInit() {
                 if (hasLoaded.test(doc.readyState)) {
                     init(); // call the onload handler
-                }
-                else {
+                } else {
                     _timer = setTimeout(checkInit, 10);
                 }
             }
 
             if (doc.addEventListener) {
                 doc.addEventListener("DOMContentLoaded", init, false);
-            }
-            else if (doc.attachEvent) {
+            } else if (doc.attachEvent) {
                 win.attachEvent("onLoad", init);
             }
 
             if (isIE) {
-              try {
-                  if (win.location.protocol === 'https:') {
-                      doc.write('<script id="__ie_onload_fusioncharts" defer="defer" src="//:"><\/script>');
-                  }
-                  else {
-                      doc.write('<script id="__ie_onload_fusioncharts" defer="defer" src="javascript:void(0)"><\/script>');
-                  }
-                  var script = doc.getElementById("__ie_onload_fusioncharts");
-                  script.onreadystatechange = function() {
+                try {
+                    if (win.location.protocol === 'https:') {
+                        doc.write('<script id="__ie_onload_fusioncharts" defer="defer" src="//:"><\/script>');
+                    } else {
+                        doc.write('<script id="__ie_onload_fusioncharts" defer="defer" src="javascript:void(0)"><\/script>');
+                    }
+                    var script = doc.getElementById("__ie_onload_fusioncharts");
+                    script.onreadystatechange = function () {
                         if (this.readyState == "complete") {
                             init(); // call the onload handler
                         }
-                  };
-              } catch (e) {}
+                    };
+                } catch (e) {
+                }
             }
 
             if (/WebKit/i.test(nav.userAgent)) { // sniff
@@ -489,8 +481,7 @@
                 };
             }(win.onload);
         }());
-    }
-    else {
+    } else {
         // already marking it ready means that notifier will let know that page
         // has already been loaded.
         global.ready = true;
@@ -501,7 +492,6 @@
     // load, that would be handled
     win.FusionMaps = global.core;
 }());
-
 
 
 /*jslint white: true, browser: true, windows: true, forin: true,  undef: true,
@@ -571,8 +561,7 @@
         // object that raised the event.
         try {
             item[0].call(scope, event, args || {});
-        }
-        catch (e) {
+        } catch (e) {
             // Call error in a separate thread to avoid stopping
             // of chart load.
             setTimeout(function () {
@@ -845,7 +834,6 @@
 }());
 
 
-
 /*jslint white: true, browser: true, windows: true, forin: true,  undef: true,
   eqeqeq: true, plusplus: true, bitwise: true, regexp: true, immed: true */
 
@@ -938,8 +926,7 @@
                 throw err;
             }, 0);
 
-        }
-        else {
+        } else {
             // Append the message string to the error message and sync with err.
             message = message + err;
         }
@@ -1112,7 +1099,7 @@
                     logger.outputTo = fn;
                 }
 
-                // In case user sends 'null' as the value of the logger function,
+                    // In case user sends 'null' as the value of the logger function,
                 // we can assume that user wants not to log any output.
                 else if (fn === null) {
                     global.core.debugMode.enabled(false);
@@ -1213,7 +1200,6 @@
 }());
 
 
-
 /*jslint white: true, browser: true, windows: true, forin: true,  undef: true,
   eqeqeq: true, plusplus: true, bitwise: true, regexp: true, immed: true */
 
@@ -1224,83 +1210,81 @@ FusionCharts(['private', 'modules.mantle.ajax', function () {
 
 
     var global = this,
-    // define constants for future use.
-    FUNCTION = 'function',
-    MSXMLHTTP = 'Microsoft.XMLHTTP',
-    MSXMLHTTP2 = 'Msxml2.XMLHTTP',
-    GET = 'GET',
-    POST = 'POST',
-    XHREQERROR = 'XmlHttprequest Error',
-    RUN = 'run',
-    ERRNO = '1110111515A',
-    win = window, // keep a local reference of window scope
+        // define constants for future use.
+        FUNCTION = 'function',
+        MSXMLHTTP = 'Microsoft.XMLHTTP',
+        MSXMLHTTP2 = 'Msxml2.XMLHTTP',
+        GET = 'GET',
+        POST = 'POST',
+        XHREQERROR = 'XmlHttprequest Error',
+        RUN = 'run',
+        ERRNO = '1110111515A',
+        win = window, // keep a local reference of window scope
 
-    // Probe IE version
-    version = parseFloat(navigator.appVersion.split("MSIE")[1]),
-    ielt8 = (version >= 5.5 && version <= 7) ? true : false,
-    //
-    // Calculate flags.
-    // Check whether the page is on file protocol.
-    fileProtocol = win.location.protocol === 'file:',
-    axObject = win.ActiveXObject,
+        // Probe IE version
+        version = parseFloat(navigator.appVersion.split("MSIE")[1]),
+        ielt8 = (version >= 5.5 && version <= 7) ? true : false,
+        //
+        // Calculate flags.
+        // Check whether the page is on file protocol.
+        fileProtocol = win.location.protocol === 'file:',
+        axObject = win.ActiveXObject,
 
-    // Check if native xhr is present
-    xhrNative = (!axObject || !fileProtocol) && win.XMLHttpRequest,
+        // Check if native xhr is present
+        xhrNative = (!axObject || !fileProtocol) && win.XMLHttpRequest,
 
-    // stats
-    counters = {
-        objects: 0,
-        xhr: 0,
-        requests: 0,
-        success: 0,
-        failure: 0,
-        idle: 0
-    },
+        // stats
+        counters = {
+            objects: 0,
+            xhr: 0,
+            requests: 0,
+            success: 0,
+            failure: 0,
+            idle: 0
+        },
 
-    // Prepare function to retrieve compatible xmlhttprequest.
-    newXmlHttpRequest = function() {
-        var xmlhttp;
+        // Prepare function to retrieve compatible xmlhttprequest.
+        newXmlHttpRequest = function () {
+            var xmlhttp;
 
-        // if xmlhttprequest is present as native, use it.
-        if (xhrNative) {
-            newXmlHttpRequest = function () {
-                counters.xhr++;
-                return new xhrNative();
-            };
-            return newXmlHttpRequest();
-        }
-
-        // Use activeX for IE
-        try {
-            xmlhttp = new axObject(MSXMLHTTP2);
-            newXmlHttpRequest = function () {
-                counters.xhr++;
-                return new axObject(MSXMLHTTP2);
-            };
-        }
-        catch (e) {
-            try {
-                xmlhttp = new axObject(MSXMLHTTP);
+            // if xmlhttprequest is present as native, use it.
+            if (xhrNative) {
                 newXmlHttpRequest = function () {
                     counters.xhr++;
-                    return new axObject(MSXMLHTTP);
+                    return new xhrNative();
                 };
+                return newXmlHttpRequest();
             }
-            catch (e) {
-                xmlhttp = false;
-            }
-        }
-        return xmlhttp;
-    },
 
-    // Ajax class.
-    Ajax = global.ajax = function (success, error) {
-        this.onSuccess = success;
-        this.onError = error;
-        this.open = false;
-        counters.objects++;
-        counters.idle++;
-    };
+            // Use activeX for IE
+            try {
+                xmlhttp = new axObject(MSXMLHTTP2);
+                newXmlHttpRequest = function () {
+                    counters.xhr++;
+                    return new axObject(MSXMLHTTP2);
+                };
+            } catch (e) {
+                try {
+                    xmlhttp = new axObject(MSXMLHTTP);
+                    newXmlHttpRequest = function () {
+                        counters.xhr++;
+                        return new axObject(MSXMLHTTP);
+                    };
+                } catch (e) {
+                    xmlhttp = false;
+                }
+            }
+            return xmlhttp;
+        },
+
+        // Ajax class.
+        Ajax = global.ajax = function (success, error) {
+            this.onSuccess = success;
+            this.onError = error;
+            this.open = false;
+            counters.objects++;
+            counters.idle++;
+        };
 
     Ajax.stats = function (type) {
         return type ? counters[type] : global.extend({}, counters);
@@ -1333,22 +1317,20 @@ FusionCharts(['private', 'modules.mantle.ajax', function () {
             try {
                 if (xmlhttp.readyState === 4) {
                     if ((!xmlhttp.status && fileProtocol) || (xmlhttp.status >= 200 &&
-                            xmlhttp.status < 300) || xmlhttp.status === 304 ||
-                            xmlhttp.status === 1223 || xmlhttp.status === 0) {
+                        xmlhttp.status < 300) || xmlhttp.status === 304 ||
+                        xmlhttp.status === 1223 || xmlhttp.status === 0) {
                         successCallback &&
-                            successCallback(xmlhttp.responseText, wrapper,
+                        successCallback(xmlhttp.responseText, wrapper,
                             callbackArgs, url);
                         counters.success++;
-                    }
-                    else if (errorCallback) {
+                    } else if (errorCallback) {
                         errorCallback(Error(XHREQERROR), wrapper, callbackArgs, url);
                         counters.failure++;
                     }
                     counters.idle--;
                     wrapper.open = false;
                 }
-            }
-            catch (error) {
+            } catch (error) {
                 if (errorCallback) {
                     errorCallback(error, wrapper, callbackArgs, url);
                 }
@@ -1369,17 +1351,15 @@ FusionCharts(['private', 'modules.mantle.ajax', function () {
                 xmlhttp.open(POST, url, true);
                 if (typeof data === 'string') {
                     postData = data;
-                }
-                else {
+                } else {
                     postData = [];
                     for (i in data) {
-                        postData.push(i + '=' + (data[i]+"")
-                                .replace(/\=/g, '%3D').replace(/\&/g, '%26'));
+                        postData.push(i + '=' + (data[i] + "")
+                            .replace(/\=/g, '%3D').replace(/\&/g, '%26'));
                     }
                     postData = postData.join('&');
                 }
-            }
-            else {
+            } else {
                 xmlhttp.open(GET, url, true);
                 postData = null;
             }
@@ -1391,8 +1371,7 @@ FusionCharts(['private', 'modules.mantle.ajax', function () {
             counters.requests++;
             counters.idle++;
             wrapper.open = true;
-        }
-        catch (e) {
+        } catch (e) {
             global.raiseError(global.core, ERRNO, RUN, XHREQERROR,
                 e.message);
         }
@@ -1414,7 +1393,7 @@ FusionCharts(['private', 'modules.mantle.ajax', function () {
 
         instance.open = false;
         return xmlhttp && typeof xmlhttp.abort === FUNCTION && xmlhttp.readyState &&
-                xmlhttp.readyState !== 0 && xmlhttp.abort();
+            xmlhttp.readyState !== 0 && xmlhttp.abort();
     };
 
     Ajax.prototype.dispose = function () {
@@ -1465,9 +1444,9 @@ FusionCharts(['private', 'modules.mantle.ajax', function () {
     global.getScriptBaseUri = function (scriptNameRegex) {
         // Get a collection of all script nodes.
         var scripts = document.getElementsByTagName('script'),
-        l = scripts.length,
-        src,
-        i;
+            l = scripts.length,
+            src,
+            i;
 
         // Iterate through the script node collection and match whether its
         // 'src' attribute contains fusioncharts file name.
@@ -1566,19 +1545,18 @@ FusionCharts(['private', 'modules.mantle.ajax', function () {
             notify = function () {
                 // clear stalled 404 check
                 scriptLoadFailureTimeout[src] =
-                        clearTimeout(scriptLoadFailureTimeout[src]);
+                    clearTimeout(scriptLoadFailureTimeout[src]);
 
                 // execute callbacks
                 eventArgs.success ? (success && success(file, src)) :
-                        (failure && failure(file, src));
+                    (failure && failure(file, src));
                 global.raiseEvent(LOAD_EVENTNAME, eventArgs, global.core);
             };
 
         // Prepare path.
         if (pathInFile) {
             path = '';
-        }
-        else {
+        } else {
             path = global.core.options.scriptBaseUri;
         }
 
@@ -1588,7 +1566,7 @@ FusionCharts(['private', 'modules.mantle.ajax', function () {
         // we do not allow XSS unsafe string
         if (!global.isXSSSafe(src, DISALLOW_CROSSDOMAIN_RESOURCE)) {
             src = typeof window.encodeURIComponent === 'function' ?
-            window.encodeURIComponent(src) : window.escape(src);
+                window.encodeURIComponent(src) : window.escape(src);
         }
 
         // Update event arguments
@@ -1636,7 +1614,7 @@ FusionCharts(['private', 'modules.mantle.ajax', function () {
         if (typeof success === 'function') {
             scriptsLoaded[src] = false;
             scriptLoadFailureTimeout[src] =
-                    clearTimeout(scriptLoadFailureTimeout[src]);
+                clearTimeout(scriptLoadFailureTimeout[src]);
 
             script.onload = function () {
                 scriptsLoaded[src] = true;
@@ -1666,7 +1644,7 @@ FusionCharts(['private', 'modules.mantle.ajax', function () {
 
         // Prepare the timeout check for script load failure
         if (typeof failure === 'function') {
-            scriptLoadFailureTimeout[src]= setTimeout(function () {
+            scriptLoadFailureTimeout[src] = setTimeout(function () {
                 if (scriptsLoaded[src]) {
                     return;
                 }
@@ -1681,7 +1659,7 @@ FusionCharts(['private', 'modules.mantle.ajax', function () {
      * Capitalizes first letter of a word
      */
     global.capitalizeString = function (str, all) {
-        return str ? str.replace(all ? (/(^|\s)([a-z])/g) : (/(^|\s)([a-z])/), function(m,p1,p2){
+        return str ? str.replace(all ? (/(^|\s)([a-z])/g) : (/(^|\s)([a-z])/), function (m, p1, p2) {
             return p1 + p2.toUpperCase();
         }) : str;
     };
@@ -1690,46 +1668,46 @@ FusionCharts(['private', 'modules.mantle.ajax', function () {
      * Function that safely deletes all items in a DOM element.
      */
     var purgeDOM = global.purgeDOM = function (d) {
-        var a = d.attributes, i, l, n;
-        if (a) {
-            for (i = a.length - 1; i >= 0; i -= 1) {
-                n = a[i].name;
-                if (typeof d[n] === 'function') {
-                    d[n] = null;
+            var a = d.attributes, i, l, n;
+            if (a) {
+                for (i = a.length - 1; i >= 0; i -= 1) {
+                    n = a[i].name;
+                    if (typeof d[n] === 'function') {
+                        d[n] = null;
+                    }
                 }
             }
-        }
-        a = d.childNodes;
-        if (a) {
-            l = a.length;
-            for (i = 0; i < l; i += 1) {
-                purgeDOM(d.childNodes[i]);
-            }
-        }
-    },
-
-    // Deconstruct policies.
-    // Update the arguments with latest copy of all variables by
-    // reverse engineering the policies.
-    deconstructPolicySet = function (policies, options, obj) {
-        var policy;
-
-        for (policy in policies) {
-            var prop;
-
-            // Set just the policy object in case of single-level policy.
-            if (policies[policy] instanceof Array) {
-                options[policies[policy][0]] = obj[policy];
-            } else {
-                // Copy the source of multi-level policies
-                for (prop in policies[policy]) {
-                    options[policies[policy][prop][0]] = obj[policy][prop];
+            a = d.childNodes;
+            if (a) {
+                l = a.length;
+                for (i = 0; i < l; i += 1) {
+                    purgeDOM(d.childNodes[i]);
                 }
             }
-        }
-    },
-    lengthCleanupRegex = /[^\%\d]*$/ig,
-    signatureMatchRegex = /^(FusionCharts|FusionWidgets|FusionMaps)/;
+        },
+
+        // Deconstruct policies.
+        // Update the arguments with latest copy of all variables by
+        // reverse engineering the policies.
+        deconstructPolicySet = function (policies, options, obj) {
+            var policy;
+
+            for (policy in policies) {
+                var prop;
+
+                // Set just the policy object in case of single-level policy.
+                if (policies[policy] instanceof Array) {
+                    options[policies[policy][0]] = obj[policy];
+                } else {
+                    // Copy the source of multi-level policies
+                    for (prop in policies[policy]) {
+                        options[policies[policy][prop][0]] = obj[policy][prop];
+                    }
+                }
+            }
+        },
+        lengthCleanupRegex = /[^\%\d]*$/ig,
+        signatureMatchRegex = /^(FusionCharts|FusionWidgets|FusionMaps)/;
 
     global.extend(global.core, {
         // Add default object management prototype method to raise deletion
@@ -1794,7 +1772,7 @@ FusionCharts(['private', 'modules.mantle.ajax', function () {
             }
 
             // Create new FusionCharts object from the computed options
-            return cloneParametersOnly ? options: new global.core(options);
+            return cloneParametersOnly ? options : new global.core(options);
 
         },
 
@@ -1849,7 +1827,7 @@ FusionCharts(['private', 'modules.mantle.ajax', function () {
             // Note that we need to replace 'fcmap_' when there.
             return (url = (url = src.substring(src.indexOf('.swf'), 0)) ?
                 url : src).substring(url.lastIndexOf('/') + 1).toLowerCase()
-                    .replace(/^fcmap_/i, '');
+                .replace(/^fcmap_/i, '');
         }
 
     }, true);
@@ -1865,7 +1843,6 @@ FusionCharts(['private', 'modules.mantle.ajax', function () {
     };
 
 }());
-
 
 
 /*jslint white: true, browser: true, windows: true, forin: true,  undef: true,
@@ -1913,205 +1890,205 @@ FusionCharts(['private', 'modules.mantle.ajax', function () {
     // Function to normalize dimension for style setting
     global.normalizeCSSDimension = function (width, height, container) {
         // optimize dimensions
-            var w = width === undefined ? (container.offsetWidth || parseFloat(container.style.width)) : width,
-                h = height === undefined ? (container.offsetHeight || parseFloat(container.style.height)) : height,
-                p;
+        var w = width === undefined ? (container.offsetWidth || parseFloat(container.style.width)) : width,
+            h = height === undefined ? (container.offsetHeight || parseFloat(container.style.height)) : height,
+            p;
 
-            // Do initial testing by setting dimensions
-            container.style.width = w = w.toString ? w.toString() : '0';
-            container.style.height = h = h.toString ? h.toString() : '0';
+        // Do initial testing by setting dimensions
+        container.style.width = w = w.toString ? w.toString() : '0';
+        container.style.height = h = h.toString ? h.toString() : '0';
 
-            if (w.match(/^\s*\d*\.?\d*\%\s*$/) && !w.match(/^\s*0\%\s*$/) &&
-                    container.offsetWidth === 0) {
-                p = container;
-                while ((p = p.offsetParent)) {
-                    if (p.offsetWidth > 0) {
-                        w = (p.offsetWidth * parseFloat(w.match(/\d*/)[0]) / 100).toString();
-                        break;
-                    }
+        if (w.match(/^\s*\d*\.?\d*\%\s*$/) && !w.match(/^\s*0\%\s*$/) &&
+            container.offsetWidth === 0) {
+            p = container;
+            while ((p = p.offsetParent)) {
+                if (p.offsetWidth > 0) {
+                    w = (p.offsetWidth * parseFloat(w.match(/\d*/)[0]) / 100).toString();
+                    break;
                 }
             }
+        }
 
-            if (h.match(/^\s*\d*\.?\d*\%\s*$/) && !h.match(/^\s*0\%\s*$/) &&
-                    container.offsetHeight <= 20) {
-                p = container;
-                while ((p = p.offsetParent)) {
-                    if (p.offsetHeight > 0) {
-                        h = (p.offsetHeight * parseFloat(h.match(/\d*/)[0]) / 100).toString();
-                        break;
-                    }
+        if (h.match(/^\s*\d*\.?\d*\%\s*$/) && !h.match(/^\s*0\%\s*$/) &&
+            container.offsetHeight <= 20) {
+            p = container;
+            while ((p = p.offsetParent)) {
+                if (p.offsetHeight > 0) {
+                    h = (p.offsetHeight * parseFloat(h.match(/\d*/)[0]) / 100).toString();
+                    break;
                 }
             }
+        }
 
-            // Re-use variable 'p' to store the final dimensioms
-            p = {
-                width: (w.replace ? w.replace(/^\s*(\d*\.?\d*)\s*$/ig, '$1px') : w),
-                height: (h.replace ? h.replace(/^\s*(\d*\.?\d*)\s*$/ig, '$1px') : h)
-            };
+        // Re-use variable 'p' to store the final dimensioms
+        p = {
+            width: (w.replace ? w.replace(/^\s*(\d*\.?\d*)\s*$/ig, '$1px') : w),
+            height: (h.replace ? h.replace(/^\s*(\d*\.?\d*)\s*$/ig, '$1px') : h)
+        };
 
-            // Finally apply the dimensions
-            container.style.width = p.width;
-            container.style.height = p.height;
+        // Finally apply the dimensions
+        container.style.width = p.width;
+        container.style.height = p.height;
 
-            return p
+        return p
     };
 
     // Collection of renderers.
     var notDefined = function () {
-        global.raiseError(this, '25081845', 'run', '::RendererManager',
-            new Error('No active renderer'));
-        return;
-    },
-    renderers = {
-        'undefined': {
-            render: notDefined,
-            remove: notDefined,
-            update: notDefined,
-            resize: notDefined,
-            config: notDefined,
-            policies: {}
-        }
-    },
-
-    store = {}, // store which chart has what renderer
-
-    // API to add renderer and also to set/get the current renderer.
-    renderer = global.renderer = {
-        register: function (name, obj) {
-            // Validate parameters
-            if (!name || typeof name.toString !== 'function') {
-                throw "#03091436 ~renderer.register() Invalid value for renderer name.";
+            global.raiseError(this, '25081845', 'run', '::RendererManager',
+                new Error('No active renderer'));
+            return;
+        },
+        renderers = {
+            'undefined': {
+                render: notDefined,
+                remove: notDefined,
+                update: notDefined,
+                resize: notDefined,
+                config: notDefined,
+                policies: {}
             }
+        },
 
-            // Desensitize character case for renderer name
-            name = name.toString().toLowerCase();
+        store = {}, // store which chart has what renderer
 
-            // Prevent addition of duplicate renderer
-            if (renderers[name] !== undefined) {
-                global.raiseError(global.core, '03091438', 'param', '::RendererManager>register',
-                    'Duplicate renderer name specified in "name"');
-                return false;
+        // API to add renderer and also to set/get the current renderer.
+        renderer = global.renderer = {
+            register: function (name, obj) {
+                // Validate parameters
+                if (!name || typeof name.toString !== 'function') {
+                    throw "#03091436 ~renderer.register() Invalid value for renderer name.";
+                }
+
+                // Desensitize character case for renderer name
+                name = name.toString().toLowerCase();
+
+                // Prevent addition of duplicate renderer
+                if (renderers[name] !== undefined) {
+                    global.raiseError(global.core, '03091438', 'param', '::RendererManager>register',
+                        'Duplicate renderer name specified in "name"');
+                    return false;
+                }
+
+                // Add renderer to the collection of renderers.
+                renderers[name] = obj;
+                // Return true when a new renderer is successfully added.
+                return true;
+            },
+
+            // Flag that tracks whether user has updated the default value.
+            userSetDefault: false,
+
+            // Set the current renderer
+            setDefault: function (name) {
+                // Validate parameters
+                if (!name || typeof name.toString !== 'function') {
+                    global.raiseError(global.core, '25081731', 'param', '::RendererManager>setDefault',
+                        'Invalid renderer name specified in "name"');
+                    return false;
+                }
+
+                // Validate the renderer name and see whether the parameter refers to a
+                // valid renderer.
+                // ALSO: Desensitize character case for renderer name.
+                if (renderers[name = name.toString().toLowerCase()] === undefined) {
+                    global.raiseError(global.core, '25081733', 'range', '::RendererManager>setDefault',
+                        'The specified renderer does not exist.');
+                    return false;
+                }
+
+                // Mark auto-set default renderer. When user specifically sets
+                // renderer, this flag needs to be overwritten.
+                this.userSetDefault = false;
+
+                // Set reference to the current renderer.
+                global.policies.options.renderer = ['renderer', name];
+                return true;
+            },
+
+            // Define a function that saves the reference to the embedded object
+            // after it has been rendered.
+            notifyRender: function (status) {
+                // Lookup corresponding chartObject for the renderer notif.
+                var chartObj = global.core.items[(status && status.id)];
+
+                // Check whether the render was successful.
+                if (!chartObj || (status.success === false && !status.silent)) {
+                    global.raiseError(global.core.items[status.id], '25081850', 'run', '::RendererManager',
+                        new Error('There was an error rendering the chart. ' +
+                            'Enable FusionCharts JS debugMode for more information.'));
+                }
+
+                // Lookup the FusionCharts object within its "items" repository.
+                chartObj.ref = status.ref;
+
+                // If the ref has been created, create a reverse reference.
+                if (status.ref) {
+                    status.ref.FusionCharts = global.core.items[status.id];
+
+                }
+
+                // Raise event that this chart has a DOM element
+                global.raiseEvent('internal.DOMElementCreated', status,
+                    chartObj);
+
+            },
+
+            protectedMethods: {
+                options: true,
+                attributes: true,
+                src: true,
+                ref: true,
+                constructor: true,
+                signature: true,
+                link: true,
+                addEventListener: true,
+                removeEventListener: true
+            },
+
+            getRenderer: function (name) {
+                return renderers[name];
+            },
+
+            getRendererPolicy: function (name) {
+                var policies = renderers[name].policies;
+                return typeof policies === 'object' ? policies : {};
+            },
+
+            currentRendererName: function () {
+                return global.policies.options.renderer[1];
+            },
+
+            update: function (obj) {
+                store[obj.id].update.apply(obj,
+                    Array.prototype.slice.call(arguments, 1));
+            },
+
+            render: function (obj) {
+                store[obj.id].render.apply(obj,
+                    Array.prototype.slice.call(arguments, 1));
+            },
+
+            remove: function (obj) {
+                store[obj.id].remove.apply(obj,
+                    Array.prototype.slice.call(arguments, 1));
+            },
+
+            resize: function (obj) {
+                store[obj.id].resize.apply(obj,
+                    Array.prototype.slice.call(arguments, 1));
+            },
+
+            config: function (obj) {
+                store[obj.id].config.apply(obj,
+                    Array.prototype.slice.call(arguments, 1));
+            },
+
+            dispose: function (obj) {
+                store[obj.id].dispose.apply(obj,
+                    Array.prototype.slice.call(arguments, 1));
             }
-
-            // Add renderer to the collection of renderers.
-            renderers[name] = obj;
-            // Return true when a new renderer is successfully added.
-            return true;
-        },
-
-        // Flag that tracks whether user has updated the default value.
-        userSetDefault: false,
-
-        // Set the current renderer
-        setDefault: function (name) {
-            // Validate parameters
-            if (!name || typeof name.toString !== 'function') {
-                global.raiseError(global.core, '25081731', 'param', '::RendererManager>setDefault',
-                    'Invalid renderer name specified in "name"');
-                return false;
-            }
-
-            // Validate the renderer name and see whether the parameter refers to a
-            // valid renderer.
-            // ALSO: Desensitize character case for renderer name.
-            if (renderers[name = name.toString().toLowerCase()] === undefined) {
-                global.raiseError(global.core, '25081733', 'range', '::RendererManager>setDefault',
-                    'The specified renderer does not exist.');
-                return false;
-            }
-
-            // Mark auto-set default renderer. When user specifically sets
-            // renderer, this flag needs to be overwritten.
-            this.userSetDefault = false;
-
-            // Set reference to the current renderer.
-            global.policies.options.renderer = ['renderer', name];
-            return true;
-        },
-
-        // Define a function that saves the reference to the embedded object
-        // after it has been rendered.
-        notifyRender: function (status) {
-            // Lookup corresponding chartObject for the renderer notif.
-            var chartObj = global.core.items[(status && status.id)];
-
-            // Check whether the render was successful.
-            if (!chartObj || (status.success === false && !status.silent)) {
-                global.raiseError(global.core.items[status.id], '25081850', 'run', '::RendererManager',
-                    new Error('There was an error rendering the chart. ' +
-                        'Enable FusionCharts JS debugMode for more information.'));
-            }
-
-            // Lookup the FusionCharts object within its "items" repository.
-            chartObj.ref = status.ref;
-
-            // If the ref has been created, create a reverse reference.
-            if (status.ref) {
-                status.ref.FusionCharts = global.core.items[status.id];
-
-            }
-
-            // Raise event that this chart has a DOM element
-            global.raiseEvent('internal.DOMElementCreated', status,
-                chartObj);
-
-        },
-
-        protectedMethods: {
-            options: true,
-            attributes: true,
-            src: true,
-            ref: true,
-            constructor: true,
-            signature: true,
-            link: true,
-            addEventListener: true,
-            removeEventListener: true
-        },
-
-        getRenderer: function (name) {
-            return renderers[name];
-        },
-
-        getRendererPolicy: function (name) {
-            var policies = renderers[name].policies;
-            return typeof policies === 'object' ? policies : {};
-        },
-
-        currentRendererName: function () {
-            return global.policies.options.renderer[1];
-        },
-
-        update: function (obj) {
-            store[obj.id].update.apply(obj,
-                Array.prototype.slice.call(arguments, 1));
-        },
-
-        render: function (obj) {
-            store[obj.id].render.apply(obj,
-                Array.prototype.slice.call(arguments, 1));
-        },
-
-        remove: function (obj) {
-            store[obj.id].remove.apply(obj,
-                Array.prototype.slice.call(arguments, 1));
-        },
-
-        resize: function (obj) {
-            store[obj.id].resize.apply(obj,
-                Array.prototype.slice.call(arguments, 1));
-        },
-
-        config: function (obj) {
-            store[obj.id].config.apply(obj,
-                Array.prototype.slice.call(arguments, 1));
-        },
-
-        dispose: function (obj) {
-            store[obj.id].dispose.apply(obj,
-                Array.prototype.slice.call(arguments, 1));
-        }
-    };
+        };
 
 
     // This function allows users to make a generic call to external interface
@@ -2119,7 +2096,7 @@ FusionCharts(['private', 'modules.mantle.ajax', function () {
     var eiCall = function (method) {
         return function () {
             // Verify whether the chart is valid object and then proceed.
-            if (this.ref === undefined  || this.ref === null  ||
+            if (this.ref === undefined || this.ref === null ||
                 typeof this.ref[method] !== 'function') {
                 // Raise error event to notify that a method on the renderer was
                 // invoked while the renderer does not have such a method.
@@ -2198,8 +2175,7 @@ FusionCharts(['private', 'modules.mantle.ajax', function () {
         try {
             eiItems = chartObj.getExternalInterfaceMethods();
             eiItems = typeof eiItems === 'string' ? eiItems.split(',') : [];
-        }
-        catch (err) {
+        } catch (err) {
             eiItems = [];
 
             global.raiseError(obj, '', 'run', 'RendererManager^Loaded',
@@ -2258,7 +2234,8 @@ FusionCharts(['private', 'modules.mantle.ajax', function () {
             if (ignore2 && !(ignore1[prop] || ignore2[prop] || sender.ref[prop] !== undefined)) {
                 try {
                     sender.ref[prop] = jsCall(event.sender, prop);
-                } catch (e) { }
+                } catch (e) {
+                }
             }
         }
     });
@@ -2313,9 +2290,9 @@ FusionCharts(['private', 'modules.mantle.ajax', function () {
             if (window[this.id] !== undefined) {
                 global.raiseError(this, '25081843', 'comp', '.render',
                     new Error('#25081843:IECompatibility() Chart ' +
-                    'Id is same as a JavaScript variable name. Variable naming ' +
-                    'error. Please use unique name for chart JS variable, ' +
-                    'chart-id and container id.'));
+                        'Id is same as a JavaScript variable name. Variable naming ' +
+                        'error. Please use unique name for chart JS variable, ' +
+                        'chart-id and container id.'));
             }
 
             // Create a blank element inside to mimic alternativecontent
@@ -2348,7 +2325,7 @@ FusionCharts(['private', 'modules.mantle.ajax', function () {
             // Set the attribute of this element that will be replaced by
             // swfobject
             alt = document.createElement(this.options.containerElementType ||
-                    'span');
+                'span');
             alt.setAttribute('id', this.id);
 
             // Clear the contents of the containerElement and subsequently
@@ -2361,8 +2338,7 @@ FusionCharts(['private', 'modules.mantle.ajax', function () {
             // Check whether we are to prepend this item or append.
             if (insertMode === 'prepend' && containerElement.firstChild) {
                 containerElement.insertBefore(alt, containerElement.firstChild);
-            }
-            else {
+            } else {
                 containerElement.appendChild(alt);
             }
 
@@ -2415,12 +2391,10 @@ FusionCharts(['private', 'modules.mantle.ajax', function () {
             var hash;
             if (!key) {
                 return;
-            }
-            else if (typeof key === 'string') {
+            } else if (typeof key === 'string') {
                 hash = {};
                 hash[key] = value;
-            }
-            else {
+            } else {
                 hash = key;
             }
             global.renderer.config(this, hash);
@@ -2484,7 +2458,6 @@ FusionCharts(['private', 'modules.mantle.ajax', function () {
 }());
 
 
-
 /*jslint white: true, browser: true, windows: true, forin: true,  undef: true,
   eqeqeq: true, plusplus: true, bitwise: true, regexp: true, immed: true */
 
@@ -2522,14 +2495,14 @@ FusionCharts(['private', 'modules.mantle.ajax', function () {
         handlers = global.transcoders = {},
         dataStore = {},
         cache = {},
-        isUrl =  /url$/i,
+        isUrl = /url$/i,
 
         xmlhttpSuccess = function (responseText, wrapper, data, url) {
             // Allow cancellation of data loaing
             var cancelDLFlag = false,
-            obj = data.obj,
-            baseFormat = data.format,
-            silent = data.silent;
+                obj = data.obj,
+                baseFormat = data.format,
+                silent = data.silent;
 
             // Raise pre data-load event
             global.raiseEvent('DataLoadRequestCompleted', {
@@ -2565,17 +2538,17 @@ FusionCharts(['private', 'modules.mantle.ajax', function () {
             }
         },
 
-        xmlhttpFailure =  function (resp, wrapper, data, url) {
+        xmlhttpFailure = function (resp, wrapper, data, url) {
             // Compile argument for event.
             var obj = data.obj,
-            eventArgs = {
-                source: SOURCENAME,
-                url: url,
-                xmlHttpRequestObject: wrapper.xhr,
-                error: resp,
-                httpStatus: (wrapper.xhr && wrapper.xhr.status) ?
-                wrapper.xhr.status : -1
-            };
+                eventArgs = {
+                    source: SOURCENAME,
+                    url: url,
+                    xmlHttpRequestObject: wrapper.xhr,
+                    error: resp,
+                    httpStatus: (wrapper.xhr && wrapper.xhr.status) ?
+                        wrapper.xhr.status : -1
+                };
 
             // Raise data load error message.
             global.raiseEvent('DataLoadError', eventArgs, obj);
@@ -2654,12 +2627,13 @@ FusionCharts(['private', 'modules.mantle.ajax', function () {
                     case "string":
                         obj.options.dataFormat =
                             /^\s*?\{[\s\S]*\}\s*?$/g.test(obj.options.dataFormat) ?
-                            'JSON' : 'XML';
+                                'JSON' : 'XML';
                         break;
                     case "object":
                         obj.options.dataFormat = "JSON";
                         break;
-                };
+                }
+                ;
             }
             obj.setChartData(dataSource, obj.options.dataFormat);
         }
@@ -2727,8 +2701,8 @@ FusionCharts(['private', 'modules.mantle.ajax', function () {
                         if (this.__state && this.__state.dhmXhrObj) {
                             this.__state.dhmXhrObj.abort();
                         }
+                    } catch (e) {
                     }
-                    catch (e) { }
                     this.cancelDataLoadRequest = function () {
                         return false;
                     };
@@ -2742,8 +2716,8 @@ FusionCharts(['private', 'modules.mantle.ajax', function () {
                 if (this.__state && this.__state.dhmXhrObj) {
                     try {
                         this.__state.dhmXhrObj.abort();
+                    } catch (e) {
                     }
-                    catch (e) { }
                 }
                 return;
             }
@@ -2761,10 +2735,10 @@ FusionCharts(['private', 'modules.mantle.ajax', function () {
             // Initiate XmlHttpRequest.
             xhr.get(typeof window.decodeURIComponent === 'function' ?
                 window.decodeURIComponent(url) : window.unescape(url), {
-                    obj: this,
-                    format: baseFormat,
-                    silent: silent
-                });
+                obj: this,
+                format: baseFormat,
+                silent: silent
+            });
 
 
         },
@@ -2884,9 +2858,9 @@ FusionCharts(['private', 'modules.mantle.ajax', function () {
             // Check presence of cached data or call the decoder routine of
             // the data-handler and return the decoded data.
             parseResult = (typeof cache[this.id][format] === 'object') ?
-            cache[this.id][format] :
-            cache[this.id][format] = handler.decode(dataStore[this.id], this,
-                this.options.dataConfiguration);
+                cache[this.id][format] :
+                cache[this.id][format] = handler.decode(dataStore[this.id], this,
+                    this.options.dataConfiguration);
 
             // Return the eminent data (in advanced mode if needed.
             return Boolean(advanced) === true ? parseResult : parseResult.data;
@@ -2915,7 +2889,7 @@ FusionCharts(['private', 'modules.mantle.ajax', function () {
 
             // Chain the decoder and encoder.
             var l1 = handlers[from].encode(data, this, configuration),
-            l2 = handlers[to].decode(l1.data, this, configuration);
+                l2 = handlers[to].decode(l1.data, this, configuration);
 
             // Carry the error.
             if (!(l2.error instanceof Error)) {
@@ -2985,15 +2959,12 @@ FusionCharts(['private', 'modules.mantle.ajax', function () {
 
                         if (fresh === false) { // check false positive
                             return protoHandler.apply(obj);
-                        }
-                        else if (obj.ref.getUpdatedXMLData) { // for flash
+                        } else if (obj.ref.getUpdatedXMLData) { // for flash
                             return global.core.transcodeData(obj.ref.getUpdatedXMLData(),
-                                    'xml', format);
-                        }
-                        else if (obj.getData) { // for js charts
+                                'xml', format);
+                        } else if (obj.getData) { // for js charts
                             return obj.getData(format);
-                        }
-                        else { // if all fail, return stale data
+                        } else { // if all fail, return stale data
                             return protoHandler.apply(obj);
                         }
                     };
@@ -3004,12 +2975,12 @@ FusionCharts(['private', 'modules.mantle.ajax', function () {
             state.dynamicDataRoutingEnabled = true; // flag
         }
         // Remove for other chart types if it was earlier inserted.
-        else if (state.dynamicDataRoutingEnabled){
+        else if (state.dynamicDataRoutingEnabled) {
             for (transcoder in global.transcoders) {
                 transcoderName = global.transcoders[transcoder].name;
                 dataGetterName = 'get' + transcoderName + 'Data';
                 if (obj.hasOwnProperty(dataGetterName) &&
-                        obj[dataGetterName]._dynamicdatarouter) {
+                    obj[dataGetterName]._dynamicdatarouter) {
                     delete obj[dataGetterName];
                 }
             }
@@ -3025,822 +2996,826 @@ FusionCharts(['private', 'modules.mantle.ajax', function () {
 	Copyright (c) 2007-2008 Geoff Stearns, Michael Williams, and Bobby van der Sluis
 	This software is released under the MIT License <http://www.opensource.org/licenses/mit-license.php>
 	Copyright (c) for modifications 2010-2011 FusionCharts Technologies LLP.
-*/var swfobject = window.swfobject = function () {
+*/
+var swfobject = window.swfobject = function () {
 
-		var UNDEF = "undefined",
-				OBJECT = "object",
-				SHOCKWAVE_FLASH = "Shockwave Flash",
-				SHOCKWAVE_FLASH_AX = "ShockwaveFlash.ShockwaveFlash",
-				FLASH_MIME_TYPE = "application/x-shockwave-flash",
-				EXPRESS_INSTALL_ID = "SWFObjectExprInst",
-				ON_READY_STATE_CHANGE = "onreadystatechange",
+    var UNDEF = "undefined",
+        OBJECT = "object",
+        SHOCKWAVE_FLASH = "Shockwave Flash",
+        SHOCKWAVE_FLASH_AX = "ShockwaveFlash.ShockwaveFlash",
+        FLASH_MIME_TYPE = "application/x-shockwave-flash",
+        EXPRESS_INSTALL_ID = "SWFObjectExprInst",
+        ON_READY_STATE_CHANGE = "onreadystatechange",
 
-				win = window,
-				doc = document,
-				nav = navigator,
+        win = window,
+        doc = document,
+        nav = navigator,
 
-				plugin = false,
-				domLoadFnArr = [main],
-				regObjArr = [],
-				objIdArr = [],
-				listenersArr = [],
-				storedAltContent,
-				storedAltContentId,
-				storedCallbackFn,
-				storedCallbackObj,
-				isDomLoaded = false,
-				isExpressInstallActive = false,
-				dynamicStylesheet,
-				dynamicStylesheetMedia,
-				autoHideShow = true,
+        plugin = false,
+        domLoadFnArr = [main],
+        regObjArr = [],
+        objIdArr = [],
+        listenersArr = [],
+        storedAltContent,
+        storedAltContentId,
+        storedCallbackFn,
+        storedCallbackObj,
+        isDomLoaded = false,
+        isExpressInstallActive = false,
+        dynamicStylesheet,
+        dynamicStylesheetMedia,
+        autoHideShow = true,
 
-		/* Centralized function for browser feature detection
-				- User agent string detection is only used when no good alternative is possible
-				- Is executed directly for optimal performance
-		*/
-		ua = function () {
-				var w3cdom = typeof doc.getElementById != UNDEF && typeof doc.getElementsByTagName != UNDEF && typeof doc.createElement != UNDEF,
-						u = nav.userAgent.toLowerCase(),
-						p = nav.platform.toLowerCase(),
-						windows = p ? /win/.test(p) : /win/.test(u),
-						mac = p ? /mac/.test(p) : /mac/.test(u),
-						webkit = /webkit/.test(u) ? parseFloat(u.replace(/^.*webkit\/(\d+(\.\d+)?).*$/, "$1")) : false, // returns either the webkit version or false if not webkit
-						ie = !+"\v1", // feature detection based on Andrea Giammarchi's solution: http://webreflection.blogspot.com/2009/01/32-bytes-to-know-if-your-browser-is-ie.html
-						playerVersion = [0,0,0],
-						d = null;
-				if (typeof nav.plugins != UNDEF && typeof nav.plugins[SHOCKWAVE_FLASH] == OBJECT) {
-						d = nav.plugins[SHOCKWAVE_FLASH].description;
-						if (d && !(typeof nav.mimeTypes != UNDEF && nav.mimeTypes[FLASH_MIME_TYPE] && !nav.mimeTypes[FLASH_MIME_TYPE].enabledPlugin)) { // navigator.mimeTypes["application/x-shockwave-flash"].enabledPlugin indicates whether plug-ins are enabled or disabled in Safari 3+
-								plugin = true;
-								ie = false; // cascaded feature detection for Internet Explorer
-								d = d.replace(/^.*\s+(\S+\s+\S+$)/, "$1");
-								playerVersion[0] = parseInt(d.replace(/^(.*)\..*$/, "$1"), 10);
-								playerVersion[1] = parseInt(d.replace(/^.*\.(.*)\s.*$/, "$1"), 10);
-								playerVersion[2] = /[a-zA-Z]/.test(d) ? parseInt(d.replace(/^.*[a-zA-Z]+(.*)$/, "$1"), 10) : 0;
-						}
-				}
-				else if (typeof win.ActiveXObject != UNDEF) {
-						try {
-								var a = new ActiveXObject(SHOCKWAVE_FLASH_AX);
-								if (a) { // a will return null when ActiveX is disabled
-										// Fix for /bug#462
-										//!// d = a.GetVariable("$version");
-										try {
-											d = a.GetVariable("$version");
-										}
-										catch (e) { }
-										// End fix for /bug#462
-										if (d) {
-												ie = true; // cascaded feature detection for Internet Explorer
-												d = d.split(" ")[1].split(",");
-												playerVersion = [parseInt(d[0], 10), parseInt(d[1], 10), parseInt(d[2], 10)];
-										}
-								}
-						}
-						catch(e) {}
-				}
-				return {w3:w3cdom, pv:playerVersion, wk:webkit, ie:ie, win:windows, mac:mac};
-		}(),
+        /* Centralized function for browser feature detection
+                - User agent string detection is only used when no good alternative is possible
+                - Is executed directly for optimal performance
+        */
+        ua = function () {
+            var w3cdom = typeof doc.getElementById != UNDEF && typeof doc.getElementsByTagName != UNDEF && typeof doc.createElement != UNDEF,
+                u = nav.userAgent.toLowerCase(),
+                p = nav.platform.toLowerCase(),
+                windows = p ? /win/.test(p) : /win/.test(u),
+                mac = p ? /mac/.test(p) : /mac/.test(u),
+                webkit = /webkit/.test(u) ? parseFloat(u.replace(/^.*webkit\/(\d+(\.\d+)?).*$/, "$1")) : false, // returns either the webkit version or false if not webkit
+                ie = !+"\v1", // feature detection based on Andrea Giammarchi's solution: http://webreflection.blogspot.com/2009/01/32-bytes-to-know-if-your-browser-is-ie.html
+                playerVersion = [0, 0, 0],
+                d = null;
+            if (typeof nav.plugins != UNDEF && typeof nav.plugins[SHOCKWAVE_FLASH] == OBJECT) {
+                d = nav.plugins[SHOCKWAVE_FLASH].description;
+                if (d && !(typeof nav.mimeTypes != UNDEF && nav.mimeTypes[FLASH_MIME_TYPE] && !nav.mimeTypes[FLASH_MIME_TYPE].enabledPlugin)) { // navigator.mimeTypes["application/x-shockwave-flash"].enabledPlugin indicates whether plug-ins are enabled or disabled in Safari 3+
+                    plugin = true;
+                    ie = false; // cascaded feature detection for Internet Explorer
+                    d = d.replace(/^.*\s+(\S+\s+\S+$)/, "$1");
+                    playerVersion[0] = parseInt(d.replace(/^(.*)\..*$/, "$1"), 10);
+                    playerVersion[1] = parseInt(d.replace(/^.*\.(.*)\s.*$/, "$1"), 10);
+                    playerVersion[2] = /[a-zA-Z]/.test(d) ? parseInt(d.replace(/^.*[a-zA-Z]+(.*)$/, "$1"), 10) : 0;
+                }
+            } else if (typeof win.ActiveXObject != UNDEF) {
+                try {
+                    var a = new ActiveXObject(SHOCKWAVE_FLASH_AX);
+                    if (a) { // a will return null when ActiveX is disabled
+                        // Fix for /bug#462
+                        //!// d = a.GetVariable("$version");
+                        try {
+                            d = a.GetVariable("$version");
+                        } catch (e) {
+                        }
+                        // End fix for /bug#462
+                        if (d) {
+                            ie = true; // cascaded feature detection for Internet Explorer
+                            d = d.split(" ")[1].split(",");
+                            playerVersion = [parseInt(d[0], 10), parseInt(d[1], 10), parseInt(d[2], 10)];
+                        }
+                    }
+                } catch (e) {
+                }
+            }
+            return {w3: w3cdom, pv: playerVersion, wk: webkit, ie: ie, win: windows, mac: mac};
+        }(),
 
-		/* Cross-browser onDomLoad
-				- Will fire an event as soon as the DOM of a web page is loaded
-				- Internet Explorer workaround based on Diego Perini's solution: http://javascript.nwbox.com/IEContentLoaded/
-				- Regular onload serves as fallback
-		*/
-		onDomLoad = function() {
-				if (!ua.w3) {return;}
-				if ((typeof doc.readyState != UNDEF && doc.readyState == "complete") || (typeof doc.readyState == UNDEF && (doc.getElementsByTagName("body")[0] || doc.body))) { // function is fired after onload, e.g. when script is inserted dynamically
-						callDomLoadFunctions();
-				}
-				if (!isDomLoaded) {
-						if (typeof doc.addEventListener != UNDEF) {
-								doc.addEventListener("DOMContentLoaded", callDomLoadFunctions, false);
-						}
-						if (ua.ie && ua.win) {
-								doc.attachEvent(ON_READY_STATE_CHANGE, function() {
-										if (doc.readyState == "complete") {
-												doc.detachEvent(ON_READY_STATE_CHANGE, arguments.callee);
-												callDomLoadFunctions();
-										}
-								});
-								if (win == top) { // if not inside an iframe
-										(function(){
-												if (isDomLoaded) {return;}
-												try {
-														doc.documentElement.doScroll("left");
-												}
-												catch(e) {
-														setTimeout(arguments.callee, 0);
-														return;
-												}
-												callDomLoadFunctions();
-										})();
-								}
-						}
-						if (ua.wk) {
-								(function(){
-										if (isDomLoaded) {return;}
-										if (!/loaded|complete/.test(doc.readyState)) {
-												setTimeout(arguments.callee, 0);
-												return;
-										}
-										callDomLoadFunctions();
-								})();
-						}
-						addLoadEvent(callDomLoadFunctions);
-				}
-		}();
+        /* Cross-browser onDomLoad
+                - Will fire an event as soon as the DOM of a web page is loaded
+                - Internet Explorer workaround based on Diego Perini's solution: http://javascript.nwbox.com/IEContentLoaded/
+                - Regular onload serves as fallback
+        */
+        onDomLoad = function () {
+            if (!ua.w3) {
+                return;
+            }
+            if ((typeof doc.readyState != UNDEF && doc.readyState == "complete") || (typeof doc.readyState == UNDEF && (doc.getElementsByTagName("body")[0] || doc.body))) { // function is fired after onload, e.g. when script is inserted dynamically
+                callDomLoadFunctions();
+            }
+            if (!isDomLoaded) {
+                if (typeof doc.addEventListener != UNDEF) {
+                    doc.addEventListener("DOMContentLoaded", callDomLoadFunctions, false);
+                }
+                if (ua.ie && ua.win) {
+                    doc.attachEvent(ON_READY_STATE_CHANGE, function () {
+                        if (doc.readyState == "complete") {
+                            doc.detachEvent(ON_READY_STATE_CHANGE, arguments.callee);
+                            callDomLoadFunctions();
+                        }
+                    });
+                    if (win == top) { // if not inside an iframe
+                        (function () {
+                            if (isDomLoaded) {
+                                return;
+                            }
+                            try {
+                                doc.documentElement.doScroll("left");
+                            } catch (e) {
+                                setTimeout(arguments.callee, 0);
+                                return;
+                            }
+                            callDomLoadFunctions();
+                        })();
+                    }
+                }
+                if (ua.wk) {
+                    (function () {
+                        if (isDomLoaded) {
+                            return;
+                        }
+                        if (!/loaded|complete/.test(doc.readyState)) {
+                            setTimeout(arguments.callee, 0);
+                            return;
+                        }
+                        callDomLoadFunctions();
+                    })();
+                }
+                addLoadEvent(callDomLoadFunctions);
+            }
+        }();
 
-		function callDomLoadFunctions() {
-				if (isDomLoaded) {return;}
-				try { // test if we can really add/remove elements to/from the DOM; we don't want to fire it too early
-						var t = doc.getElementsByTagName("body")[0].appendChild(createElement("span"));
-						t.parentNode.removeChild(t);
-				}
-				catch (e) {return;}
-				isDomLoaded = true;
-				var dl = domLoadFnArr.length;
-				for (var i = 0; i < dl; i++) {
-						domLoadFnArr[i]();
-				}
-		}
+    function callDomLoadFunctions() {
+        if (isDomLoaded) {
+            return;
+        }
+        try { // test if we can really add/remove elements to/from the DOM; we don't want to fire it too early
+            var t = doc.getElementsByTagName("body")[0].appendChild(createElement("span"));
+            t.parentNode.removeChild(t);
+        } catch (e) {
+            return;
+        }
+        isDomLoaded = true;
+        var dl = domLoadFnArr.length;
+        for (var i = 0; i < dl; i++) {
+            domLoadFnArr[i]();
+        }
+    }
 
-		function addDomLoadEvent(fn) {
-				if (isDomLoaded) {
-						fn();
-				}
-				else {
-						domLoadFnArr[domLoadFnArr.length] = fn; // Array.push() is only available in IE5.5+
-				}
-		}
+    function addDomLoadEvent(fn) {
+        if (isDomLoaded) {
+            fn();
+        } else {
+            domLoadFnArr[domLoadFnArr.length] = fn; // Array.push() is only available in IE5.5+
+        }
+    }
 
-		/* Cross-browser onload
-				- Based on James Edwards' solution: http://brothercake.com/site/resources/scripts/onload/
-				- Will fire an event as soon as a web page including all of its assets are loaded
-		 */
-		function addLoadEvent(fn) {
-				if (typeof win.addEventListener != UNDEF) {
-						win.addEventListener("load", fn, false);
-				}
-				else if (typeof doc.addEventListener != UNDEF) {
-						doc.addEventListener("load", fn, false);
-				}
-				else if (typeof win.attachEvent != UNDEF) {
-						addListener(win, "onload", fn);
-				}
-				else if (typeof win.onload == "function") {
-						var fnOld = win.onload;
-						win.onload = function() {
-								fnOld();
-								fn();
-						};
-				}
-				else {
-						win.onload = fn;
-				}
-		}
+    /* Cross-browser onload
+            - Based on James Edwards' solution: http://brothercake.com/site/resources/scripts/onload/
+            - Will fire an event as soon as a web page including all of its assets are loaded
+     */
+    function addLoadEvent(fn) {
+        if (typeof win.addEventListener != UNDEF) {
+            win.addEventListener("load", fn, false);
+        } else if (typeof doc.addEventListener != UNDEF) {
+            doc.addEventListener("load", fn, false);
+        } else if (typeof win.attachEvent != UNDEF) {
+            addListener(win, "onload", fn);
+        } else if (typeof win.onload == "function") {
+            var fnOld = win.onload;
+            win.onload = function () {
+                fnOld();
+                fn();
+            };
+        } else {
+            win.onload = fn;
+        }
+    }
 
-		/* Main function
-				- Will preferably execute onDomLoad, otherwise onload (as a fallback)
-		*/
-		function main() {
-				if (plugin) {
-						testPlayerVersion();
-				}
-				else {
-						matchVersions();
-				}
-		}
+    /* Main function
+            - Will preferably execute onDomLoad, otherwise onload (as a fallback)
+    */
+    function main() {
+        if (plugin) {
+            testPlayerVersion();
+        } else {
+            matchVersions();
+        }
+    }
 
-		/* Detect the Flash Player version for non-Internet Explorer browsers
-				- Detecting the plug-in version via the object element is more precise than using the plugins collection item's description:
-				  a. Both release and build numbers can be detected
-				  b. Avoid wrong descriptions by corrupt installers provided by Adobe
-				  c. Avoid wrong descriptions by multiple Flash Player entries in the plugin Array, caused by incorrect browser imports
-				- Disadvantage of this method is that it depends on the availability of the DOM, while the plugins collection is immediately available
-		*/
-		function testPlayerVersion() {
-				var b = doc.getElementsByTagName("body")[0];
-				var o = createElement(OBJECT);
-				o.setAttribute("type", FLASH_MIME_TYPE);
-				var t = b.appendChild(o);
-				if (t) {
-						var counter = 0;
-						(function(){
-								if (typeof t.GetVariable != UNDEF) {
-										// Fix for /bug#462
-										//!// var d = t.GetVariable("$version");
-										var d;
-										try {
-											d = t.GetVariable("$version");
-										}
-										catch (e) { }
-										// End fix for /bug#462
-										if (d) {
-												d = d.split(" ")[1].split(",");
-												ua.pv = [parseInt(d[0], 10), parseInt(d[1], 10), parseInt(d[2], 10)];
-										}
-								}
-								else if (counter < 10) {
-										counter++;
-										setTimeout(arguments.callee, 10);
-										return;
-								}
-								b.removeChild(o);
-								t = null;
-								matchVersions();
-						})();
-				}
-				else {
-						matchVersions();
-				}
-		}
+    /* Detect the Flash Player version for non-Internet Explorer browsers
+            - Detecting the plug-in version via the object element is more precise than using the plugins collection item's description:
+              a. Both release and build numbers can be detected
+              b. Avoid wrong descriptions by corrupt installers provided by Adobe
+              c. Avoid wrong descriptions by multiple Flash Player entries in the plugin Array, caused by incorrect browser imports
+            - Disadvantage of this method is that it depends on the availability of the DOM, while the plugins collection is immediately available
+    */
+    function testPlayerVersion() {
+        var b = doc.getElementsByTagName("body")[0];
+        var o = createElement(OBJECT);
+        o.setAttribute("type", FLASH_MIME_TYPE);
+        var t = b.appendChild(o);
+        if (t) {
+            var counter = 0;
+            (function () {
+                if (typeof t.GetVariable != UNDEF) {
+                    // Fix for /bug#462
+                    //!// var d = t.GetVariable("$version");
+                    var d;
+                    try {
+                        d = t.GetVariable("$version");
+                    } catch (e) {
+                    }
+                    // End fix for /bug#462
+                    if (d) {
+                        d = d.split(" ")[1].split(",");
+                        ua.pv = [parseInt(d[0], 10), parseInt(d[1], 10), parseInt(d[2], 10)];
+                    }
+                } else if (counter < 10) {
+                    counter++;
+                    setTimeout(arguments.callee, 10);
+                    return;
+                }
+                b.removeChild(o);
+                t = null;
+                matchVersions();
+            })();
+        } else {
+            matchVersions();
+        }
+    }
 
-		/* Perform Flash Player and SWF version matching; static publishing only
-		*/
-		function matchVersions() {
-				var rl = regObjArr.length;
-				if (rl > 0) {
-						for (var i = 0; i < rl; i++) { // for each registered object element
-								var id = regObjArr[i].id;
-								var cb = regObjArr[i].callbackFn;
-								var cbObj = regObjArr[i].userData || {};
-                                                                cbObj.success = false;
-                                                                cbObj.id = id;
-								if (ua.pv[0] > 0) {
-										var obj = getElementById(id);
-										if (obj) {
-												if (hasPlayerVersion(regObjArr[i].swfVersion) && !(ua.wk && ua.wk < 312)) { // Flash Player version >= published SWF version: Houston, we have a match!
-														setVisibility(id, true);
-														if (cb) {
-																cbObj.success = true;
-																cbObj.ref = getObjectById(id);
-																cb(cbObj);
-														}
-												}
-												else if (regObjArr[i].expressInstall && canExpressInstall()) { // show the Adobe Express Install dialog if set by the web page author and if supported
-														var att = {};
-														att.data = regObjArr[i].expressInstall;
-														att.width = obj.getAttribute("width") || "0";
-														att.height = obj.getAttribute("height") || "0";
-														if (obj.getAttribute("class")) {att.styleclass = obj.getAttribute("class");}
-														if (obj.getAttribute("align")) {att.align = obj.getAttribute("align");}
-														// parse HTML object param element's name-value pairs
-														var par = {};
-														var p = obj.getElementsByTagName("param");
-														var pl = p.length;
-														for (var j = 0; j < pl; j++) {
-																if (p[j].getAttribute("name").toLowerCase() != "movie") {
-																		par[p[j].getAttribute("name")] = p[j].getAttribute("value");
-																}
-														}
-														showExpressInstall(att, par, id, cb);
-												}
-												else { // Flash Player and SWF version mismatch or an older Webkit engine that ignores the HTML object element's nested param elements: display alternative content instead of SWF
-														displayAltContent(obj);
-														if (cb) {cb(cbObj);}
-												}
-										}
-								}
-								else {	// if no Flash Player is installed or the fp version cannot be detected we let the HTML object element do its job (either show a SWF or alternative content)
-										setVisibility(id, true);
-										if (cb) {
-												var o = getObjectById(id); // test whether there is an HTML object element or not
-												if (o && typeof o.SetVariable != UNDEF) {
-														cbObj.success = true;
-														cbObj.ref = o;
-												}
-												cb(cbObj);
-										}
-								}
-						}
-				}
-		}
+    /* Perform Flash Player and SWF version matching; static publishing only
+    */
+    function matchVersions() {
+        var rl = regObjArr.length;
+        if (rl > 0) {
+            for (var i = 0; i < rl; i++) { // for each registered object element
+                var id = regObjArr[i].id;
+                var cb = regObjArr[i].callbackFn;
+                var cbObj = regObjArr[i].userData || {};
+                cbObj.success = false;
+                cbObj.id = id;
+                if (ua.pv[0] > 0) {
+                    var obj = getElementById(id);
+                    if (obj) {
+                        if (hasPlayerVersion(regObjArr[i].swfVersion) && !(ua.wk && ua.wk < 312)) { // Flash Player version >= published SWF version: Houston, we have a match!
+                            setVisibility(id, true);
+                            if (cb) {
+                                cbObj.success = true;
+                                cbObj.ref = getObjectById(id);
+                                cb(cbObj);
+                            }
+                        } else if (regObjArr[i].expressInstall && canExpressInstall()) { // show the Adobe Express Install dialog if set by the web page author and if supported
+                            var att = {};
+                            att.data = regObjArr[i].expressInstall;
+                            att.width = obj.getAttribute("width") || "0";
+                            att.height = obj.getAttribute("height") || "0";
+                            if (obj.getAttribute("class")) {
+                                att.styleclass = obj.getAttribute("class");
+                            }
+                            if (obj.getAttribute("align")) {
+                                att.align = obj.getAttribute("align");
+                            }
+                            // parse HTML object param element's name-value pairs
+                            var par = {};
+                            var p = obj.getElementsByTagName("param");
+                            var pl = p.length;
+                            for (var j = 0; j < pl; j++) {
+                                if (p[j].getAttribute("name").toLowerCase() != "movie") {
+                                    par[p[j].getAttribute("name")] = p[j].getAttribute("value");
+                                }
+                            }
+                            showExpressInstall(att, par, id, cb);
+                        } else { // Flash Player and SWF version mismatch or an older Webkit engine that ignores the HTML object element's nested param elements: display alternative content instead of SWF
+                            displayAltContent(obj);
+                            if (cb) {
+                                cb(cbObj);
+                            }
+                        }
+                    }
+                } else {	// if no Flash Player is installed or the fp version cannot be detected we let the HTML object element do its job (either show a SWF or alternative content)
+                    setVisibility(id, true);
+                    if (cb) {
+                        var o = getObjectById(id); // test whether there is an HTML object element or not
+                        if (o && typeof o.SetVariable != UNDEF) {
+                            cbObj.success = true;
+                            cbObj.ref = o;
+                        }
+                        cb(cbObj);
+                    }
+                }
+            }
+        }
+    }
 
-		function getObjectById(objectIdStr) {
-				var o, r = null;
-				/* ORIGINAL CODE
-				o = getElementById(objectIdStr);
-				if (o && o.nodeName == "OBJECT") {
-						if (typeof o.SetVariable != UNDEF) {
-								r = o;
-						}
-						else {
-								var n = o.getElementsByTagName(OBJECT)[0];
-								if (n) {
-										r = n;
-								}
-						}
-				} */
-				/* fix for access embeds */
-				if (!(document.embeds && (o = document.embeds[objectIdStr]))) {
-					if (!((o = getElementById(objectIdStr)) && o.nodeName == "OBJECT")) {
-						o = window[objectIdStr];
-					}
-				}
+    function getObjectById(objectIdStr) {
+        var o, r = null;
+        /* ORIGINAL CODE
+        o = getElementById(objectIdStr);
+        if (o && o.nodeName == "OBJECT") {
+                if (typeof o.SetVariable != UNDEF) {
+                        r = o;
+                }
+                else {
+                        var n = o.getElementsByTagName(OBJECT)[0];
+                        if (n) {
+                                r = n;
+                        }
+                }
+        } */
+        /* fix for access embeds */
+        if (!(document.embeds && (o = document.embeds[objectIdStr]))) {
+            if (!((o = getElementById(objectIdStr)) && o.nodeName == "OBJECT")) {
+                o = window[objectIdStr];
+            }
+        }
 
-				if (!o) {
-					return r;
-				}
+        if (!o) {
+            return r;
+        }
 
-				if (typeof o.SetVariable != UNDEF) {
-						r = o;
-				}
-				else {
-						var n = o.getElementsByTagName(OBJECT)[0];
-						if (n) {
-								r = n;
-						}
-				}
-				/* fix for access embeds ends */
-				return r;
-		}
+        if (typeof o.SetVariable != UNDEF) {
+            r = o;
+        } else {
+            var n = o.getElementsByTagName(OBJECT)[0];
+            if (n) {
+                r = n;
+            }
+        }
+        /* fix for access embeds ends */
+        return r;
+    }
 
-		/* Requirements for Adobe Express Install
-				- only one instance can be active at a time
-				- fp 6.0.65 or higher
-				- Win/Mac OS only
-				- no Webkit engines older than version 312
-		*/
-		function canExpressInstall() {
-				return !isExpressInstallActive && hasPlayerVersion("6.0.65") && (ua.win || ua.mac) && !(ua.wk && ua.wk < 312);
-		}
+    /* Requirements for Adobe Express Install
+            - only one instance can be active at a time
+            - fp 6.0.65 or higher
+            - Win/Mac OS only
+            - no Webkit engines older than version 312
+    */
+    function canExpressInstall() {
+        return !isExpressInstallActive && hasPlayerVersion("6.0.65") && (ua.win || ua.mac) && !(ua.wk && ua.wk < 312);
+    }
 
-		/* Show the Adobe Express Install dialog
-				- Reference: http://www.adobe.com/cfusion/knowledgebase/index.cfm?id=6a253b75
-		*/
-		function showExpressInstall(att, par, replaceElemIdStr, callbackFn) {
-				isExpressInstallActive = true;
-				storedCallbackFn = callbackFn || null;
-				storedCallbackObj = {success:false, id:replaceElemIdStr};
-				var obj = getElementById(replaceElemIdStr);
-				if (obj) {
-						if (obj.nodeName == "OBJECT") { // static publishing
-								storedAltContent = abstractAltContent(obj);
-								storedAltContentId = null;
-						}
-						else { // dynamic publishing
-								storedAltContent = obj;
-								storedAltContentId = replaceElemIdStr;
-						}
-						att.id = EXPRESS_INSTALL_ID;
-						if (typeof att.width == UNDEF || (!/%$/.test(att.width) && parseInt(att.width, 10) < 310)) {att.width = "310";}
-						if (typeof att.height == UNDEF || (!/%$/.test(att.height) && parseInt(att.height, 10) < 137)) {att.height = "137";}
-						doc.title = doc.title.slice(0, 47) + " - Flash Player Installation";
-						var pt = ua.ie && ua.win ? "ActiveX" : "PlugIn",
-								fv = "MMredirectURL=" + win.location.toString().replace(/&/g,"%26") + "&MMplayerType=" + pt + "&MMdoctitle=" + doc.title;
-						if (typeof par.flashvars != UNDEF) {
-								par.flashvars += "&" + fv;
-						}
-						else {
-								par.flashvars = fv;
-						}
-						// IE only: when a SWF is loading (AND: not available in cache) wait for the readyState of the object element to become 4 before removing it,
-						// because you cannot properly cancel a loading SWF file without breaking browser load references, also obj.onreadystatechange doesn't work
-						if (ua.ie && ua.win && obj.readyState != 4) {
-								var newObj = createElement("div");
-								replaceElemIdStr += "SWFObjectNew";
-								newObj.setAttribute("id", replaceElemIdStr);
-								obj.parentNode.insertBefore(newObj, obj); // insert placeholder div that will be replaced by the object element that loads expressinstall.swf
-								obj.style.display = "none";
-								(function(){
-										if (obj.readyState == 4) {
-												obj.parentNode.removeChild(obj);
-										}
-										else {
-												setTimeout(arguments.callee, 10);
-										}
-								})();
-						}
-						createSWF(att, par, replaceElemIdStr);
-				}
-		}
+    /* Show the Adobe Express Install dialog
+            - Reference: http://www.adobe.com/cfusion/knowledgebase/index.cfm?id=6a253b75
+    */
+    function showExpressInstall(att, par, replaceElemIdStr, callbackFn) {
+        isExpressInstallActive = true;
+        storedCallbackFn = callbackFn || null;
+        storedCallbackObj = {success: false, id: replaceElemIdStr};
+        var obj = getElementById(replaceElemIdStr);
+        if (obj) {
+            if (obj.nodeName == "OBJECT") { // static publishing
+                storedAltContent = abstractAltContent(obj);
+                storedAltContentId = null;
+            } else { // dynamic publishing
+                storedAltContent = obj;
+                storedAltContentId = replaceElemIdStr;
+            }
+            att.id = EXPRESS_INSTALL_ID;
+            if (typeof att.width == UNDEF || (!/%$/.test(att.width) && parseInt(att.width, 10) < 310)) {
+                att.width = "310";
+            }
+            if (typeof att.height == UNDEF || (!/%$/.test(att.height) && parseInt(att.height, 10) < 137)) {
+                att.height = "137";
+            }
+            doc.title = doc.title.slice(0, 47) + " - Flash Player Installation";
+            var pt = ua.ie && ua.win ? "ActiveX" : "PlugIn",
+                fv = "MMredirectURL=" + win.location.toString().replace(/&/g, "%26") + "&MMplayerType=" + pt + "&MMdoctitle=" + doc.title;
+            if (typeof par.flashvars != UNDEF) {
+                par.flashvars += "&" + fv;
+            } else {
+                par.flashvars = fv;
+            }
+            // IE only: when a SWF is loading (AND: not available in cache) wait for the readyState of the object element to become 4 before removing it,
+            // because you cannot properly cancel a loading SWF file without breaking browser load references, also obj.onreadystatechange doesn't work
+            if (ua.ie && ua.win && obj.readyState != 4) {
+                var newObj = createElement("div");
+                replaceElemIdStr += "SWFObjectNew";
+                newObj.setAttribute("id", replaceElemIdStr);
+                obj.parentNode.insertBefore(newObj, obj); // insert placeholder div that will be replaced by the object element that loads expressinstall.swf
+                obj.style.display = "none";
+                (function () {
+                    if (obj.readyState == 4) {
+                        obj.parentNode.removeChild(obj);
+                    } else {
+                        setTimeout(arguments.callee, 10);
+                    }
+                })();
+            }
+            createSWF(att, par, replaceElemIdStr);
+        }
+    }
 
-		/* Functions to abstract and display alternative content
-		*/
-		function displayAltContent(obj) {
-				if (ua.ie && ua.win && obj.readyState != 4) {
-						// IE only: when a SWF is loading (AND: not available in cache) wait for the readyState of the object element to become 4 before removing it,
-						// because you cannot properly cancel a loading SWF file without breaking browser load references, also obj.onreadystatechange doesn't work
-						var el = createElement("div");
-						obj.parentNode.insertBefore(el, obj); // insert placeholder div that will be replaced by the alternative content
-						el.parentNode.replaceChild(abstractAltContent(obj), el);
-						obj.style.display = "none";
-						(function(){
-								if (obj.readyState == 4) {
-										obj.parentNode.removeChild(obj);
-								}
-								else {
-										setTimeout(arguments.callee, 10);
-								}
-						})();
-				}
-				else {
-						obj.parentNode.replaceChild(abstractAltContent(obj), obj);
-				}
-		}
+    /* Functions to abstract and display alternative content
+    */
+    function displayAltContent(obj) {
+        if (ua.ie && ua.win && obj.readyState != 4) {
+            // IE only: when a SWF is loading (AND: not available in cache) wait for the readyState of the object element to become 4 before removing it,
+            // because you cannot properly cancel a loading SWF file without breaking browser load references, also obj.onreadystatechange doesn't work
+            var el = createElement("div");
+            obj.parentNode.insertBefore(el, obj); // insert placeholder div that will be replaced by the alternative content
+            el.parentNode.replaceChild(abstractAltContent(obj), el);
+            obj.style.display = "none";
+            (function () {
+                if (obj.readyState == 4) {
+                    obj.parentNode.removeChild(obj);
+                } else {
+                    setTimeout(arguments.callee, 10);
+                }
+            })();
+        } else {
+            obj.parentNode.replaceChild(abstractAltContent(obj), obj);
+        }
+    }
 
-		function abstractAltContent(obj) {
-				var ac = createElement("div");
-				if (ua.win && ua.ie) {
-						ac.innerHTML = obj.innerHTML;
-				}
-				else {
-						var nestedObj = obj.getElementsByTagName(OBJECT)[0];
-						if (nestedObj) {
-								var c = nestedObj.childNodes;
-								if (c) {
-										var cl = c.length;
-										for (var i = 0; i < cl; i++) {
-												if (!(c[i].nodeType == 1 && c[i].nodeName == "PARAM") && !(c[i].nodeType == 8)) {
-														ac.appendChild(c[i].cloneNode(true));
-												}
-										}
-								}
-						}
-				}
-				return ac;
-		}
+    function abstractAltContent(obj) {
+        var ac = createElement("div");
+        if (ua.win && ua.ie) {
+            ac.innerHTML = obj.innerHTML;
+        } else {
+            var nestedObj = obj.getElementsByTagName(OBJECT)[0];
+            if (nestedObj) {
+                var c = nestedObj.childNodes;
+                if (c) {
+                    var cl = c.length;
+                    for (var i = 0; i < cl; i++) {
+                        if (!(c[i].nodeType == 1 && c[i].nodeName == "PARAM") && !(c[i].nodeType == 8)) {
+                            ac.appendChild(c[i].cloneNode(true));
+                        }
+                    }
+                }
+            }
+        }
+        return ac;
+    }
 
-		/* Cross-browser dynamic SWF creation
-		*/
-		function createSWF(attObj, parObj, id) {
-				var r, el = getElementById(id);
-				if (ua.wk && ua.wk < 312) {return r;}
-				if (el) {
-						if (typeof attObj.id == UNDEF) { // if no 'id' is defined for the object element, it will inherit the 'id' from the alternative content
-								attObj.id = el.id;
-						}
-						if (ua.ie && ua.win) { // Internet Explorer + the HTML object element + W3C DOM methods do not combine: fall back to outerHTML
-								var att = "";
-								for (var i in attObj) {
-										if (attObj[i] != Object.prototype[i]) { // filter out prototype additions from other potential libraries
-												if (i.toLowerCase() == "data") {
-														parObj.movie = attObj[i];
-												}
-												else if (i.toLowerCase() == "styleclass") { // 'class' is an ECMA4 reserved keyword
-														att += ' class="' + attObj[i] + '"';
-												}
-												else if (i.toLowerCase() != "classid") {
-														att += ' ' + i + '="' + attObj[i] + '"';
-												}
-										}
-								}
-								var par = "";
-								for (var j in parObj) {
-										if (parObj[j] != Object.prototype[j]) { // filter out prototype additions from other potential libraries
-												par += '<param name="' + j + '" value="' + parObj[j] + '" />';
-										}
-								}
-								el.outerHTML = '<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"' + att + '>' + par + '</object>';
-								objIdArr[objIdArr.length] = attObj.id; // stored to fix object 'leaks' on unload (dynamic publishing only)
-								r = getElementById(attObj.id);
-						}
-						else { // well-behaving browsers
-								var o = createElement(OBJECT);
-								o.setAttribute("type", FLASH_MIME_TYPE);
-								for (var m in attObj) {
-										if (attObj[m] != Object.prototype[m]) { // filter out prototype additions from other potential libraries
-												if (m.toLowerCase() == "styleclass") { // 'class' is an ECMA4 reserved keyword
-														o.setAttribute("class", attObj[m]);
-												}
-												else if (m.toLowerCase() != "classid") { // filter out IE specific attribute
-														o.setAttribute(m, attObj[m]);
-												}
-										}
-								}
-								for (var n in parObj) {
-										if (parObj[n] != Object.prototype[n] && n.toLowerCase() != "movie") { // filter out prototype additions from other potential libraries and IE specific param element
-												createObjParam(o, n, parObj[n]);
-										}
-								}
-								el.parentNode.replaceChild(o, el);
-								r = o;
-						}
-				}
-				return r;
-		}
+    /* Cross-browser dynamic SWF creation
+    */
+    function createSWF(attObj, parObj, id) {
+        var r, el = getElementById(id);
+        if (ua.wk && ua.wk < 312) {
+            return r;
+        }
+        if (el) {
+            if (typeof attObj.id == UNDEF) { // if no 'id' is defined for the object element, it will inherit the 'id' from the alternative content
+                attObj.id = el.id;
+            }
+            if (ua.ie && ua.win) { // Internet Explorer + the HTML object element + W3C DOM methods do not combine: fall back to outerHTML
+                var att = "";
+                for (var i in attObj) {
+                    if (attObj[i] != Object.prototype[i]) { // filter out prototype additions from other potential libraries
+                        if (i.toLowerCase() == "data") {
+                            parObj.movie = attObj[i];
+                        } else if (i.toLowerCase() == "styleclass") { // 'class' is an ECMA4 reserved keyword
+                            att += ' class="' + attObj[i] + '"';
+                        } else if (i.toLowerCase() != "classid") {
+                            att += ' ' + i + '="' + attObj[i] + '"';
+                        }
+                    }
+                }
+                var par = "";
+                for (var j in parObj) {
+                    if (parObj[j] != Object.prototype[j]) { // filter out prototype additions from other potential libraries
+                        par += '<param name="' + j + '" value="' + parObj[j] + '" />';
+                    }
+                }
+                el.outerHTML = '<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"' + att + '>' + par + '</object>';
+                objIdArr[objIdArr.length] = attObj.id; // stored to fix object 'leaks' on unload (dynamic publishing only)
+                r = getElementById(attObj.id);
+            } else { // well-behaving browsers
+                var o = createElement(OBJECT);
+                o.setAttribute("type", FLASH_MIME_TYPE);
+                for (var m in attObj) {
+                    if (attObj[m] != Object.prototype[m]) { // filter out prototype additions from other potential libraries
+                        if (m.toLowerCase() == "styleclass") { // 'class' is an ECMA4 reserved keyword
+                            o.setAttribute("class", attObj[m]);
+                        } else if (m.toLowerCase() != "classid") { // filter out IE specific attribute
+                            o.setAttribute(m, attObj[m]);
+                        }
+                    }
+                }
+                for (var n in parObj) {
+                    if (parObj[n] != Object.prototype[n] && n.toLowerCase() != "movie") { // filter out prototype additions from other potential libraries and IE specific param element
+                        createObjParam(o, n, parObj[n]);
+                    }
+                }
+                el.parentNode.replaceChild(o, el);
+                r = o;
+            }
+        }
+        return r;
+    }
 
-		function createObjParam(el, pName, pValue) {
-				var p = createElement("param");
-				p.setAttribute("name", pName);
-				p.setAttribute("value", pValue);
-				el.appendChild(p);
-		}
+    function createObjParam(el, pName, pValue) {
+        var p = createElement("param");
+        p.setAttribute("name", pName);
+        p.setAttribute("value", pValue);
+        el.appendChild(p);
+    }
 
-		/* Cross-browser SWF removal
-				- Especially needed to safely and completely remove a SWF in Internet Explorer
-		*/
-		function removeSWF(id) {
-				var obj = getElementById(id);
-				if (obj && obj.nodeName == "OBJECT") {
-						if (ua.ie && ua.win) {
-								obj.style.display = "none";
-								(function(){
-										if (obj.readyState == 4) {
-												removeObjectInIE(id);
-										}
-										else {
-												setTimeout(arguments.callee, 10);
-										}
-								})();
-						}
-						else {
-								obj.parentNode.removeChild(obj);
-						}
-				}
-		}
+    /* Cross-browser SWF removal
+            - Especially needed to safely and completely remove a SWF in Internet Explorer
+    */
+    function removeSWF(id) {
+        var obj = getElementById(id);
+        if (obj && obj.nodeName == "OBJECT") {
+            if (ua.ie && ua.win) {
+                obj.style.display = "none";
+                (function () {
+                    if (obj.readyState == 4) {
+                        removeObjectInIE(id);
+                    } else {
+                        setTimeout(arguments.callee, 10);
+                    }
+                })();
+            } else {
+                obj.parentNode.removeChild(obj);
+            }
+        }
+    }
 
-		function removeObjectInIE(id) {
-				var obj = getElementById(id);
-				if (obj) {
-						for (var i in obj) {
-								if (typeof obj[i] == "function") {
-										obj[i] = null;
-								}
-						}
-						obj.parentNode.removeChild(obj);
-				}
-		}
+    function removeObjectInIE(id) {
+        var obj = getElementById(id);
+        if (obj) {
+            for (var i in obj) {
+                if (typeof obj[i] == "function") {
+                    obj[i] = null;
+                }
+            }
+            obj.parentNode.removeChild(obj);
+        }
+    }
 
-		/* Functions to optimize JavaScript compression
-		*/
-		function getElementById(id) {
-				var el = null;
-				try {
-						el = doc.getElementById(id);
-				}
-				catch (e) {}
-				return el;
-		}
+    /* Functions to optimize JavaScript compression
+    */
+    function getElementById(id) {
+        var el = null;
+        try {
+            el = doc.getElementById(id);
+        } catch (e) {
+        }
+        return el;
+    }
 
-		function createElement(el) {
-				return doc.createElement(el);
-		}
+    function createElement(el) {
+        return doc.createElement(el);
+    }
 
-		/* Updated attachEvent function for Internet Explorer
-				- Stores attachEvent information in an Array, so on unload the detachEvent functions can be called to avoid memory leaks
-		*/
-		function addListener(target, eventType, fn) {
-				target.attachEvent(eventType, fn);
-				listenersArr[listenersArr.length] = [target, eventType, fn];
-		}
+    /* Updated attachEvent function for Internet Explorer
+            - Stores attachEvent information in an Array, so on unload the detachEvent functions can be called to avoid memory leaks
+    */
+    function addListener(target, eventType, fn) {
+        target.attachEvent(eventType, fn);
+        listenersArr[listenersArr.length] = [target, eventType, fn];
+    }
 
-		/* Flash Player and SWF content version matching
-		*/
-		function hasPlayerVersion(rv) {
-				var pv = ua.pv, v = rv.split(".");
-				v[0] = parseInt(v[0], 10);
-				v[1] = parseInt(v[1], 10) || 0; // supports short notation, e.g. "9" instead of "9.0.0"
-				v[2] = parseInt(v[2], 10) || 0;
-				return (pv[0] > v[0] || (pv[0] == v[0] && pv[1] > v[1]) || (pv[0] == v[0] && pv[1] == v[1] && pv[2] >= v[2])) ? true : false;
-		}
+    /* Flash Player and SWF content version matching
+    */
+    function hasPlayerVersion(rv) {
+        var pv = ua.pv, v = rv.split(".");
+        v[0] = parseInt(v[0], 10);
+        v[1] = parseInt(v[1], 10) || 0; // supports short notation, e.g. "9" instead of "9.0.0"
+        v[2] = parseInt(v[2], 10) || 0;
+        return (pv[0] > v[0] || (pv[0] == v[0] && pv[1] > v[1]) || (pv[0] == v[0] && pv[1] == v[1] && pv[2] >= v[2])) ? true : false;
+    }
 
-		/* Cross-browser dynamic CSS creation
-				- Based on Bobby van der Sluis' solution: http://www.bobbyvandersluis.com/articles/dynamicCSS.php
-		*/
-		function createCSS(sel, decl, media, newStyle) {
-				if (ua.ie && ua.mac) {return;}
-				var h = doc.getElementsByTagName("head")[0];
-				if (!h) {return;} // to also support badly authored HTML pages that lack a head element
-				var m = (media && typeof media == "string") ? media : "screen";
-				if (newStyle) {
-						dynamicStylesheet = null;
-						dynamicStylesheetMedia = null;
-				}
-				if (!dynamicStylesheet || dynamicStylesheetMedia != m) {
-						// create dynamic stylesheet + get a global reference to it
-						var s = createElement("style");
-						s.setAttribute("type", "text/css");
-						s.setAttribute("media", m);
-						dynamicStylesheet = h.appendChild(s);
-						if (ua.ie && ua.win && typeof doc.styleSheets != UNDEF && doc.styleSheets.length > 0) {
-								dynamicStylesheet = doc.styleSheets[doc.styleSheets.length - 1];
-						}
-						dynamicStylesheetMedia = m;
-				}
-				// add style rule
-				if (ua.ie && ua.win) {
-						if (dynamicStylesheet && typeof dynamicStylesheet.addRule == OBJECT) {
-								dynamicStylesheet.addRule(sel, decl);
-						}
-				}
-				else {
-						if (dynamicStylesheet && typeof doc.createTextNode != UNDEF) {
-								dynamicStylesheet.appendChild(doc.createTextNode(sel + " {" + decl + "}"));
-						}
-				}
-		}
+    /* Cross-browser dynamic CSS creation
+            - Based on Bobby van der Sluis' solution: http://www.bobbyvandersluis.com/articles/dynamicCSS.php
+    */
+    function createCSS(sel, decl, media, newStyle) {
+        if (ua.ie && ua.mac) {
+            return;
+        }
+        var h = doc.getElementsByTagName("head")[0];
+        if (!h) {
+            return;
+        } // to also support badly authored HTML pages that lack a head element
+        var m = (media && typeof media == "string") ? media : "screen";
+        if (newStyle) {
+            dynamicStylesheet = null;
+            dynamicStylesheetMedia = null;
+        }
+        if (!dynamicStylesheet || dynamicStylesheetMedia != m) {
+            // create dynamic stylesheet + get a global reference to it
+            var s = createElement("style");
+            s.setAttribute("type", "text/css");
+            s.setAttribute("media", m);
+            dynamicStylesheet = h.appendChild(s);
+            if (ua.ie && ua.win && typeof doc.styleSheets != UNDEF && doc.styleSheets.length > 0) {
+                dynamicStylesheet = doc.styleSheets[doc.styleSheets.length - 1];
+            }
+            dynamicStylesheetMedia = m;
+        }
+        // add style rule
+        if (ua.ie && ua.win) {
+            if (dynamicStylesheet && typeof dynamicStylesheet.addRule == OBJECT) {
+                dynamicStylesheet.addRule(sel, decl);
+            }
+        } else {
+            if (dynamicStylesheet && typeof doc.createTextNode != UNDEF) {
+                dynamicStylesheet.appendChild(doc.createTextNode(sel + " {" + decl + "}"));
+            }
+        }
+    }
 
-		function setVisibility(id, isVisible) {
-				if (!autoHideShow) {return;}
-				var v = isVisible ? "visible" : "hidden";
-				if (isDomLoaded && getElementById(id)) {
-						getElementById(id).style.visibility = v;
-				}
-				else {
-						createCSS("#" + id, "visibility:" + v);
-				}
-		}
+    function setVisibility(id, isVisible) {
+        if (!autoHideShow) {
+            return;
+        }
+        var v = isVisible ? "visible" : "hidden";
+        if (isDomLoaded && getElementById(id)) {
+            getElementById(id).style.visibility = v;
+        } else {
+            createCSS("#" + id, "visibility:" + v);
+        }
+    }
 
-		/* Filter to avoid XSS attacks
-		*/
-		function urlEncodeIfNecessary(s) {
-				var regex = /[\\\"<>\.;]/;
-				var hasBadChars = regex.exec(s) != null;
-				return hasBadChars && typeof encodeURIComponent != UNDEF ? encodeURIComponent(s) : s;
-		}
+    /* Filter to avoid XSS attacks
+    */
+    function urlEncodeIfNecessary(s) {
+        var regex = /[\\\"<>\.;]/;
+        var hasBadChars = regex.exec(s) != null;
+        return hasBadChars && typeof encodeURIComponent != UNDEF ? encodeURIComponent(s) : s;
+    }
 
-		/* Release memory to avoid memory leaks caused by closures, fix hanging audio/video threads and force open sockets/NetConnections to disconnect (Internet Explorer only)
-		*/
-		var cleanup = function() {
-				if (ua.ie && ua.win) {
-						window.attachEvent("onunload", function() {
-								// remove listeners to avoid memory leaks
-								var ll = listenersArr.length;
-								for (var i = 0; i < ll; i++) {
-										listenersArr[i][0].detachEvent(listenersArr[i][1], listenersArr[i][2]);
-								}
-								// cleanup dynamically embedded objects to fix audio/video threads and force open sockets and NetConnections to disconnect
-								var il = objIdArr.length;
-								for (var j = 0; j < il; j++) {
-										removeSWF(objIdArr[j]);
-								}
-								// cleanup library's main closures to avoid memory leaks
-								for (var k in ua) {
-										ua[k] = null;
-								}
-								ua = null;
-								for (var l in swfobject) {
-										swfobject[l] = null;
-								}
-								swfobject = null;
-						});
-				}
-		}();
+    /* Release memory to avoid memory leaks caused by closures, fix hanging audio/video threads and force open sockets/NetConnections to disconnect (Internet Explorer only)
+    */
+    var cleanup = function () {
+        if (ua.ie && ua.win) {
+            window.attachEvent("onunload", function () {
+                // remove listeners to avoid memory leaks
+                var ll = listenersArr.length;
+                for (var i = 0; i < ll; i++) {
+                    listenersArr[i][0].detachEvent(listenersArr[i][1], listenersArr[i][2]);
+                }
+                // cleanup dynamically embedded objects to fix audio/video threads and force open sockets and NetConnections to disconnect
+                var il = objIdArr.length;
+                for (var j = 0; j < il; j++) {
+                    removeSWF(objIdArr[j]);
+                }
+                // cleanup library's main closures to avoid memory leaks
+                for (var k in ua) {
+                    ua[k] = null;
+                }
+                ua = null;
+                for (var l in swfobject) {
+                    swfobject[l] = null;
+                }
+                swfobject = null;
+            });
+        }
+    }();
 
-		return {
-				/* Public API
-						- Reference: http://code.google.com/p/swfobject/wiki/documentation
-				*/
-                                FusionChartsModified: true,
+    return {
+        /* Public API
+                - Reference: http://code.google.com/p/swfobject/wiki/documentation
+        */
+        FusionChartsModified: true,
 
-				registerObject: function(objectIdStr, swfVersionStr, xiSwfUrlStr, callbackFn, data) {
-                                                var regObj = data || {};
-						if (ua.w3 && objectIdStr && swfVersionStr) {
-								regObj.id = objectIdStr;
-								regObj.swfVersion = swfVersionStr;
-								regObj.expressInstall = xiSwfUrlStr;
-								regObj.callbackFn = callbackFn;
-								regObj.userData = data;
-								regObjArr[regObjArr.length] = regObj;
-								setVisibility(objectIdStr, false);
-						}
-						else if (callbackFn) {
-                                                                regObj.success = false;
-                                                                regObj.id = objectIdStr;
-								callbackFn(regObj);
-						}
-				},
+        registerObject: function (objectIdStr, swfVersionStr, xiSwfUrlStr, callbackFn, data) {
+            var regObj = data || {};
+            if (ua.w3 && objectIdStr && swfVersionStr) {
+                regObj.id = objectIdStr;
+                regObj.swfVersion = swfVersionStr;
+                regObj.expressInstall = xiSwfUrlStr;
+                regObj.callbackFn = callbackFn;
+                regObj.userData = data;
+                regObjArr[regObjArr.length] = regObj;
+                setVisibility(objectIdStr, false);
+            } else if (callbackFn) {
+                regObj.success = false;
+                regObj.id = objectIdStr;
+                callbackFn(regObj);
+            }
+        },
 
-				getObjectById: function(objectIdStr) {
-						if (ua.w3) {
-								return getObjectById(objectIdStr);
-						}
-				},
+        getObjectById: function (objectIdStr) {
+            if (ua.w3) {
+                return getObjectById(objectIdStr);
+            }
+        },
 
-				embedSWF: function(swfUrlStr, replaceElemIdStr, widthStr, heightStr, swfVersionStr, xiSwfUrlStr, flashvarsObj, parObj, attObj, callbackFn, data) {
-						var callbackObj = data || {};
-                                                callbackObj.success = false;
-                                                callbackObj.id = replaceElemIdStr;
-						if (ua.w3 && !(ua.wk && ua.wk < 312) && swfUrlStr && replaceElemIdStr && widthStr && heightStr && swfVersionStr) {
-								setVisibility(replaceElemIdStr, false);
-								addDomLoadEvent(function() {
-										widthStr += ""; // auto-convert to string
-										heightStr += "";
-										var att = {};
-										if (attObj && typeof attObj === OBJECT) {
-												for (var i in attObj) { // copy object to avoid the use of references, because web authors often reuse attObj for multiple SWFs
-														att[i] = attObj[i];
-												}
-										}
-										att.data = swfUrlStr;
-										att.width = widthStr;
-										att.height = heightStr;
-										var par = {};
-										if (parObj && typeof parObj === OBJECT) {
-												for (var j in parObj) { // copy object to avoid the use of references, because web authors often reuse parObj for multiple SWFs
-														par[j] = parObj[j];
-												}
-										}
-										if (flashvarsObj && typeof flashvarsObj === OBJECT) {
-												for (var k in flashvarsObj) { // copy object to avoid the use of references, because web authors often reuse flashvarsObj for multiple SWFs
-														if (typeof par.flashvars != UNDEF) {
-																par.flashvars += "&" + k + "=" + flashvarsObj[k];
-														}
-														else {
-																par.flashvars = k + "=" + flashvarsObj[k];
-														}
-												}
-										}
-										if (hasPlayerVersion(swfVersionStr)) { // create SWF
-												var obj = createSWF(att, par, replaceElemIdStr);
-												if (att.id == replaceElemIdStr) {
-														setVisibility(replaceElemIdStr, true);
-												}
-												callbackObj.success = true;
-												callbackObj.ref = obj;
-										}
-										else if (xiSwfUrlStr && canExpressInstall()) { // show Adobe Express Install
-												att.data = xiSwfUrlStr;
-												showExpressInstall(att, par, replaceElemIdStr, callbackFn);
-												return;
-										}
-										else { // show alternative content
-												setVisibility(replaceElemIdStr, true);
-										}
-										if (callbackFn) {callbackFn(callbackObj);}
-								});
-						}
-						else if (callbackFn) {callbackFn(callbackObj);}
-				},
+        embedSWF: function (swfUrlStr, replaceElemIdStr, widthStr, heightStr, swfVersionStr, xiSwfUrlStr, flashvarsObj, parObj, attObj, callbackFn, data) {
+            var callbackObj = data || {};
+            callbackObj.success = false;
+            callbackObj.id = replaceElemIdStr;
+            if (ua.w3 && !(ua.wk && ua.wk < 312) && swfUrlStr && replaceElemIdStr && widthStr && heightStr && swfVersionStr) {
+                setVisibility(replaceElemIdStr, false);
+                addDomLoadEvent(function () {
+                    widthStr += ""; // auto-convert to string
+                    heightStr += "";
+                    var att = {};
+                    if (attObj && typeof attObj === OBJECT) {
+                        for (var i in attObj) { // copy object to avoid the use of references, because web authors often reuse attObj for multiple SWFs
+                            att[i] = attObj[i];
+                        }
+                    }
+                    att.data = swfUrlStr;
+                    att.width = widthStr;
+                    att.height = heightStr;
+                    var par = {};
+                    if (parObj && typeof parObj === OBJECT) {
+                        for (var j in parObj) { // copy object to avoid the use of references, because web authors often reuse parObj for multiple SWFs
+                            par[j] = parObj[j];
+                        }
+                    }
+                    if (flashvarsObj && typeof flashvarsObj === OBJECT) {
+                        for (var k in flashvarsObj) { // copy object to avoid the use of references, because web authors often reuse flashvarsObj for multiple SWFs
+                            if (typeof par.flashvars != UNDEF) {
+                                par.flashvars += "&" + k + "=" + flashvarsObj[k];
+                            } else {
+                                par.flashvars = k + "=" + flashvarsObj[k];
+                            }
+                        }
+                    }
+                    if (hasPlayerVersion(swfVersionStr)) { // create SWF
+                        var obj = createSWF(att, par, replaceElemIdStr);
+                        if (att.id == replaceElemIdStr) {
+                            setVisibility(replaceElemIdStr, true);
+                        }
+                        callbackObj.success = true;
+                        callbackObj.ref = obj;
+                    } else if (xiSwfUrlStr && canExpressInstall()) { // show Adobe Express Install
+                        att.data = xiSwfUrlStr;
+                        showExpressInstall(att, par, replaceElemIdStr, callbackFn);
+                        return;
+                    } else { // show alternative content
+                        setVisibility(replaceElemIdStr, true);
+                    }
+                    if (callbackFn) {
+                        callbackFn(callbackObj);
+                    }
+                });
+            } else if (callbackFn) {
+                callbackFn(callbackObj);
+            }
+        },
 
-				switchOffAutoHideShow: function() {
-						autoHideShow = false;
-				},
+        switchOffAutoHideShow: function () {
+            autoHideShow = false;
+        },
 
-				ua: ua,
+        ua: ua,
 
-				getFlashPlayerVersion: function() {
-						return {major:ua.pv[0], minor:ua.pv[1], release:ua.pv[2]};
-				},
+        getFlashPlayerVersion: function () {
+            return {major: ua.pv[0], minor: ua.pv[1], release: ua.pv[2]};
+        },
 
-				hasFlashPlayerVersion: hasPlayerVersion,
+        hasFlashPlayerVersion: hasPlayerVersion,
 
-				createSWF: function(attObj, parObj, replaceElemIdStr) {
-						if (ua.w3) {
-								return createSWF(attObj, parObj, replaceElemIdStr);
-						}
-						else {
-								return undefined;
-						}
-				},
+        createSWF: function (attObj, parObj, replaceElemIdStr) {
+            if (ua.w3) {
+                return createSWF(attObj, parObj, replaceElemIdStr);
+            } else {
+                return undefined;
+            }
+        },
 
-				showExpressInstall: function(att, par, replaceElemIdStr, callbackFn) {
-						if (ua.w3 && canExpressInstall()) {
-								showExpressInstall(att, par, replaceElemIdStr, callbackFn);
-						}
-				},
+        showExpressInstall: function (att, par, replaceElemIdStr, callbackFn) {
+            if (ua.w3 && canExpressInstall()) {
+                showExpressInstall(att, par, replaceElemIdStr, callbackFn);
+            }
+        },
 
-				removeSWF: function(objElemIdStr) {
-						if (ua.w3) {
-								removeSWF(objElemIdStr);
-						}
-				},
+        removeSWF: function (objElemIdStr) {
+            if (ua.w3) {
+                removeSWF(objElemIdStr);
+            }
+        },
 
-				createCSS: function(selStr, declStr, mediaStr, newStyleBoolean) {
-						if (ua.w3) {
-								createCSS(selStr, declStr, mediaStr, newStyleBoolean);
-						}
-				},
+        createCSS: function (selStr, declStr, mediaStr, newStyleBoolean) {
+            if (ua.w3) {
+                createCSS(selStr, declStr, mediaStr, newStyleBoolean);
+            }
+        },
 
-				addDomLoadEvent: addDomLoadEvent,
+        addDomLoadEvent: addDomLoadEvent,
 
-				addLoadEvent: addLoadEvent,
+        addLoadEvent: addLoadEvent,
 
-				getQueryParamValue: function(param) {
-						var q = doc.location.search || doc.location.hash;
-						if (q) {
-								if (/\?/.test(q)) {q = q.split("?")[1];} // strip question mark
-								if (param == null) {
-										return urlEncodeIfNecessary(q);
-								}
-								var pairs = q.split("&");
-								for (var i = 0; i < pairs.length; i++) {
-										if (pairs[i].substring(0, pairs[i].indexOf("=")) == param) {
-												return urlEncodeIfNecessary(pairs[i].substring((pairs[i].indexOf("=") + 1)));
-										}
-								}
-						}
-						return "";
-				},
+        getQueryParamValue: function (param) {
+            var q = doc.location.search || doc.location.hash;
+            if (q) {
+                if (/\?/.test(q)) {
+                    q = q.split("?")[1];
+                } // strip question mark
+                if (param == null) {
+                    return urlEncodeIfNecessary(q);
+                }
+                var pairs = q.split("&");
+                for (var i = 0; i < pairs.length; i++) {
+                    if (pairs[i].substring(0, pairs[i].indexOf("=")) == param) {
+                        return urlEncodeIfNecessary(pairs[i].substring((pairs[i].indexOf("=") + 1)));
+                    }
+                }
+            }
+            return "";
+        },
 
-				// For internal usage only
-				expressInstallCallback: function() {
-						if (isExpressInstallActive) {
-								var obj = getElementById(EXPRESS_INSTALL_ID);
-								if (obj && storedAltContent) {
-										obj.parentNode.replaceChild(storedAltContent, obj);
-										if (storedAltContentId) {
-												setVisibility(storedAltContentId, true);
-												if (ua.ie && ua.win) {storedAltContent.style.display = "block";}
-										}
-										if (storedCallbackFn) {storedCallbackFn(storedCallbackObj);}
-								}
-								isExpressInstallActive = false;
-						}
-				}
-		};
+        // For internal usage only
+        expressInstallCallback: function () {
+            if (isExpressInstallActive) {
+                var obj = getElementById(EXPRESS_INSTALL_ID);
+                if (obj && storedAltContent) {
+                    obj.parentNode.replaceChild(storedAltContent, obj);
+                    if (storedAltContentId) {
+                        setVisibility(storedAltContentId, true);
+                        if (ua.ie && ua.win) {
+                            storedAltContent.style.display = "block";
+                        }
+                    }
+                    if (storedCallbackFn) {
+                        storedCallbackFn(storedCallbackObj);
+                    }
+                }
+                isExpressInstallActive = false;
+            }
+        }
+    };
 }();
 /*jslint white: true, browser: true, windows: true, forin: true,  undef: true,
     plusplus: true, bitwise: true, immed: true */
@@ -3882,8 +3857,8 @@ FusionCharts(['private', 'modules.renderer.flash', function () {
         global.swfobject = win.swfobject;
         win.swfobject.createCSS('object.FusionCharts:focus, embed.FusionCharts:focus',
             'outline: none');
-    }
-    catch (err) { } // Suppress any error caused.
+    } catch (err) {
+    } // Suppress any error caused.
 
     // Set flags for minimum version of flash-player needed.
     global.core.options.requiredFlashPlayerVersion = '8';
@@ -3934,112 +3909,112 @@ FusionCharts(['private', 'modules.renderer.flash', function () {
         },
 
 
-    // TODO: Not Implemented.
-    probeParamsFromDOM = function (id) {
-        // Get reference to the HTMLNode from the id that has been sent. To
-        // ensure that object/embed elements are properly located, we use the
-        // swfobject's getObjectById method.
-        var ref = win.swfobject.getObjectById(id), i, l, paramName, tags,
-        params = {}, parent, vars, attrs = {};
+        // TODO: Not Implemented.
+        probeParamsFromDOM = function (id) {
+            // Get reference to the HTMLNode from the id that has been sent. To
+            // ensure that object/embed elements are properly located, we use the
+            // swfobject's getObjectById method.
+            var ref = win.swfobject.getObjectById(id), i, l, paramName, tags,
+                params = {}, parent, vars, attrs = {};
 
-        // We test whether an object was located or not.
-        if (!ref && typeof ref.tagName !== STRING) {
-            return undefined;
-        }
+            // We test whether an object was located or not.
+            if (!ref && typeof ref.tagName !== STRING) {
+                return undefined;
+            }
 
-        // Get the parentNode as container. For that we first test whether the
-        // object has a parentNode or not. It has to be really really wierd to
-        // not have a parentNode and yet reach this point in code. Still, we
-        // do a check.
-        if ((parent = ref.parentNode) && parent.tagName &&
-            parent.tagName.toLowerCase() === OBJECT && parent.parentNode) {
-            // When we know that the parentNode of the object exists, we need to
-            // check whether it is an embed element within object element.
-            parent = parent.parentNode;
-        }
-        if (!parent) {
-            return undefined;
-        }
-        params.renderAt = parent;
+            // Get the parentNode as container. For that we first test whether the
+            // object has a parentNode or not. It has to be really really wierd to
+            // not have a parentNode and yet reach this point in code. Still, we
+            // do a check.
+            if ((parent = ref.parentNode) && parent.tagName &&
+                parent.tagName.toLowerCase() === OBJECT && parent.parentNode) {
+                // When we know that the parentNode of the object exists, we need to
+                // check whether it is an embed element within object element.
+                parent = parent.parentNode;
+            }
+            if (!parent) {
+                return undefined;
+            }
+            params.renderAt = parent;
 
-        // Get flashVars. First check whether there is any attribute within
-        // the root tag named as flashVars as because this is the syntax for
-        // <embed> tag.
-        if (!(ref.tagName.toLowerCase() !== OBJECT && ref.getAttribute &&
-            (vars = ref.getAttribute('flashvars') || '')) && ref.hasChildNodes &&
-        ref.hasChildNodes()) {
-            // When flashvars attribute is not found, we try to iterate through
-            // the childnodes to find the <param> node that contains the
-            // flashVars.
-            tags = ref.childNodes;
-            for (i = 0, l = tags.length; i < l; i += 1) {
-                if (tags[i].tagName === 'PARAM' &&
-                    (paramName = tags[i].getAttribute('name')) &&
-                    paramName.toLowerCase() === 'flashvars') {
-                    vars = tags[i].getAttribute('value') || '';
+            // Get flashVars. First check whether there is any attribute within
+            // the root tag named as flashVars as because this is the syntax for
+            // <embed> tag.
+            if (!(ref.tagName.toLowerCase() !== OBJECT && ref.getAttribute &&
+                (vars = ref.getAttribute('flashvars') || '')) && ref.hasChildNodes &&
+                ref.hasChildNodes()) {
+                // When flashvars attribute is not found, we try to iterate through
+                // the childnodes to find the <param> node that contains the
+                // flashVars.
+                tags = ref.childNodes;
+                for (i = 0, l = tags.length; i < l; i += 1) {
+                    if (tags[i].tagName === 'PARAM' &&
+                        (paramName = tags[i].getAttribute('name')) &&
+                        paramName.toLowerCase() === 'flashvars') {
+                        vars = tags[i].getAttribute('value') || '';
+                    }
                 }
             }
-        }
 
-        // Convert the flashVars attribute into flashVars object:
-        // Split the attribute string with = and &. Then put the odd indices
-        // as keys and evens as values
-        if (vars && isFunction(vars.toString)) {
-            vars = vars.split(/\=|&/g);
-            params.flashVars = {};
-            for (i = 0, l = vars.length; i < l; i += 2) {
-                params.flashVars[vars[i]] = vars[i + 1];
+            // Convert the flashVars attribute into flashVars object:
+            // Split the attribute string with = and &. Then put the odd indices
+            // as keys and evens as values
+            if (vars && isFunction(vars.toString)) {
+                vars = vars.split(/\=|&/g);
+                params.flashVars = {};
+                for (i = 0, l = vars.length; i < l; i += 2) {
+                    params.flashVars[vars[i]] = vars[i + 1];
+                }
             }
-        }
-        return params;
+            return params;
 
-    },
+        },
 
-    /**
-     * Event listener that updates local chart data when there has
-     * been a remote data update on renderer.
-     */
-    syncDataStore =  function (e, a) {
+        /**
+         * Event listener that updates local chart data when there has
+         * been a remote data update on renderer.
+         */
+        syncDataStore = function (e, a) {
 
-        // Verify whether the event has been raised by JS or by Flash.
-        // If event has been raised by JS, we do not need to do
-        // anything further.
-        // TODO: Filter out non-internal data-load event.
-        if (a && a.source === 'XmlHttpRequest') {
-            return;
-        }
+            // Verify whether the event has been raised by JS or by Flash.
+            // If event has been raised by JS, we do not need to do
+            // anything further.
+            // TODO: Filter out non-internal data-load event.
+            if (a && a.source === 'XmlHttpRequest') {
+                return;
+            }
 
-        // Reference to chartObj.
-        var obj = e.sender;
+            // Reference to chartObj.
+            var obj = e.sender;
 
-        // Test whether the required functions are available.
-        if (obj.ref && isFunction(obj.ref.dataInvokedOnSWF) &&
-            obj.ref.dataInvokedOnSWF() && isFunction(obj.ref.getXML)) {
+            // Test whether the required functions are available.
+            if (obj.ref && isFunction(obj.ref.dataInvokedOnSWF) &&
+                obj.ref.dataInvokedOnSWF() && isFunction(obj.ref.getXML)) {
 
-            // Raise a warning for the same.
-            global.raiseWarning(obj, '08300116', 'run',
-                '::DataHandler~__fusioncharts_vars',
-                'Data was set in UTF unsafe manner');
+                // Raise a warning for the same.
+                global.raiseWarning(obj, '08300116', 'run',
+                    '::DataHandler~__fusioncharts_vars',
+                    'Data was set in UTF unsafe manner');
 
-            // Silently update/sync the internal data of FusionCharts JS
-            // objects with the new data that was directly sent to flash.
-            obj.setChartData(win.unescape(e.sender.ref.getXML({
-                escaped: true
-            })), FusionChartsDataFormats.XML, true);
+                // Silently update/sync the internal data of FusionCharts JS
+                // objects with the new data that was directly sent to flash.
+                obj.setChartData(win.unescape(e.sender.ref.getXML({
+                    escaped: true
+                })), FusionChartsDataFormats.XML, true);
 
-            // Update the flashVars as well.
-            obj.flashVars.dataXML = obj.getChartData(FusionChartsDataFormats.XML);
+                // Update the flashVars as well.
+                obj.flashVars.dataXML = obj.getChartData(FusionChartsDataFormats.XML);
 
-            // Since further data communication involves the presence of
-            // data-xml in state, we remove the dataURL from flashVars and
-            // keep XML fetched from chart.
-            delete obj.flashVars.dataURL;
-        }
+                // Since further data communication involves the presence of
+                // data-xml in state, we remove the dataURL from flashVars and
+                // keep XML fetched from chart.
+                delete obj.flashVars.dataURL;
+            }
 
-        // Remove ebent handler association so that normal dataLoad is not
-        // intercepted.
-        e.sender.removeEventListener('DataLoaded', syncDataStore);
-    };
+            // Remove ebent handler association so that normal dataLoad is not
+            // intercepted.
+            e.sender.removeEventListener('DataLoaded', syncDataStore);
+        };
 
 
     // This code-block exposes a function that assists FusionCharts swf objects
@@ -4056,12 +4031,12 @@ FusionCharts(['private', 'modules.renderer.flash', function () {
 
             return !((obj = global.core(id)) instanceof global.core &&
                 obj.ref && (parent = obj.ref.parentNode)) ? {} : {
-                    width: parent.offsetWidth * (isPercentRegex.test(obj.width) ?
-                        parseInt(obj.width, 10) / 100 : 1),
-                    height: parent.offsetHeight * (isPercentRegex.test(obj.height) ?
-                        parseInt(obj.height, 10) / 100 : 1)
-                };
+                width: parent.offsetWidth * (isPercentRegex.test(obj.width) ?
+                    parseInt(obj.width, 10) / 100 : 1),
+                height: parent.offsetHeight * (isPercentRegex.test(obj.height) ?
+                    parseInt(obj.height, 10) / 100 : 1)
             };
+        };
     }());
 
     // Routines to manage state between SWF and FusionCharts JS Object
@@ -4089,8 +4064,7 @@ FusionCharts(['private', 'modules.renderer.flash', function () {
                     window.swfobject.registerObject(id,
                         global.core.options.requiredFlashPlayerVersion, undefined,
                         global.renderer.notifyRender);*/
-                }
-                else {
+                } else {
                     // Throw error when FusionCharts obj not found.
                     global.raiseError(global.core, '25081621', 'run', '::FlashRenderer',
                         'FusionCharts Flash object is accessing flashVars of non-existent object.');
@@ -4119,8 +4093,7 @@ FusionCharts(['private', 'modules.renderer.flash', function () {
                 }
 
                 obj.__state.flashUpdatedFlashVars = true;
-            }
-            else {
+            } else {
                 // Clear data related variables to prevent sync with local
                 // store.
                 delete vars.dataURL;
@@ -4137,9 +4110,9 @@ FusionCharts(['private', 'modules.renderer.flash', function () {
         // Here we check whether data was set during construction, requires
         // special handling.
         if (obj.__state.dataSetDuringConstruction &&
-                obj.flashVars.dataXML === undefined &&
-                obj.options.dataSource !== undefined &&
-                typeof obj.options.dataFormat === STRING) {
+            obj.flashVars.dataXML === undefined &&
+            obj.options.dataSource !== undefined &&
+            typeof obj.options.dataFormat === STRING) {
 
             obj.flashVars.dataXML = obj.options.dataSource;
         }
@@ -4187,9 +4160,9 @@ FusionCharts(['private', 'modules.renderer.flash', function () {
 
         // AutoInstallRedirect action routine.
         if (Boolean(obj.options.autoInstallRedirect) === true &&
-                !win.swfobject.hasFlashPlayerVersion(
+            !win.swfobject.hasFlashPlayerVersion(
                 global.core.options.requiredFlashPlayerVersion.toString()) &&
-                noFlashRedirectNotified === false) {
+            noFlashRedirectNotified === false) {
             noFlashRedirectNotified = true;
             if (global.core.options.installRedirectMessage &&
                 win.confirm(global.core.options.installRedirectMessage)) {
@@ -4199,7 +4172,7 @@ FusionCharts(['private', 'modules.renderer.flash', function () {
 
         // Set initial state of charts
         if (obj.options.dataFormat === undefined &&
-                obj.options.dataSource === undefined) {
+            obj.options.dataSource === undefined) {
             obj.options.dataFormat = FusionChartsDataFormats.XMLURL;
             obj.options.dataSource = 'Data.xml';
         }
@@ -4299,8 +4272,7 @@ FusionCharts(['private', 'modules.renderer.flash', function () {
             // check XSS before saving URL request.
             if (global.isXSSSafe(dataURL)) {
                 encodedVars.dataURL = dataURL || '';
-            }
-            else {
+            } else {
                 encodedVars.dataURL = urlEncode(dataURL) || '';
             }
 
@@ -4313,7 +4285,7 @@ FusionCharts(['private', 'modules.renderer.flash', function () {
 
             // Check for the presence of swfobject in window scope. It should be present
             // either provided externally by user or as part of stitched build.
-            if (!(win.swfobject && win.swfobject.embedSWF && win.swfobject.FusionChartsModified))  {
+            if (!(win.swfobject && win.swfobject.embedSWF && win.swfobject.FusionChartsModified)) {
                 win.swfobject = global.swfobject;
             }
 
@@ -4331,8 +4303,7 @@ FusionCharts(['private', 'modules.renderer.flash', function () {
                     this.height, global.core.options.requiredFlashPlayerVersion,
                     undefined, encodedVars, this.params, this.attributes,
                     callBack, swfoData);
-            }
-            else {
+            } else {
                 global.raiseError(this, '1113061611', 'run', 'FlashRenderer~render',
                     Error('Could not find swfobject library or embedSWF API'));
             }
@@ -4356,12 +4327,10 @@ FusionCharts(['private', 'modules.renderer.flash', function () {
                     // If yes then we re-render the chart.
                     if (this.src !== this.__state.lastRenderedSrc) {
                         this.render();
-                    }
-                    else {
+                    } else {
                         chart.setDataXML(data, false);
                     }
-                }
-                else {
+                } else {
                     // Remove the 'animation' flag of the chart while data was
                     // updated during unavailability of SWF
                     delete this.flashVars.dataURL;
@@ -4373,8 +4342,7 @@ FusionCharts(['private', 'modules.renderer.flash', function () {
                 // Call ExternalInterface method to show message
                 if (this.isActive() && isFunction(chart.showChartMessage)) {
                     chart.showChartMessage('InvalidXMLText');
-                }
-                else {
+                } else {
                     // Remove the 'animation' flag of the chart while data was
                     // updated during unavailability of SWF
                     this.flashVars.dataXML = '<Invalid' + vars.format.toUpperCase() + '>';
@@ -4449,8 +4417,8 @@ FusionCharts(['private', 'modules.renderer.flash', function () {
             DataLoadRequested: function (event, args) {
                 // Reference to event sender.
                 var obj = event.sender,
-                url = args.url,
-                legacyTransport = false;
+                    url = args.url,
+                    legacyTransport = false;
 
                 // Do not use AJAX in case of local file protocol.
                 if (args.dataFormat === FusionChartsDataFormats.XML && (
@@ -4460,14 +4428,12 @@ FusionCharts(['private', 'modules.renderer.flash', function () {
                     if (obj.ref) {
                         if (obj.ref.setDataURL) {
                             obj.ref.setDataURL(url, false);
-                        }
-                        else {
+                        } else {
                             global.raiseError(this, '0109112330', 'run',
                                 '>FlashRenderer^DataLoadRequested',
                                 Error('Unable to fetch URL due to security restriction on Flash Player. Update global security settings.'));
                         }
-                    }
-                    else {
+                    } else {
                         // Update the flashVars with new URL
                         obj.flashVars.dataURL = url;
                     }
@@ -4489,7 +4455,7 @@ FusionCharts(['private', 'modules.renderer.flash', function () {
                         obj.ref.showChartMessage('XMLLoadingText');
                     }
                 }
-                // In case chart object is not available, we set a flashvar saying that
+                    // In case chart object is not available, we set a flashvar saying that
                 // loading is to be stalled.
                 else if (!legacyTransport) {
                     obj.flashVars.stallLoad = true;
@@ -4520,8 +4486,7 @@ FusionCharts(['private', 'modules.renderer.flash', function () {
                     args.source === 'XmlHttpRequest') {
                     // Show Data Load Error Message.
                     obj.ref.showChartMessage('LoadDataErrorText');
-                }
-                else {
+                } else {
                     delete obj.flashVars.dataURL;// = 'XmlHttpRequestDataLoadError: ' + args.url;
                     obj.flashVars.dataXML = '<JSON parsing error>';
                     delete obj.flashVars.stallLoad;
@@ -4551,8 +4516,8 @@ FusionCharts(['private', 'modules.renderer.flash', function () {
 
             // Create temporary elements and temporary access Id
             var outElm = doc.createElement('span'),
-            inElm = doc.createElement('span'),
-            tempId = 'RnVzaW9uQ2hhcnRz' + (new Date()).getTime();
+                inElm = doc.createElement('span'),
+                tempId = 'RnVzaW9uQ2hhcnRz' + (new Date()).getTime();
 
             // Create DOM hierarchy
             outElm.appendChild(inElm);
@@ -4589,7 +4554,7 @@ FusionCharts(['private', 'modules.renderer.flash', function () {
             }
 
             // Set the property.
-            this.params.wMode =  'transparent' ;
+            this.params.wMode = 'transparent';
         },
 
         registerObject: function () {
@@ -4659,7 +4624,7 @@ FusionCharts(['private', 'modules.renderer.flash', function () {
 
             // We check whether the renderer has setDataURL function, we set it.
             if (this.ref === undefined || this.ref === null ||
-                    !isFunction(this.ref.setDataURL)) {
+                !isFunction(this.ref.setDataURL)) {
                 // For flash renderer, we set the flashVars, so that it is picked
                 // up when chart renders.
                 this.setChartData(url.toString(), FusionChartsDataFormats.XMLURL);
@@ -4679,7 +4644,6 @@ FusionCharts(['private', 'modules.renderer.flash', function () {
 }]);
 
 
-
 /*jslint white: true, browser: true, windows: true, forin: true,  undef: true,
   plusplus: true, bitwise: true, immed: true */
 /*global Array: false, FusionCharts, RegExp: false, jQuery: false, window: false,
@@ -4697,303 +4661,304 @@ FusionCharts(['private', 'modules.renderer.flash', function () {
 FusionCharts(['private', 'modules.renderer.js', function () {
 
     var
-    global = this,
-    win = window,
-    doc = document,
-    coreOptions = global.core.options,
-    extendedCoreOptions = {
-        html5ScriptNameSuffix:  '.js',
-        html5ScriptNamePrefix: 'FusionCharts.HC.',
-        jQuerySourceFileName: 'jquery.min.js'
-    },
+        global = this,
+        win = window,
+        doc = document,
+        coreOptions = global.core.options,
+        extendedCoreOptions = {
+            html5ScriptNameSuffix: '.js',
+            html5ScriptNamePrefix: 'FusionCharts.HC.',
+            jQuerySourceFileName: 'jquery.min.js'
+        },
 
-    /**
-     * This flag sets whether the JavaScript renderer will be used primarily or
-     * Flash renderer would be given priority if player exists.
-     * @id SET_AS_PRIMARY_RENDERER
-     * @type boolean
-     * @const
-     */
-    SET_AS_PRIMARY_RENDERER = false,
+        /**
+         * This flag sets whether the JavaScript renderer will be used primarily or
+         * Flash renderer would be given priority if player exists.
+         * @id SET_AS_PRIMARY_RENDERER
+         * @type boolean
+         * @const
+         */
+        SET_AS_PRIMARY_RENDERER = false,
 
-    LOADER_CSS_TEXT = 'display: inline-block; *zoom:1; *display:inline; width: 100%; ' +
-        'font-family: Verdana; font-size: 10px; color: #666666; text-align: center;',
-    MODULE_NAME_BASE = 'modules.renderer.js-',
+        LOADER_CSS_TEXT = 'display: inline-block; *zoom:1; *display:inline; width: 100%; ' +
+            'font-family: Verdana; font-size: 10px; color: #666666; text-align: center;',
+        MODULE_NAME_BASE = 'modules.renderer.js-',
 
-    isIE = /msie/i.test(navigator.userAgent) && !win.opera,
-    hasSVG = !!doc.createElementNS && !!doc.createElementNS("http://www.w3.org/2000/svg", "svg").createSVGRect,
+        isIE = /msie/i.test(navigator.userAgent) && !win.opera,
+        hasSVG = !!doc.createElementNS && !!doc.createElementNS("http://www.w3.org/2000/svg", "svg").createSVGRect,
 
-    // Create the renderer object.
-    renderer = function () {},
+        // Create the renderer object.
+        renderer = function () {
+        },
 
-    // Create an object in global that would store Renderer Library
-    lib = global.hcLib = {
-        cmdQueue: []
-    },
+        // Create an object in global that would store Renderer Library
+        lib = global.hcLib = {
+            cmdQueue: []
+        },
 
-    moduleCmdQueue = lib.moduleCmdQueue = {
-        jquery: [],
-        base: [],
-        charts: [],
-        powercharts: [],
-        widgets: [],
-        maps: []
-    },
+        moduleCmdQueue = lib.moduleCmdQueue = {
+            jquery: [],
+            base: [],
+            charts: [],
+            powercharts: [],
+            widgets: [],
+            maps: []
+        },
 
-    moduleDependencies = lib.moduleDependencies = {},
+        moduleDependencies = lib.moduleDependencies = {},
 
-    /**
-     * The enumeration of default filenames for each of the dependent
-     * modules.
-     * @type object
-     * @constant
-     */
-    moduleMeta = lib.moduleMeta = {
-        jquery: 'jquery.min.js',
-        base: 'FusionCharts.HC.js',
-        charts: 'FusionCharts.HC.Charts.js',
-        powercharts: 'FusionCharts.HC.PowerCharts.js',
-        widgets: 'FusionCharts.HC.Widgets.js',
-        maps: 'FusionCharts.HC.Maps.js'
-    },
+        /**
+         * The enumeration of default filenames for each of the dependent
+         * modules.
+         * @type object
+         * @constant
+         */
+        moduleMeta = lib.moduleMeta = {
+            jquery: 'jquery.min.js',
+            base: 'FusionCharts.HC.js',
+            charts: 'FusionCharts.HC.Charts.js',
+            powercharts: 'FusionCharts.HC.PowerCharts.js',
+            widgets: 'FusionCharts.HC.Widgets.js',
+            maps: 'FusionCharts.HC.Maps.js'
+        },
 
-    /**
-     * Stores a list of modules that are blocked from loading.
-     */
-    blockedModules = {},
+        /**
+         * Stores a list of modules that are blocked from loading.
+         */
+        blockedModules = {},
 
-    /**
-     * Find the relevant required module names from a given chart type.
-     *
-     * @param {string} type depermines the chart type (alias) that needs to
-     * be looked up for dependent module names
-     *
-     * @type Array
-     */
-    getDependentModuleName = lib.getDependentModuleName = function (type) {
-        var modules = [],
-            i,
-            j;
+        /**
+         * Find the relevant required module names from a given chart type.
+         *
+         * @param {string} type depermines the chart type (alias) that needs to
+         * be looked up for dependent module names
+         *
+         * @type Array
+         */
+        getDependentModuleName = lib.getDependentModuleName = function (type) {
+            var modules = [],
+                i,
+                j;
 
-        for (i in moduleDependencies) {
-            if ((j = moduleDependencies[i][type]) === undefined) {
-                continue;
-            }
-            modules[j] = i;
-        }
-
-        return modules;
-    },
-
-    /**
-     * Adds a dynamic dependency item
-     */
-    injectModuleDependency = lib.injectModuleDependency = function (module, alias, order) {
-        var isInjected = false;
-
-        if (alias === undefined) {
-            alias = module;
-        }
-
-        if (!moduleDependencies[module]) {
-            moduleDependencies[module] = {};
-            if (!moduleCmdQueue[module]) {
-                moduleCmdQueue[module] = [];
-                lib.moduleMeta[module] = coreOptions.html5ScriptNamePrefix +
-                        alias + coreOptions.html5ScriptNameSuffix;
-            }
-            isInjected = true;
-        }
-        moduleDependencies[module][alias] = order || 0;
-
-        return isInjected; // indicate alias already injected
-    },
-
-    // Function that checks whether a particular module is loaded.
-    hasModule = lib.hasModule = function (name) {
-        var i, l;
-
-        // In case we check presense of multiple modules.
-        if (name instanceof Array) {
-            for (i = 0, l = name.length; i < l; i += 1) {
-                if (!Boolean(global.modules[MODULE_NAME_BASE + name]) ||
-                        (name === 'jquery' && !Boolean(win.jQuery))) {
-                    return false;
+            for (i in moduleDependencies) {
+                if ((j = moduleDependencies[i][type]) === undefined) {
+                    continue;
                 }
-            }
-            return true;
-        }
-
-        // Do special check for jQuery as it does not declare a specific module
-        if (name === 'jquery') {
-            return Boolean(win.jQuery);
-        }
-
-        return Boolean(global.modules[MODULE_NAME_BASE + name]);
-    },
-
-    // Determine whether a chart-type needs a particular module.
-    needsModule = lib.needsModule = function (name, type) {
-        return (lib.moduleDependencies[name] &&
-                lib.moduleDependencies[name][type]) !== undefined;
-    },
-
-    // Function to call the global loadScript function for loading an html5
-    // module.
-    loadModule = lib.loadModule = function (name, success, failure, source) {
-
-        // convert single string to array of one string.
-        if (!(name instanceof Array)) {
-            name = [name];
-        }
-
-
-        var
-        l = name.length,
-        count = 0,
-        loadFile = function () {
-
-            // Proceed with callback when load completes.
-            if (count >= l) {
-                success && success();
-                return;
+                modules[j] = i;
             }
 
-            var metaKey = name[count], meta = moduleMeta[metaKey], userSrc;
+            return modules;
+        },
 
-            // Increment counter.
-            count += 1;
+        /**
+         * Adds a dynamic dependency item
+         */
+        injectModuleDependency = lib.injectModuleDependency = function (module, alias, order) {
+            var isInjected = false;
 
-            if (!metaKey) {
-                failure && failure(metaKey);
-            }
-            // Check if module already exists
-            else if (hasModule(metaKey)) {
-                loadFile();
-                return;
-            }
-	    // Check if loading has been blocked. If yes, then assume that
-            // module exists.
-            else if (blockedModules[metaKey]) {
-                global.raiseError(source || global.core,
-                '1112201445A', 'run', 'JavaScriptRenderer~loadModule() ',
-                'required resources are absent or blocked from loading.');
-                failure && failure(metaKey);
-                return;
+            if (alias === undefined) {
+                alias = module;
             }
 
-            // If user has overridden file names.
-            userSrc = (metaKey === 'jquery') ? // handle jquery legacy
-                global.core.options.jQuerySourceFileName :
-            global.core.options['html5' + global.capitalizeString(metaKey) + 'Src'];
+            if (!moduleDependencies[module]) {
+                moduleDependencies[module] = {};
+                if (!moduleCmdQueue[module]) {
+                    moduleCmdQueue[module] = [];
+                    lib.moduleMeta[module] = coreOptions.html5ScriptNamePrefix +
+                        alias + coreOptions.html5ScriptNameSuffix;
+                }
+                isInjected = true;
+            }
+            moduleDependencies[module][alias] = order || 0;
 
-            global.loadScript(userSrc == undefined ? meta : userSrc, {
-                success: function () {
-                    // Even after successful load, we should check whether it
-                    // actually loaded the module.
-                    if (hasModule(metaKey)) {
-                        loadFile();
+            return isInjected; // indicate alias already injected
+        },
+
+        // Function that checks whether a particular module is loaded.
+        hasModule = lib.hasModule = function (name) {
+            var i, l;
+
+            // In case we check presense of multiple modules.
+            if (name instanceof Array) {
+                for (i = 0, l = name.length; i < l; i += 1) {
+                    if (!Boolean(global.modules[MODULE_NAME_BASE + name]) ||
+                        (name === 'jquery' && !Boolean(win.jQuery))) {
+                        return false;
                     }
-                    else {
+                }
+                return true;
+            }
+
+            // Do special check for jQuery as it does not declare a specific module
+            if (name === 'jquery') {
+                return Boolean(win.jQuery);
+            }
+
+            return Boolean(global.modules[MODULE_NAME_BASE + name]);
+        },
+
+        // Determine whether a chart-type needs a particular module.
+        needsModule = lib.needsModule = function (name, type) {
+            return (lib.moduleDependencies[name] &&
+                lib.moduleDependencies[name][type]) !== undefined;
+        },
+
+        // Function to call the global loadScript function for loading an html5
+        // module.
+        loadModule = lib.loadModule = function (name, success, failure, source) {
+
+            // convert single string to array of one string.
+            if (!(name instanceof Array)) {
+                name = [name];
+            }
+
+
+            var
+                l = name.length,
+                count = 0,
+                loadFile = function () {
+
+                    // Proceed with callback when load completes.
+                    if (count >= l) {
+                        success && success();
+                        return;
+                    }
+
+                    var metaKey = name[count], meta = moduleMeta[metaKey], userSrc;
+
+                    // Increment counter.
+                    count += 1;
+
+                    if (!metaKey) {
                         failure && failure(metaKey);
                     }
-                },
+                    // Check if module already exists
+                    else if (hasModule(metaKey)) {
+                        loadFile();
+                        return;
+                    }
+                        // Check if loading has been blocked. If yes, then assume that
+                    // module exists.
+                    else if (blockedModules[metaKey]) {
+                        global.raiseError(source || global.core,
+                            '1112201445A', 'run', 'JavaScriptRenderer~loadModule() ',
+                            'required resources are absent or blocked from loading.');
+                        failure && failure(metaKey);
+                        return;
+                    }
 
-                failure: failure && function () {
-                    failure(metaKey);
-                }
-            }, undefined, true);
-        };
+                    // If user has overridden file names.
+                    userSrc = (metaKey === 'jquery') ? // handle jquery legacy
+                        global.core.options.jQuerySourceFileName :
+                        global.core.options['html5' + global.capitalizeString(metaKey) + 'Src'];
 
-        loadFile();
-    },
+                    global.loadScript(userSrc == undefined ? meta : userSrc, {
+                        success: function () {
+                            // Even after successful load, we should check whether it
+                            // actually loaded the module.
+                            if (hasModule(metaKey)) {
+                                loadFile();
+                            } else {
+                                failure && failure(metaKey);
+                            }
+                        },
 
-    /**
-     * Execute renderer interface commands that are queued due to renderer
-     * not being ready.
-     */
-    executeWaitingCommands = lib.executeWaitingCommands = function (queue) {
-        var item;
+                        failure: failure && function () {
+                            failure(metaKey);
+                        }
+                    }, undefined, true);
+                };
 
-        // Iterate through all FusionCharts objects
-        while ((item = queue.shift())) {
-            // Now we execute 'command' on all charts that are waiting
-            // for the renderer to get ready.
-            if (typeof item === 'object') {
-                renderer[item.cmd].apply(item.obj, item.args);
-            }
-        }
+            loadFile();
+        },
 
-    },
+        /**
+         * Execute renderer interface commands that are queued due to renderer
+         * not being ready.
+         */
+        executeWaitingCommands = lib.executeWaitingCommands = function (queue) {
+            var item;
 
-    /**
-     * Remove all waiting commands for a specific chart-object
-     */
-    cleanupWaitingCommands = lib.cleanupWaitingCommands = function (chart) {
-        var type = chart.chartType(),
-            modules = getDependentModuleName(type),
-            module,
-            requeue = [],
-            queue,
-            item;
-
-        // Iterate through all modules that this chart is dependent on.
-        while ((module = modules.shift())) {
-            queue = moduleCmdQueue[module] || [];
+            // Iterate through all FusionCharts objects
             while ((item = queue.shift())) {
-                // Check whether the scope object matches the one passed in params.
-                if (typeof item === 'object' && item.obj !== chart) {
-                    requeue.push(item);
+                // Now we execute 'command' on all charts that are waiting
+                // for the renderer to get ready.
+                if (typeof item === 'object') {
+                    renderer[item.cmd].apply(item.obj, item.args);
                 }
             }
-            // Restore re-queued items back in queue
-            queue.concat(requeue);
-            requeue = [];
-        }
-    },
 
-    clearStateEventHandler = function (event) {
-        delete event.sender.jsVars._reflowData;
-        event.sender.jsVars._reflowData = {};
-        //delete reflowclean
-        delete event.sender.jsVars._reflowClean;
-    },
+        },
 
-    // Messege configuration
-    ChartMessage = function () {
-        var api = function () {};
-        api.prototype = {
-            "LoadDataErrorText": 'Error in loading data.',
-            "XMLLoadingText": 'Retrieving data. Please wait',
-            "InvalidXMLText": 'Invalid data.',
-            "ChartNoDataText": 'No data to display.',
-            "ReadingDataText": 'Reading data. Please wait',
-            "ChartNotSupported": 'Chart type not supported.',
-            "PBarLoadingText": '',
-            "LoadingText": 'Loading chart. Please wait',
-            "RenderChartErrorText": 'Unable to render chart.'
+        /**
+         * Remove all waiting commands for a specific chart-object
+         */
+        cleanupWaitingCommands = lib.cleanupWaitingCommands = function (chart) {
+            var type = chart.chartType(),
+                modules = getDependentModuleName(type),
+                module,
+                requeue = [],
+                queue,
+                item;
+
+            // Iterate through all modules that this chart is dependent on.
+            while ((module = modules.shift())) {
+                queue = moduleCmdQueue[module] || [];
+                while ((item = queue.shift())) {
+                    // Check whether the scope object matches the one passed in params.
+                    if (typeof item === 'object' && item.obj !== chart) {
+                        requeue.push(item);
+                    }
+                }
+                // Restore re-queued items back in queue
+                queue.concat(requeue);
+                requeue = [];
+            }
+        },
+
+        clearStateEventHandler = function (event) {
+            delete event.sender.jsVars._reflowData;
+            event.sender.jsVars._reflowData = {};
+            //delete reflowclean
+            delete event.sender.jsVars._reflowClean;
+        },
+
+        // Messege configuration
+        ChartMessage = function () {
+            var api = function () {
+            };
+            api.prototype = {
+                "LoadDataErrorText": 'Error in loading data.',
+                "XMLLoadingText": 'Retrieving data. Please wait',
+                "InvalidXMLText": 'Invalid data.',
+                "ChartNoDataText": 'No data to display.',
+                "ReadingDataText": 'Reading data. Please wait',
+                "ChartNotSupported": 'Chart type not supported.',
+                "PBarLoadingText": '',
+                "LoadingText": 'Loading chart. Please wait',
+                "RenderChartErrorText": 'Unable to render chart.'
+            };
+            return api.prototype.constructor = api;
+        }(),
+
+        showLoadingMessage = function (chart, container) {
+            var vars = chart.jsVars,
+                msgs = vars.msgStore;
+
+            if (container && chart.options.showLoadingMessage) {
+                // Show loading message as HTML block since HTML5 renderer is not
+                // loaded yet.
+                container.innerHTML = '<small style="' + LOADER_CSS_TEXT +
+                    ' padding-top: ' +
+                    ((parseInt(container.style.height, 10) / 2) - 5) + 'px">' +
+                    (msgs.PBarLoadingText || msgs.LoadingText) + '</small>';
+                // Set the container's background color only when
+                // transparent mode is not set.
+                container.style.backgroundColor = vars.transparent ?
+                    'transparent' :
+                    (chart.options.containerBackgroundColor || '#ffffff');
+            }
         };
-        return api.prototype.constructor = api;
-    }(),
-
-    showLoadingMessage = function (chart, container) {
-        var vars = chart.jsVars,
-            msgs = vars.msgStore;
-
-        if (container && chart.options.showLoadingMessage) {
-            // Show loading message as HTML block since HTML5 renderer is not
-            // loaded yet.
-            container.innerHTML = '<small style="'+ LOADER_CSS_TEXT +
-                ' padding-top: ' +
-                ((parseInt(container.style.height, 10) / 2) - 5) +'px">' +
-                (msgs.PBarLoadingText || msgs.LoadingText) + '</small>';
-            // Set the container's background color only when
-            // transparent mode is not set.
-            container.style.backgroundColor = vars.transparent ?
-                'transparent' :
-                (chart.options.containerBackgroundColor || '#ffffff');
-        }
-    };
 
     // Define default configuration options pertaining to HTML5 renderer.
     global.extend(global.core.options, extendedCoreOptions);
@@ -5132,8 +5097,7 @@ FusionCharts(['private', 'modules.renderer.js', function () {
             }
         },
 
-        protectedMethods: {
-        },
+        protectedMethods: {},
 
         events: {
             BeforeInitialize: function (event) {
@@ -5195,7 +5159,7 @@ FusionCharts(['private', 'modules.renderer.js', function () {
 
                 // Reference to event sender.
                 var obj = event.sender,
-                vars = obj.jsVars;
+                    vars = obj.jsVars;
 
                 delete vars.loadError;
 
@@ -5203,17 +5167,14 @@ FusionCharts(['private', 'modules.renderer.js', function () {
                 // message in chart itself.
                 if (obj.ref && obj.options.showDataLoadingMessage) {
                     if (vars.hcObj && !vars.hasNativeMessage &&
-                            vars.hcObj.showLoading) {
+                        vars.hcObj.showLoading) {
                         vars.hcObj.showMessage(vars.msgStore.XMLLoadingText);
-                    }
-                    else if (obj.ref.showChartMessage) {
+                    } else if (obj.ref.showChartMessage) {
                         obj.ref.showChartMessage('XMLLoadingText');
-                    }
-                    else {
+                    } else {
                         vars.stallLoad = true;
                     }
-                }
-                else {
+                } else {
                     vars.stallLoad = true;
                 }
             },
@@ -5221,7 +5182,7 @@ FusionCharts(['private', 'modules.renderer.js', function () {
             DataLoadRequestCompleted: function (event) {
                 // Reference to event sender.
                 var obj = event.sender,
-                vars = obj.id;
+                    vars = obj.id;
 
                 // Clear load prevention flags.
                 delete vars.stallLoad;
@@ -5231,7 +5192,7 @@ FusionCharts(['private', 'modules.renderer.js', function () {
 
                 // Reference to event sender.
                 var obj = event.sender,
-                vars = obj.jsVars;
+                    vars = obj.jsVars;
 
                 // On data load error, one needs to display "No Data To Display"
                 // on charts.
@@ -5313,7 +5274,6 @@ FusionCharts(['private', 'modules.renderer.js', function () {
     })
 
 
-
     global.extend(global.core, {
         /**
          * Provide API for auto fall-back to JS chart when no flash is installed.
@@ -5367,7 +5327,7 @@ FusionCharts(['private', 'modules.renderer.js', function () {
         },
 
         _preloadJSChartModule: function (name) {
-            
+
 
             throw "NotImplemented()";
         }
@@ -5442,7 +5402,6 @@ FusionCharts(['private', 'modules.renderer.js', function () {
 }());
 
 
-
 /*jslint evil: true, strict: false, regexp: false */
 
 /*members "", "\b", "\t", "\n", "\f", "\r", "\"", JSON, "\\", apply,
@@ -5474,19 +5433,19 @@ if (!JSON) {
         Date.prototype.toJSON = function (key) {
 
             return isFinite(this.valueOf()) ?
-                this.getUTCFullYear()     + '-' +
+                this.getUTCFullYear() + '-' +
                 f(this.getUTCMonth() + 1) + '-' +
-                f(this.getUTCDate())      + 'T' +
-                f(this.getUTCHours())     + ':' +
-                f(this.getUTCMinutes())   + ':' +
-                f(this.getUTCSeconds())   + 'Z' : null;
+                f(this.getUTCDate()) + 'T' +
+                f(this.getUTCHours()) + ':' +
+                f(this.getUTCMinutes()) + ':' +
+                f(this.getUTCSeconds()) + 'Z' : null;
         };
 
-        String.prototype.toJSON      =
-            Number.prototype.toJSON  =
-            Boolean.prototype.toJSON = function (key) {
-                return this.valueOf();
-            };
+        String.prototype.toJSON =
+            Number.prototype.toJSON =
+                Boolean.prototype.toJSON = function (key) {
+                    return this.valueOf();
+                };
     }
 
     var cx = /[\u0000\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g,
@@ -5499,7 +5458,7 @@ if (!JSON) {
             '\n': '\\n',
             '\f': '\\f',
             '\r': '\\r',
-            '"' : '\\"',
+            '"': '\\"',
             '\\': '\\\\'
         },
         rep;
@@ -5536,7 +5495,7 @@ if (!JSON) {
 // If the value has a toJSON method, call it to obtain a replacement value.
 
         if (value && typeof value === 'object' &&
-                typeof value.toJSON === 'function') {
+            typeof value.toJSON === 'function') {
             value = value.toJSON(key);
         }
 
@@ -5550,98 +5509,98 @@ if (!JSON) {
 // What happens next depends on the value's type.
 
         switch (typeof value) {
-        case 'string':
-            return quote(value);
+            case 'string':
+                return quote(value);
 
-        case 'number':
+            case 'number':
 
 // JSON numbers must be finite. Encode non-finite numbers as null.
 
-            return isFinite(value) ? String(value) : 'null';
+                return isFinite(value) ? String(value) : 'null';
 
-        case 'boolean':
-        case 'null':
+            case 'boolean':
+            case 'null':
 
 // If the value is a boolean or null, convert it to a string. Note:
 // typeof null does not produce 'null'. The case is included here in
 // the remote chance that this gets fixed someday.
 
-            return String(value);
+                return String(value);
 
 // If the type is 'object', we might be dealing with an object or an array or
 // null.
 
-        case 'object':
+            case 'object':
 
 // Due to a specification blunder in ECMAScript, typeof null is 'object',
 // so watch out for that case.
 
-            if (!value) {
-                return 'null';
-            }
+                if (!value) {
+                    return 'null';
+                }
 
 // Make an array to hold the partial results of stringifying this object value.
 
-            gap += indent;
-            partial = [];
+                gap += indent;
+                partial = [];
 
 // Is the value an array?
 
-            if (Object.prototype.toString.apply(value) === '[object Array]') {
+                if (Object.prototype.toString.apply(value) === '[object Array]') {
 
 // The value is an array. Stringify every element. Use null as a placeholder
 // for non-JSON values.
 
-                length = value.length;
-                for (i = 0; i < length; i += 1) {
-                    partial[i] = str(i, value) || 'null';
-                }
+                    length = value.length;
+                    for (i = 0; i < length; i += 1) {
+                        partial[i] = str(i, value) || 'null';
+                    }
 
 // Join all of the elements together, separated with commas, and wrap them in
 // brackets.
 
-                v = partial.length === 0 ? '[]' : gap ?
-                    '[\n' + gap + partial.join(',\n' + gap) + '\n' + mind + ']' :
-                    '[' + partial.join(',') + ']';
-                gap = mind;
-                return v;
-            }
+                    v = partial.length === 0 ? '[]' : gap ?
+                        '[\n' + gap + partial.join(',\n' + gap) + '\n' + mind + ']' :
+                        '[' + partial.join(',') + ']';
+                    gap = mind;
+                    return v;
+                }
 
 // If the replacer is an array, use it to select the members to be stringified.
 
-            if (rep && typeof rep === 'object') {
-                length = rep.length;
-                for (i = 0; i < length; i += 1) {
-                    if (typeof rep[i] === 'string') {
-                        k = rep[i];
-                        v = str(k, value);
-                        if (v) {
-                            partial.push(quote(k) + (gap ? ': ' : ':') + v);
+                if (rep && typeof rep === 'object') {
+                    length = rep.length;
+                    for (i = 0; i < length; i += 1) {
+                        if (typeof rep[i] === 'string') {
+                            k = rep[i];
+                            v = str(k, value);
+                            if (v) {
+                                partial.push(quote(k) + (gap ? ': ' : ':') + v);
+                            }
                         }
                     }
-                }
-            } else {
+                } else {
 
 // Otherwise, iterate through all of the keys in the object.
 
-                for (k in value) {
-                    if (Object.prototype.hasOwnProperty.call(value, k)) {
-                        v = str(k, value);
-                        if (v) {
-                            partial.push(quote(k) + (gap ? ': ' : ':') + v);
+                    for (k in value) {
+                        if (Object.prototype.hasOwnProperty.call(value, k)) {
+                            v = str(k, value);
+                            if (v) {
+                                partial.push(quote(k) + (gap ? ': ' : ':') + v);
+                            }
                         }
                     }
                 }
-            }
 
 // Join all of the member texts together, separated with commas,
 // and wrap them in braces.
 
-            v = partial.length === 0 ? '{}' : gap ?
-                '{\n' + gap + partial.join(',\n' + gap) + '\n' + mind + '}' :
-                '{' + partial.join(',') + '}';
-            gap = mind;
-            return v;
+                v = partial.length === 0 ? '{}' : gap ?
+                    '{\n' + gap + partial.join(',\n' + gap) + '\n' + mind + '}' :
+                    '{' + partial.join(',') + '}';
+                gap = mind;
+                return v;
         }
     }
 
@@ -5679,7 +5638,7 @@ if (!JSON) {
 
             rep = replacer;
             if (replacer && typeof replacer !== 'function' &&
-                    (typeof replacer !== 'object' ||
+                (typeof replacer !== 'object' ||
                     typeof replacer.length !== 'number')) {
                 throw new Error('JSON.stringify');
             }
@@ -5751,9 +5710,9 @@ if (!JSON) {
 // ',' or ':' or '{' or '}'. If that is so, then the text is safe for eval.
 
             if (/^[\],:{}\s]*$/
-                    .test(text.replace(/\\(?:["\\\/bfnrt]|u[0-9a-fA-F]{4})/g, '@')
-                        .replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']')
-                        .replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
+                .test(text.replace(/\\(?:["\\\/bfnrt]|u[0-9a-fA-F]{4})/g, '@')
+                    .replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']')
+                    .replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
 
 // In the third stage we use the eval function to compile the text into a
 // JavaScript structure. The '{' operator is subject to a syntactic ambiguity
@@ -5811,37 +5770,38 @@ if (!JSON) {
 
 
     var
-    COMPACTDATAMODE = 'compactdatamode',
-    STRING = 'string',
-    FUNCTION = 'function',
-    OBJECT = 'object',
-    /**
-     * Trims a long string at lightning fast speed of less than an ms!
-     * @param {string} str is the string to be trimmed.
-     * @type string
-     */
-    fastTrim = function (str) {
-        str = str.replace(/^\s\s*/, '');
-        var ws = /\s/, i = str.length;
-        while (ws.test(str.charAt(i -= 1))) {}
-        return str.slice(0, i + 1);
-    },
+        COMPACTDATAMODE = 'compactdatamode',
+        STRING = 'string',
+        FUNCTION = 'function',
+        OBJECT = 'object',
+        /**
+         * Trims a long string at lightning fast speed of less than an ms!
+         * @param {string} str is the string to be trimmed.
+         * @type string
+         */
+        fastTrim = function (str) {
+            str = str.replace(/^\s\s*/, '');
+            var ws = /\s/, i = str.length;
+            while (ws.test(str.charAt(i -= 1))) {
+            }
+            return str.slice(0, i + 1);
+        },
 
-    XSSEncode = function (s) {
-        if (s === null || s === undefined || typeof s.toString !== FUNCTION) {
-            return '';
-        }
+        XSSEncode = function (s) {
+            if (s === null || s === undefined || typeof s.toString !== FUNCTION) {
+                return '';
+            }
 
-        // do we convert to numerical or html entity?
-        s = s.toString()
-            .replace(/&/g, '&amp;')
-            .replace(/\'/g, '&#39;') //no HTML equivalent as &apos is not cross browser supported
-            .replace(/\"/g, '&quot;')
-            .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;');
+            // do we convert to numerical or html entity?
+            s = s.toString()
+                .replace(/&/g, '&amp;')
+                .replace(/\'/g, '&#39;') //no HTML equivalent as &apos is not cross browser supported
+                .replace(/\"/g, '&quot;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;');
 
-        return s;
-    };
+            return s;
+        };
 
     var xml2json = (function () {
 
@@ -5865,7 +5825,7 @@ if (!JSON) {
                 },
                 data: true,
                 dataset: true,
-                lineset : true,
+                lineset: true,
                 categories: true,
                 category: true,
 
@@ -6037,7 +5997,7 @@ if (!JSON) {
                     value: true, // widgets
                     target: true // widgets
                 },
-                 // maps
+                // maps
                 markers: {
                     definition: true,
                     application: true,
@@ -6069,8 +6029,7 @@ if (!JSON) {
                         obj[nodeName] = [];
                     }
                     obj[nodeName].push(childObj);
-                }
-                else {
+                } else {
                     obj[nodeName] = childObj;
                 }
             },
@@ -6120,7 +6079,7 @@ if (!JSON) {
                                 // Apply nodeName transformation 'tag' rule with
                                 // base-parent-child relationship.
                                 if (typeof rule === OBJECT &&
-                                        typeof rule[parentNodeName] === OBJECT) {
+                                    typeof rule[parentNodeName] === OBJECT) {
                                     temp = undefined;
                                     for (temp in rule[parentNodeName]) {
                                         if (baseObj[temp]) {
@@ -6130,15 +6089,15 @@ if (!JSON) {
                                     }
 
                                 }
-                                // Apply nodeName transformation 'tag' rule with
+                                    // Apply nodeName transformation 'tag' rule with
                                 // parent-child relationship.
                                 else if (typeof rule === OBJECT &&
-                                        typeof rule[parentNodeName] === STRING) {
+                                    typeof rule[parentNodeName] === STRING) {
                                     nodeName = rule[parentNodeName];
 
                                 }
 
-                                // Apply nodeName transformation 'tag' rule with parent
+                                    // Apply nodeName transformation 'tag' rule with parent
                                 // independent relationship.
                                 else if (typeof rule === STRING) {
                                     nodeName = rule;
@@ -6154,8 +6113,7 @@ if (!JSON) {
                                 if (rule && rule[nodeName]) {
                                     parse.child(obj, childNode.childNodes,
                                         nodeName, baseObj);
-                                }
-                                else {
+                                } else {
                                     parse.child(childObj, childNode.childNodes,
                                         nodeName, baseObj);
                                 }
@@ -6177,36 +6135,36 @@ if (!JSON) {
                             }*/
                             break;
 
-                    // In case the child object is a text node and meets some
-                    // other requirements, we parse it as textNode
-                    case XML_TEXTNODE:
+                        // In case the child object is a text node and meets some
+                        // other requirements, we parse it as textNode
+                        case XML_TEXTNODE:
 
-                        // Parse mandatory text-node rule.
-                        rule = rules.text[parentNodeName];
-                        if (rule) {
-                            nodeName = rule;
-                            childObj = childNode.data;
+                            // Parse mandatory text-node rule.
+                            rule = rules.text[parentNodeName];
+                            if (rule) {
+                                nodeName = rule;
+                                childObj = childNode.data;
 
-                            // Append the computed childObject to parent depending
-                            // upon whether it has to be appended to an array or as
-                            // a child object.
-                            parse.append(childObj, obj, nodeName, parentNodeName);
-                        }
+                                // Append the computed childObject to parent depending
+                                // upon whether it has to be appended to an array or as
+                                // a child object.
+                                parse.append(childObj, obj, nodeName, parentNodeName);
+                            }
 
-                        // Parse compact-data mode / optional text-node rule
-                        rule = rules.dsv[parentNodeName];
-                        if (typeof rule === STRING && baseObj.chart &&
+                            // Parse compact-data mode / optional text-node rule
+                            rule = rules.dsv[parentNodeName];
+                            if (typeof rule === STRING && baseObj.chart &&
                                 parseInt(baseObj.chart[COMPACTDATAMODE], 10)) {
-                            // Create text node
-                            nodeName = rule;
-                            childObj = childNode.data;
+                                // Create text node
+                                nodeName = rule;
+                                childObj = childNode.data;
 
-                            // Since this is DSV type text node, it is directly
-                            // appended to the object.
-                            obj[nodeName] = obj[nodeName] ?
+                                // Since this is DSV type text node, it is directly
+                                // appended to the object.
+                                obj[nodeName] = obj[nodeName] ?
                                     obj[nodeName] + childObj : childObj;
-                        }
-                        break;
+                            }
+                            break;
 
                     } // end switching based on node-type
                 }
@@ -6267,8 +6225,7 @@ if (!JSON) {
             try {
                 if (window.DOMParser) {
                     xmlDoc = (new window.DOMParser()).parseFromString(xml, "text/xml");
-                }
-                else { // Internet Explorer
+                } else { // Internet Explorer
                     if (document.body && global.core.options.allowIESafeXMLParsing) { // Check if xml islands can be used
                         var xmlElem = document.createElement("xml");
                         xmlElem.innerHTML = xml;
@@ -6276,8 +6233,7 @@ if (!JSON) {
                         xmlDoc = xmlElem.XMLDocument;
                         document.body.removeChild(xmlElem);
                         xmlElem = null;
-                    }
-                    else {
+                    } else {
                         xmlDoc = new ActiveXObject("Microsoft.XMLDOM");
                         xmlDoc.async = "false";
                         xmlDoc.loadXML(xml);
@@ -6290,8 +6246,7 @@ if (!JSON) {
                     (rootName === 'chart' || rootName === 'map' || rootName === 'graph'))) {
                     parser.errorObject = new TypeError('xml2json.parse()');
                     return jsonObj;
-                }
-                else if (rootName === 'graph') {
+                } else if (rootName === 'graph') {
 
                     newNode = xmlDoc.createElement('chart');
                     rootAttrs = root.attributes;
@@ -6299,7 +6254,7 @@ if (!JSON) {
                     while (i--) {
                         newNode.setAttribute(rootAttrs[i].name, rootAttrs[i].value);
                         rootAttrs.removeNamedItem(rootAttrs[i].name);
-                     }
+                    }
 
                     childNodes = root.childNodes;
                     i = (childNodes && childNodes.length) || 0;
@@ -6318,8 +6273,7 @@ if (!JSON) {
                     xmlDoc.replaceChild(newNode, root);
                     root = newNode;
                 }
-            }
-            catch (e) {
+            } catch (e) {
                 parser.errorObject = e;
             }
 
@@ -6336,8 +6290,7 @@ if (!JSON) {
 
                 // Delete error flag.
                 delete parser.errorObject;
-            }
-            else {
+            } else {
                 parser.errorObject = new TypeError('xml2json.parse()');
             }
 
@@ -6446,7 +6399,7 @@ if (!JSON) {
                     linkedmap: {
                         map: 'map'
                     },
-                    linkedchart : {
+                    linkedchart: {
                         chart: 'chart'
                     }
 
@@ -6517,7 +6470,7 @@ if (!JSON) {
              * @var {string} lcaseNS The case desensitized namespace.
              */
             var attrString = '', innerXML = '', nodeName = '', outerXML = '',
-            item, lowerItem, qualifier;
+                item, lowerItem, qualifier;
 
             // Desensitize case of namespace.
             if (namespace && typeof namespace.toLowerCase === 'function') {
@@ -6543,7 +6496,7 @@ if (!JSON) {
                     if (typeof obj[item] === STRING) {
                         outerXML += XSSEncode(obj[item]);
                     }
-                    // If the node is not string, we process its contents as
+                        // If the node is not string, we process its contents as
                     // another node.
                     else {
                         outerXML += parser(obj[item], namespace,
@@ -6551,7 +6504,7 @@ if (!JSON) {
                     }
                 }
             }
-            // For any other data-type other than Array we iterate through the
+                // For any other data-type other than Array we iterate through the
             // contents of the variable and parse each node.
             else {
                 for (item in obj) {
@@ -6569,8 +6522,8 @@ if (!JSON) {
                             qualifier, namespace, flags) + '</' + lowerItem + '>';
                     }
 
-                    // Parse "attr" rule. Here we test whether to use the items
-                    // within a particular item as the XML attributes of the
+                        // Parse "attr" rule. Here we test whether to use the items
+                        // within a particular item as the XML attributes of the
                     // parent namespace.
                     else if (typeof obj[item] === OBJECT) {
 
@@ -6581,7 +6534,7 @@ if (!JSON) {
                                 .replace(/\/\>/ig, '');
                             namespace = lowerItem;
                         }
-                        // Otherwise, recurse the parser to process the object
+                            // Otherwise, recurse the parser to process the object
                         // as a child JSON object.
                         else {
                             innerXML += parser(obj[item], lowerItem, namespace, flags);
@@ -6590,19 +6543,17 @@ if (!JSON) {
                     // Parse "vLine" and other static rules.
                     else {
 
-                        if (flags.applyDSV && (qualifier = rules.qualify('dsv', lowerItem, namespace)) ) {
+                        if (flags.applyDSV && (qualifier = rules.qualify('dsv', lowerItem, namespace))) {
                             innerXML += obj[item];
                         }// Check for text qualifier
                         else if ((qualifier = rules.qualify('text', lowerItem, namespace))) {
                             innerXML += '<' + qualifier + '>' + obj[item] +
                                 '</' + qualifier + '>';
-                        }
-                        else if (lowerItem === 'vline' && Boolean(obj[item])) {
+                        } else if (lowerItem === 'vline' && Boolean(obj[item])) {
                             namespace = 'vline';
-                        }
-                        else {
+                        } else {
                             attrString += ' ' + lowerItem + '=\"' + XSSEncode(obj[item])
-                            .toString().replace(/\"/ig, '&quot;') + '\"';
+                                .toString().replace(/\"/ig, '&quot;') + '\"';
                         }
                     }
                 }
@@ -6617,8 +6568,8 @@ if (!JSON) {
 
                 // Build the final XML node string.
                 outerXML = (nodeName !== '' ? nodeName : '<' + namespace) +
-                attrString + (innerXML !== '' ? '>' + innerXML + '</' +
-                    namespace + '>' : ' />');
+                    attrString + (innerXML !== '' ? '>' + innerXML + '</' +
+                        namespace + '>' : ' />');
             }
 
             return outerXML;
@@ -6635,15 +6586,14 @@ if (!JSON) {
                 // errors.
                 try {
                     jsonData = JSON.parse(jsonData);
-                }
-                catch (e) {
+                } catch (e) {
                     parser.errorObject = e;
                 }
             }
 
             // Call JSON2XML parser to retrieve the parsed data.
             var rootNS = jsonData && jsonData.graph ? 'graph' :
-                    (jsonData && jsonData.map ? 'map' : 'chart'),
+                (jsonData && jsonData.map ? 'map' : 'chart'),
                 xmlData = parser(jsonData, rootNS, undefined, {});
 
             // Compile a return object for encoding function.
@@ -6661,7 +6611,6 @@ if (!JSON) {
     });
 
 }());
-
 
 
 /*jslint white: true, browser: true, windows: true, forin: true,  undef: true,
@@ -6861,15 +6810,15 @@ FusionCharts(['private', 'CSVDataHandler', function () {
         }
         // Probe widgets.
         else if ((datasets = (jsondata.dials && jsondata.dials.dial) ||
-                (jsondata.pointers && jsondata.pointers.pointer) ||
-                jsondata.value) !== undefined) {
+            (jsondata.pointers && jsondata.pointers.pointer) ||
+            jsondata.value) !== undefined) {
 
             // Prepare CSV for single-value input.
             if (typeof datasets === 'string') {
                 csv.set(0, 0, datasets);
                 // Separate single-value for bullet graphs "target" tag
                 if (typeof jsondata.target === 'string') {
-                    csv.set(0,1, jsondata.target)
+                    csv.set(0, 1, jsondata.target)
                 }
             }
             // For multi-value gauges having dials or pointers.
@@ -6884,7 +6833,7 @@ FusionCharts(['private', 'CSVDataHandler', function () {
 
         // Take multi-series decision here.
         else if ((datasets = jsondata.dataset ||
-                (!(jsondata.data instanceof Array) && []))) {
+            (!(jsondata.data instanceof Array) && []))) {
             column = 1;
 
             // Merge lineset with dataset for easy algorithm (will be separated
@@ -6907,7 +6856,7 @@ FusionCharts(['private', 'CSVDataHandler', function () {
             if (!(datasetLength = datasets.length)) {
                 for (i = 0; i < categoryLength; i += 1) {
                     categoryItem = categories[i];
-                    csv.set(i+1, 0, categoryItem.label || categoryItem.name);
+                    csv.set(i + 1, 0, categoryItem.label || categoryItem.name);
                 }
             }
 
@@ -6918,15 +6867,14 @@ FusionCharts(['private', 'CSVDataHandler', function () {
                     dataCollection = dataCollection[i].dataset;
                     g = 0;
                     dataCollectionLength = dataCollection.length;
-                }
-                else {
+                } else {
                     dataCollection = datasets;
                     g = i;
                     dataCollectionLength = g + 1;
                 }
 
                 for (; g < dataCollectionLength && !isXYPlot && !isMapPlot;
-                        g += 1, column += 1) {
+                       g += 1, column += 1) {
                     // Refer to the dataset item that contains the data and
                     // forms a column.
                     datasetItem = dataCollection[g];
@@ -6943,7 +6891,7 @@ FusionCharts(['private', 'CSVDataHandler', function () {
                     // Loop through categories and fill the values of each column
                     // with its values
                     for (j = 0, k = 0, dataLength = datasetItem.data && datasetItem.data.length || 0;
-                            j < dataLength || j < categoryLength; j += 1) {
+                         j < dataLength || j < categoryLength; j += 1) {
                         categoryItem = categories[j];
                         row = k + 1;
 
@@ -7007,11 +6955,11 @@ FusionCharts(['private', 'CSVDataHandler', function () {
             }
         }
         // for non-ms data.
-        else if ((datasets = jsondata.data)){
+        else if ((datasets = jsondata.data)) {
             csv.set(0, 1, chartAttrs.yaxisname || 'Value');
 
             for (i = 0, categoryLength = datasets.length;
-                    i < categoryLength; i += 1) {
+                 i < categoryLength; i += 1) {
                 dataItem = datasets[i];
                 // Ignore vLines
                 if (!dataItem.vline) {
@@ -7035,11 +6983,11 @@ FusionCharts(['private', 'CSVDataHandler', function () {
 
             // Iterate through all datasets.
             for (i = 0, row = 1, datasets = jsondata.dataset,
-                    dataCollectionLength = datasets.length;
-                    i < dataCollectionLength; i += 1) {
+                     dataCollectionLength = datasets.length;
+                 i < dataCollectionLength; i += 1) {
                 for (j = 0, datasetItem = datasets[i] && datasets[i].data || [],
-                        datasetLength = datasetItem.length; j < datasetLength;
-                        j += 1, row += 1) {
+                         datasetLength = datasetItem.length; j < datasetLength;
+                     j += 1, row += 1) {
                     dataItem = datasetItem[j] || {};
                     dataValue = [datasets[i].seriesname, dataItem.x, dataItem.y];
 
@@ -7059,9 +7007,9 @@ FusionCharts(['private', 'CSVDataHandler', function () {
                     // probed, it will no longer need to compute so many logic
                     // operations since isErrorPlot flag will then be true.
                     if (isErrorPlot || forceErrorColumns ||
-                            dataItem.errorvalue !== undefined ||
-                            dataItem.horizontalerrorvalue !== undefined ||
-                            dataItem.verticalerrorvalue !== undefined) {
+                        dataItem.errorvalue !== undefined ||
+                        dataItem.horizontalerrorvalue !== undefined ||
+                        dataItem.verticalerrorvalue !== undefined) {
 
                         dataValue.push(dataItem.errorvalue,
                             dataItem.horizontalerrorvalue === undefined ?
@@ -7082,8 +7030,7 @@ FusionCharts(['private', 'CSVDataHandler', function () {
                     csv.setRow(row, dataValue);
                 }
             }
-        }
-        else if (isMapPlot) {
+        } else if (isMapPlot) {
             // reset parsing;
             csv.clear();
 
@@ -7093,7 +7040,7 @@ FusionCharts(['private', 'CSVDataHandler', function () {
             // Iterate through all rows and create a reverse map of id to row
             // index.
             for (i = 0, j = 1, categories = jsondata.rows && jsondata.rows.row || [],
-                    l = categories.length; i < l; i += 1, j += 1) {
+                     l = categories.length; i < l; i += 1, j += 1) {
                 categoryItem = categories[i];
                 if (categoryItem.id) {
                     mapRows[categoryItem.id.toLowerCase()] = j; // desensitize
@@ -7102,7 +7049,7 @@ FusionCharts(['private', 'CSVDataHandler', function () {
             }
             // Iterate through all columns and reverse map id to column index.
             for (i = 0, j = 1, categories = jsondata.columns && jsondata.columns.column || [],
-                    l = categories.length; i < l; i += 1, j += 1) {
+                     l = categories.length; i < l; i += 1, j += 1) {
                 categoryItem = categories[i];
                 if (categoryItem.id) {
                     mapColumns[categoryItem.id.toLowerCase()] = j; // desensitize
@@ -7180,7 +7127,6 @@ FusionCharts(['private', 'CSVDataHandler', function () {
     });
 
 }]);
-
 
 
 /*jslint white: true, browser: true, windows: true, forin: true,  undef: true,
@@ -7273,12 +7219,12 @@ FusionCharts(['private', 'CSVDataHandler', function () {
             // Get chart attributes.
             var attList = (attList =
                     this.getChartData(FusionChartsDataFormats.JSON)).chart ||
-                    attList.graph || attList.map;
+                attList.graph || attList.map;
 
             // In case no argument is passed, we return the entire set of
             // chart attributes object.
             if (arguments.length === 0 || attribute === undefined ||
-                    attList === undefined) {
+                attList === undefined) {
                 return attList;
             }
 
@@ -7293,7 +7239,7 @@ FusionCharts(['private', 'CSVDataHandler', function () {
                 value = attList[attribute.toString().toLowerCase()];
             }
 
-            // In case user sends an array of attributes, we compile an object
+                // In case user sends an array of attributes, we compile an object
             // for the same and return.
             else if (attribute instanceof Array) {
                 value = {};
@@ -7303,7 +7249,7 @@ FusionCharts(['private', 'CSVDataHandler', function () {
                 }
             }
 
-            // If all above conditions fail, there must be some issue with the
+                // If all above conditions fail, there must be some issue with the
             // parameters.
             else {
                 global.raiseError(this, '25081429', 'param',
@@ -7317,7 +7263,6 @@ FusionCharts(['private', 'CSVDataHandler', function () {
     }, true);
 
 }());
-
 
 
 /*jslint white: true, browser: true, windows: true, forin: true,  undef: true,
@@ -7368,8 +7313,8 @@ FusionCharts(['private', 'CSVDataHandler', function () {
             if (parent instanceof global.core) {
                 this.level = this.parent.link.level + 1;
             } else {
-            // Parent is not an instance of FusionCharts, this implies this link is
-            // a root link
+                // Parent is not an instance of FusionCharts, this implies this link is
+                // a root link
                 store[root.id] = [{}];
                 this.level = 0;
             }
@@ -7378,7 +7323,7 @@ FusionCharts(['private', 'CSVDataHandler', function () {
         checkObjectRenderLocationOverride = function (obj, parent) {
             return (obj.options.containerElement ===
                 parent.options.containerElement || obj.options.containerElementId ===
-                parent.options.containerElementId) && obj.options.insertMode  ===
+                parent.options.containerElementId) && obj.options.insertMode ===
                 FusionChartsDOMInsertModes.REPLACE;
         };
 
@@ -7414,7 +7359,7 @@ FusionCharts(['private', 'CSVDataHandler', function () {
                 // Delete any extra configuration.
                 store[this.link.root.id].splice(param.length);
             } else if (typeof param === 'object') {
-            // If user has sent one object, we assume he wants to configure
+                // If user has sent one object, we assume he wants to configure
                 // In case level is undefined, we need to assign the current
                 // level of the object.
                 if (typeof level !== 'number') {
@@ -7425,7 +7370,7 @@ FusionCharts(['private', 'CSVDataHandler', function () {
                 if (store[this.link.root.id][level] === undefined) {
                     store[this.link.root.id][level] = {};
                 }
-		// Copy all parameters passed on to the store.
+                // Copy all parameters passed on to the store.
                 global.extend(store[this.link.root.id][level], param);
             } else {
                 global.raiseError(this, '25081731', 'param', '~configureLink()',
@@ -7444,8 +7389,8 @@ FusionCharts(['private', 'CSVDataHandler', function () {
         if (!(event.sender.link instanceof LinkInformation)) {
             event.sender.link = new LinkInformation(event.sender);
         } else {
-        // In case link is predefined, we need to add the new object to the
-        // 'items' collection of parent of the new object.
+            // In case link is predefined, we need to add the new object to the
+            // 'items' collection of parent of the new object.
             // In case of root link, parent is undefined, we do not need to
             // add any type of item configuration.
             if (event.sender.link.parent instanceof global.core) {
@@ -7472,7 +7417,7 @@ FusionCharts(['private', 'CSVDataHandler', function () {
             // swfUrl.
             if (!param.swfSrcPath && param.swfUrl) {
                 param.swfSrcPath = param.swfUrl
-                        .replace(/(.*?)?[^\/]*\.swf.*?/ig, '$1');
+                    .replace(/(.*?)?[^\/]*\.swf.*?/ig, '$1');
             }
             param.type = alias;
         }
@@ -7504,7 +7449,7 @@ FusionCharts(['private', 'CSVDataHandler', function () {
         // Check whether the overlay button text is "close" or "back" depending
         // upon the place of render of the chart.
         if (!checkObjectRenderLocationOverride(childObj, obj) &&
-                !(obj.options.overlayButton
+            !(obj.options.overlayButton
                 && obj.options.overlayButton.message)) {
 
             if (typeof obj.options.overlayButton !== 'object') {
@@ -7547,11 +7492,11 @@ FusionCharts(['private', 'CSVDataHandler', function () {
         }, root);
 
         setTimeout(function () {
-            if (global.core.items[sender.id] ) {
+            if (global.core.items[sender.id]) {
                 sender.dispose();
             }
 
-             // Raise event that link has been closed for a root chart.
+            // Raise event that link has been closed for a root chart.
             global.raiseEvent('LinkedItemClosed', {
                 level: level
             }, root);
@@ -7560,7 +7505,7 @@ FusionCharts(['private', 'CSVDataHandler', function () {
         // In case link item was closed for an object whose parent is not
         // active, we re-render it.
         if (!parent.isActive() &&
-                checkObjectRenderLocationOverride(sender, parent)) {
+            checkObjectRenderLocationOverride(sender, parent)) {
             parent.render();
         }
 
@@ -7622,7 +7567,6 @@ FusionCharts(['private', 'CSVDataHandler', function () {
     FusionChartsEvents.BeforeLinkedItemClose = 'beforelinkeditemclose';
 
 }());
-
 
 
 /*jslint white: true, browser: true, windows: true, forin: true,  undef: true,
@@ -7700,11 +7644,11 @@ FusionCharts(['private', 'CSVDataHandler', function () {
 
             var canvasItems = container.getElementsByTagName('canvas'),
                 l,
-				i;
+                i;
 
             for (i = 0, l = canvasItems.length; i < l; i += 1) {
                 if (canvasItems[i].__fusioncharts__reference === obj.id) {
-					container.removeChild(canvasItems[i]);
+                    container.removeChild(canvasItems[i]);
                     if (obj.ref) {
                         obj.ref.__fusioncharts__canvascreated = false;
                     }
@@ -7816,39 +7760,39 @@ FusionCharts(['private', 'CSVDataHandler', function () {
         }
     };
 
-	lib.drawRLE = function (canvas, rle, width, height, baseColor) {
+    lib.drawRLE = function (canvas, rle, width, height, baseColor) {
 
-		// Failsafe height and width parameters
-		width = width || 2;
-		height = height || 2;
+        // Failsafe height and width parameters
+        width = width || 2;
+        height = height || 2;
 
-		// Adjust canvas dimension
-		canvas.setAttribute('width', width);
-		canvas.setAttribute('height', height);
+        // Adjust canvas dimension
+        canvas.setAttribute('width', width);
+        canvas.setAttribute('height', height);
 
-		var context = canvas.getContext('2d'), imageData;
+        var context = canvas.getContext('2d'), imageData;
 
-		// Prepare image data from rle sent from embed parameter.
-		if (typeof context.putImageData === 'function' &&
-				typeof context.createImageData === 'function') {
-			imageData = context.createImageData(width, height);
-			lib.rle2rgba(rle, imageData.data, baseColor);
-			context.putImageData(imageData, 0, 0);
-		} else { // Fall-back drawing method
-			imageData = lib.rle2array(rle, baseColor);
-			var x = 0, y = 0, z = 0;
-			for (y in imageData) {
-				x = 0;
-				for (z = 0; z < imageData[y].length; z += 2) {
-					context.fillStyle = "#" + imageData[y][z];
-					context.fillRect(x, y, imageData[y][z + 1], 1);
-					x += parseInt(imageData[y][z + 1], 10);
-				}
+        // Prepare image data from rle sent from embed parameter.
+        if (typeof context.putImageData === 'function' &&
+            typeof context.createImageData === 'function') {
+            imageData = context.createImageData(width, height);
+            lib.rle2rgba(rle, imageData.data, baseColor);
+            context.putImageData(imageData, 0, 0);
+        } else { // Fall-back drawing method
+            imageData = lib.rle2array(rle, baseColor);
+            var x = 0, y = 0, z = 0;
+            for (y in imageData) {
+                x = 0;
+                for (z = 0; z < imageData[y].length; z += 2) {
+                    context.fillStyle = "#" + imageData[y][z];
+                    context.fillRect(x, y, imageData[y][z + 1], 1);
+                    x += parseInt(imageData[y][z + 1], 10);
+                }
 
-			}
-		}
-		return true;
-	};
+            }
+        }
+        return true;
+    };
 
     // Manages the dynamically generated CSS of the page
     var css = {
@@ -7863,144 +7807,144 @@ FusionCharts(['private', 'CSVDataHandler', function () {
         cssNode: undefined
     }, activeItems = {}, queuedItems = {}, activeCount = 0, queueTrigger;
 
-	// Define function that allows switch between stylesheets.
-	css.invoke = function (style) {
-		// Check whether to use one of the available library styles.
-		if (typeof this.styles[style] !== 'undefined') {
-			style = this.styles[style];
-		}
-		// If style is not set as undefined, set the style.
-		if (typeof style !== 'undefined') {
-			if (this.cssNode !== undefined && this.cssNode.parentNode !== undefined) {
-				this.cssNode.parentNode.removeChild(this.cssNode);
-			}
-			css.cssNode = lib.appendCSS(style);
-		}
-	};
+    // Define function that allows switch between stylesheets.
+    css.invoke = function (style) {
+        // Check whether to use one of the available library styles.
+        if (typeof this.styles[style] !== 'undefined') {
+            style = this.styles[style];
+        }
+        // If style is not set as undefined, set the style.
+        if (typeof style !== 'undefined') {
+            if (this.cssNode !== undefined && this.cssNode.parentNode !== undefined) {
+                this.cssNode.parentNode.removeChild(this.cssNode);
+            }
+            css.cssNode = lib.appendCSS(style);
+        }
+    };
 
     var onDrawComplete = function (event) {
-			// Get reference to the rendered object refetence
-			var obj = event.sender.ref, w, h;
+            // Get reference to the rendered object refetence
+            var obj = event.sender.ref, w, h;
 
-			// We just verify the external interface for safety sake. Though it is
-			// very unlikely that this event will be fired with crippled EI.
-			if (obj === undefined || typeof obj.prepareImageDataStream !== 'function' ||
-					obj.prepareImageDataStream() === false) {
-				// Request obj to prepare image data stream or queue it up in case SWF
-				// is busy.
-				queueTrigger(event.sender);
-				return;
-			}
-			// Add the object to te collection of active objects post successful
-			// imagestream preparation call.
-			if (!activeItems[event.sender.id]) {
-				activeItems[event.sender.id] = obj;
-				activeCount += 1;
-				if (activeCount === 1) {
-					global.raiseEvent('PrintReadyStateChange', {
-						ready: false,
-						bypass: config.bypass
-					}, event.sender);
-				}
-			}
-			// While image is being prepared, render the "waiting" message.
-			try {
-				w = obj.offsetWidth;
-				h = obj.offsetHeight;
-				lib.drawText(lib.getCanvasElementOf(obj, w, h), config.message, w, h);
-			} catch (e) {
-			// In case of error, remove the CSS so that the SWF is still
-			// printable.
-				css.invoke('error'); // invoke the css that hides canvas
-				global.raiseError(event.sender, '25081807', 'run',
-					'::PrintManager>onDrawComplete',
-					'There was an error while showing message to user via canvas.');
-			}
-		},
+            // We just verify the external interface for safety sake. Though it is
+            // very unlikely that this event will be fired with crippled EI.
+            if (obj === undefined || typeof obj.prepareImageDataStream !== 'function' ||
+                obj.prepareImageDataStream() === false) {
+                // Request obj to prepare image data stream or queue it up in case SWF
+                // is busy.
+                queueTrigger(event.sender);
+                return;
+            }
+            // Add the object to te collection of active objects post successful
+            // imagestream preparation call.
+            if (!activeItems[event.sender.id]) {
+                activeItems[event.sender.id] = obj;
+                activeCount += 1;
+                if (activeCount === 1) {
+                    global.raiseEvent('PrintReadyStateChange', {
+                        ready: false,
+                        bypass: config.bypass
+                    }, event.sender);
+                }
+            }
+            // While image is being prepared, render the "waiting" message.
+            try {
+                w = obj.offsetWidth;
+                h = obj.offsetHeight;
+                lib.drawText(lib.getCanvasElementOf(obj, w, h), config.message, w, h);
+            } catch (e) {
+                // In case of error, remove the CSS so that the SWF is still
+                // printable.
+                css.invoke('error'); // invoke the css that hides canvas
+                global.raiseError(event.sender, '25081807', 'run',
+                    '::PrintManager>onDrawComplete',
+                    'There was an error while showing message to user via canvas.');
+            }
+        },
 
-		onImageStreamReady = function (event, args) {
-			try {
-				if (lib.drawRLE(lib.getCanvasElementOf(event.sender.ref,
-						args.width, args.height), args.stream, args.width,
-						args.height, args.bgColor) === true) {
-					// On successful canvas rendering, remove the item from active
-					// item collection.
-					if (activeItems[event.sender.id]) {
-						delete activeItems[event.sender.id];
-						activeCount -= 1;
+        onImageStreamReady = function (event, args) {
+            try {
+                if (lib.drawRLE(lib.getCanvasElementOf(event.sender.ref,
+                    args.width, args.height), args.stream, args.width,
+                    args.height, args.bgColor) === true) {
+                    // On successful canvas rendering, remove the item from active
+                    // item collection.
+                    if (activeItems[event.sender.id]) {
+                        delete activeItems[event.sender.id];
+                        activeCount -= 1;
 
-						if (activeCount === 0) {
-							global.raiseEvent('PrintReadyStateChange', {
-								ready: true,
-								bypass: config.bypass
-							}, event.sender);
-						}
-					}
-				}
-			} catch (e) {
-			// In case of error, remove the CSS so that the SWF is still
-			// printable.
-				css.invoke('error'); // invoke the css that hides canvas
-				global.raiseError(event.sender, '25081810', 'run',
-					'::PrintManager>onImageStreamReady',
-					'There was an error while drawing canvas.');
-			}
-		},
+                        if (activeCount === 0) {
+                            global.raiseEvent('PrintReadyStateChange', {
+                                ready: true,
+                                bypass: config.bypass
+                            }, event.sender);
+                        }
+                    }
+                }
+            } catch (e) {
+                // In case of error, remove the CSS so that the SWF is still
+                // printable.
+                css.invoke('error'); // invoke the css that hides canvas
+                global.raiseError(event.sender, '25081810', 'run',
+                    '::PrintManager>onImageStreamReady',
+                    'There was an error while drawing canvas.');
+            }
+        },
 
-		// Method to remove canvas and other print manager stuffs when an object is
-		// disposed.
-		onBeforeDispose = function (event) {
-			lib.removeCanvasElementOf(event.sender);
-		},
+        // Method to remove canvas and other print manager stuffs when an object is
+        // disposed.
+        onBeforeDispose = function (event) {
+            lib.removeCanvasElementOf(event.sender);
+        },
 
-		subscribeToEvents = function (state) {
-			var eventAction = state ? 'addEventListener' :
-					'removeEventListener';
+        subscribeToEvents = function (state) {
+            var eventAction = state ? 'addEventListener' :
+                'removeEventListener';
 
-			// Apply the event listener states to the eventHandlers.
-			global.core[eventAction]('ImageStreamReady', onImageStreamReady);
-			global.core[eventAction]('DrawComplete', onDrawComplete);
-			global.core[eventAction]('BeforeDispose', onBeforeDispose);
-		},
+            // Apply the event listener states to the eventHandlers.
+            global.core[eventAction]('ImageStreamReady', onImageStreamReady);
+            global.core[eventAction]('DrawComplete', onDrawComplete);
+            global.core[eventAction]('BeforeDispose', onBeforeDispose);
+        },
 
-		initialize = function () {
-			var item;
+        initialize = function () {
+            var item;
 
-			if (config.invokeCSS === true) {
-				css.invoke('print');
-			}
-			// Iterate through all FusionCharts object reference and
-			// do a fake call to onDrawComplete event
-			for (item in global.core.items) {
-				queueTrigger(global.core.items[item]);
-				queueTrigger();
-			}
+            if (config.invokeCSS === true) {
+                css.invoke('print');
+            }
+            // Iterate through all FusionCharts object reference and
+            // do a fake call to onDrawComplete event
+            for (item in global.core.items) {
+                queueTrigger(global.core.items[item]);
+                queueTrigger();
+            }
 
-		},
+        },
 
-		destroy = function () {
-			var item;
+        destroy = function () {
+            var item;
 
-			// Hide any of the canvas element in case user disables
-			// print manager.
-			css.invoke('error');
-			// Iterate through all FusionCharts object reference and remove
-			// their canvases if present.
-			for (item in global.core.items) {
-				lib.removeCanvasElementOf(global.core.items[item]);
-			}
-			if (!config.bypass) {
-				global.raiseEvent('PrintReadyStateChange', {
-					ready: false,
-					bypass: config.bypass
-				});
-			}
-			// Finally remove all traces of CSS
-			css.invoke('normal');
-		};
+            // Hide any of the canvas element in case user disables
+            // print manager.
+            css.invoke('error');
+            // Iterate through all FusionCharts object reference and remove
+            // their canvases if present.
+            for (item in global.core.items) {
+                lib.removeCanvasElementOf(global.core.items[item]);
+            }
+            if (!config.bypass) {
+                global.raiseEvent('PrintReadyStateChange', {
+                    ready: false,
+                    bypass: config.bypass
+                });
+            }
+            // Finally remove all traces of CSS
+            css.invoke('normal');
+        };
 
-    queueTrigger  = function (obj) {
-		var item;
+    queueTrigger = function (obj) {
+        var item;
         // In case the first argument is not undefined, it implies that an item
         // is to be queued up
         if (obj instanceof global.core) {
@@ -8046,8 +7990,8 @@ FusionCharts(['private', 'CSVDataHandler', function () {
                 // rendered.
                 for (item in global.core.items) {
                     if ((ref = global.core.items[item].ref) !== undefined &&
-							ref.hasRendered && ref.hasRendered() === false) {
-						return false;
+                        ref.hasRendered && ref.hasRendered() === false) {
+                        return false;
                     }
 
                 }
@@ -8066,7 +8010,7 @@ FusionCharts(['private', 'CSVDataHandler', function () {
                 // Check browser capability to fulfill minimum requirements for
                 // this script. Do not proceed if browser is IE
                 if ('\v' === 'v' || global.renderer.currentRendererName() !== 'flash' ||
-						typeof document.createElement('canvas').getContext !== 'function') {
+                    typeof document.createElement('canvas').getContext !== 'function') {
                     config.bypass = true;
                     global.raiseEvent('PrintReadyStateChange', {
                         ready: true,

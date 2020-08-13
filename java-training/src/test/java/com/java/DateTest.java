@@ -13,6 +13,7 @@ import java.time.temporal.ChronoUnit;
 /**
  * 时间日期 [java8 API]
  * LocalDateTime`：`Date`有的我都有，`Date`没有的我也有
+ *
  * @ClassName DateTest
  * @Description TODO
  * @Author jb.zhou
@@ -23,14 +24,14 @@ public class DateTest {
 
 
     @Test
-    public void test01(){
+    public void test01() {
 
         // 获取当前年月日
         LocalDate localDate1 = LocalDate.now();
         System.out.println(localDate1);
 
         // 构造指定的年月日
-        LocalDate localDate2 = LocalDate.of(2019,10,21);
+        LocalDate localDate2 = LocalDate.of(2019, 10, 21);
 
         // 获取年月日
         int year = localDate1.getYear();
@@ -41,7 +42,7 @@ public class DateTest {
         int month1 = localDate1.get(ChronoField.MONTH_OF_YEAR);
         System.out.println(month + "  " + month1);
 
-        int day1 =  localDate1.getDayOfMonth();
+        int day1 = localDate1.getDayOfMonth();
         int day2 = localDate1.get(ChronoField.DAY_OF_MONTH);
         System.out.println(day1 + "  " + day2);
 
@@ -52,7 +53,7 @@ public class DateTest {
     }
 
     @Test
-    public void test02(){
+    public void test02() {
 
         // LocalTime 只会获取几点几分几秒
         LocalTime localTime = LocalTime.of(13, 51, 10);
@@ -71,7 +72,7 @@ public class DateTest {
     }
 
     @Test
-    public void test03(){
+    public void test03() {
 
         LocalDate localDate = LocalDate.now();
         LocalTime localTime = LocalTime.now();
@@ -91,7 +92,7 @@ public class DateTest {
     }
 
     @Test
-    public void test04(){
+    public void test04() {
         // Instant 获取秒数
         Instant instant = Instant.now();
 
@@ -107,7 +108,7 @@ public class DateTest {
     // 修改LocalDate、LocalTime、LocalDateTime、Instant
     // LocalDate、LocalTime、LocalDateTime、Instant为不可变对象，修改这些对象对象会返回一个副本
     @Test
-    public void test05(){
+    public void test05() {
         // LocalDateTime 增加、减少年数、月数、天数等 以
         LocalDateTime localDateTime = LocalDateTime.of(2019, Month.SEPTEMBER, 10,
                 14, 46, 56);
@@ -138,7 +139,7 @@ public class DateTest {
         String s2 = localDate.format(DateTimeFormatter.ISO_LOCAL_DATE);
         // 自定义格式化
         // DateTimeFormatter默认提供了多种格式化方式，如果默认提供的不能满足要求，可以通过DateTimeFormatter的ofPattern方法创建自定义格式化方式
-        DateTimeFormatter dateTimeFormatter =   DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String s3 = localDate.format(dateTimeFormatter);
 
         // 解析时间
@@ -148,7 +149,7 @@ public class DateTest {
     }
 
     @Test
-    public void test06(){
+    public void test06() {
 
 //        SpringBoot中应用LocalDateTime
 //

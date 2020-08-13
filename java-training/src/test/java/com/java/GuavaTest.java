@@ -16,7 +16,7 @@ public class GuavaTest {
      * list转换为字符串
      */
     @Test
-    public void joinTest(){
+    public void joinTest() {
         List<String> names = Lists.newArrayList("John", "Jane", "Adam", "Tom");
         String result = Joiner.on(",").join(names);
 

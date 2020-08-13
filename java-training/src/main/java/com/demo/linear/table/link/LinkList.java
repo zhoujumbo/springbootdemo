@@ -1,6 +1,7 @@
 package com.demo.linear.table.link;
 
-import com.lzz.linear.node.Node;
+
+import com.demo.linear.node.Node;
 
 /**
  * 链表类LinkList
@@ -28,9 +29,9 @@ public class LinkList {
     //求带头结点的链表的长度
     public int length() {
         Node p = head.next; //p指向首结点
-        int length = 0;		//计数器
+        int length = 0;        //计数器
         while (p != null) {
-            p = p.next;		//依次指向后继结点
+            p = p.next;        //依次指向后继结点
             ++length;
         }
         return length;
@@ -38,7 +39,7 @@ public class LinkList {
 
     //查找带头结点的链表的第i个结点
     public Object get(int i) {
-        Node p =  head.next; //p指向首结点
+        Node p = head.next; //p指向首结点
         int j = 0;
         //从首结点开始查找
         while (p != null && j < i) {
@@ -53,7 +54,7 @@ public class LinkList {
 
     //查找元素为obj的结点
     public int indexOf(Object obj) {
-        Node p =  head.next; //p指向首结点
+        Node p = head.next; //p指向首结点
         int j = 0;
         //从首结点开始查找
         while (p != null && !p.data.equals(obj)) {
@@ -68,29 +69,31 @@ public class LinkList {
 
     //在第i个结点之前插入新节点元素
     public void insert(int i, Object obj) {
-        Node p =  head;		//p指向头结点
+        Node p = head;        //p指向头结点
         int j = -1;
         //寻找第i个结点的前结点
-        while (p != null && j < i-1) {
+        while (p != null && j < i - 1) {
             p = p.next;
             j++;
         }
-        if (j > i-1 && p == null) {
+        if (j > i - 1 && p == null) {
             throw new RuntimeException("插入位置不合法");
         }
-        Node s = new Node(obj);	//生成新结点
-        s.next = p.next;		//当前结点p的后结点引用赋给新节点
-        p.next = s;				//当前结点p的引用指向新节点
+        Node s = new Node(obj);    //生成新结点
+        s.next = p.next;        //当前结点p的后结点引用赋给新节点
+        p.next = s;                //当前结点p的引用指向新节点
     }
 
     //头部添加元素
     public void startAdd(Object obj) {
         insert(0, obj);
     }
+
     //尾部添加元素
     public void endAdd(Object obj) {
         insert(length(), obj);
     }
+
     //默认尾部添加元素
     public void add(Object obj) {
         insert(length(), obj);
@@ -98,30 +101,30 @@ public class LinkList {
 
     //删除第i个结点
     public void remove(int i) {
-        Node p =  head;
+        Node p = head;
         int j = -1;
         //寻找第i个结点的前结点
-        while (p != null && j < i-1) {
+        while (p != null && j < i - 1) {
             p = p.next;
             j++;
         }
-        if (j > i-1 && p.next == null) {
+        if (j > i - 1 && p.next == null) {
             throw new RuntimeException("删除位置不合法");
         }
-        p.next = p.next.next;	//当前结点p的引用指向下下个结点
+        p.next = p.next.next;    //当前结点p的引用指向下下个结点
     }
 
     /**
      * 去处重复结点的方法
      */
     public void removeRepeatElem() {
-        Node p = head.next;		 //p指向首结点
-        while (p != null) {		 //从首结点向后查找，直到p为空
+        Node p = head.next;         //p指向首结点
+        while (p != null) {         //从首结点向后查找，直到p为空
             int index = indexOf(p.data);  //记录p的位置
             Node q = p.next;
             while (q != null) {
                 if (p.data.equals(q.data)) {
-                    remove(index+1);	   //去除q所在位置的重复元素
+                    remove(index + 1);       //去除q所在位置的重复元素
                 } else {
                     index++;
                 }

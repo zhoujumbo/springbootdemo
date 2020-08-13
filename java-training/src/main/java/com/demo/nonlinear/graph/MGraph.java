@@ -1,8 +1,10 @@
 package com.demo.nonlinear.graph;
 
-import com.lzz.linear.queue.link.LinkQueue;
+
+import com.demo.linear.queue.link.LinkQueue;
 
 import java.util.Scanner;
+
 /**
  * 图的四种类型：
  * 无向图，有向图，无向网，有向网
@@ -10,22 +12,23 @@ import java.util.Scanner;
  * Date   2018/5/27
  */
 enum GraphKind {
-    UDG,	//无向图
-    DG,		//有向图
-    UDN,	//无向网
-    DN;		//有向网
+    UDG,    //无向图
+    DG,        //有向图
+    UDN,    //无向网
+    DN;        //有向网
 }
+
 /**
  * 图：邻接矩阵存储结构
  */
 public class MGraph {
-    public final static int INFINITY = Integer.MAX_VALUE;	//表示无、有向网中的无穷大
+    public final static int INFINITY = Integer.MAX_VALUE;    //表示无、有向网中的无穷大
 
-    private GraphKind kind;		//图的种类标志
-    private int vexNum;			//顶点数
-    private int arcNum;			//边数
-    private Object[] vexs;		//顶点数组
-    private int[][] arcs;		//邻接矩阵
+    private GraphKind kind;        //图的种类标志
+    private int vexNum;            //顶点数
+    private int arcNum;            //边数
+    private Object[] vexs;        //顶点数组
+    private int[][] arcs;        //邻接矩阵
 
     public MGraph() {
         this(null, 0, 0, null, null);
@@ -60,7 +63,7 @@ public class MGraph {
     }
 
     public Object getVex(int v) {
-        if (v <0 || v >= vexNum) {
+        if (v < 0 || v >= vexNum) {
             throw new RuntimeException("该顶点不存在:" + v);
         }
         return vexs[v];
@@ -94,15 +97,15 @@ public class MGraph {
         vexNum = sc.nextInt();
         arcNum = sc.nextInt();
 
-        vexs = new Object[vexNum];			//创建顶点数组
+        vexs = new Object[vexNum];            //创建顶点数组
         System.out.println("请分别输入图的" + vexNum + "个顶点：");
         for (int v = 0; v < vexNum; v++) {
-            vexs[v] = sc.next();			//初始化顶点数组
+            vexs[v] = sc.next();            //初始化顶点数组
         }
-        arcs = new int[vexNum][vexNum];		//创建邻接矩阵
+        arcs = new int[vexNum][vexNum];        //创建邻接矩阵
         for (int v = 0; v < vexNum; v++) {
             for (int u = 0; u < vexNum; u++) {
-                arcs[v][u] = 0;				//初始化邻接矩阵的值
+                arcs[v][u] = 0;                //初始化邻接矩阵的值
             }
         }
 
@@ -110,7 +113,7 @@ public class MGraph {
         for (int k = 0; k < arcNum; k++) {
             int v = locateVex(sc.next());
             int u = locateVex(sc.next());
-            arcs[v][u] = arcs[u][v] = 1;	//矩阵对称赋值为1
+            arcs[v][u] = arcs[u][v] = 1;    //矩阵对称赋值为1
         }
     }
 
@@ -121,15 +124,15 @@ public class MGraph {
         vexNum = sc.nextInt();
         arcNum = sc.nextInt();
 
-        vexs = new Object[vexNum];			//创建顶点数组
+        vexs = new Object[vexNum];            //创建顶点数组
         System.out.println("请分别输入图的" + vexNum + "个顶点：");
         for (int v = 0; v < vexNum; v++) {
-            vexs[v] = sc.next();			//初始化顶点数组
+            vexs[v] = sc.next();            //初始化顶点数组
         }
-        arcs = new int[vexNum][vexNum];		//创建邻接矩阵
+        arcs = new int[vexNum][vexNum];        //创建邻接矩阵
         for (int v = 0; v < vexNum; v++) {
             for (int u = 0; u < vexNum; u++) {
-                arcs[v][u] = 0;				//初始化邻接矩阵的值
+                arcs[v][u] = 0;                //初始化邻接矩阵的值
             }
         }
 
@@ -137,7 +140,7 @@ public class MGraph {
         for (int k = 0; k < arcNum; k++) {
             int v = locateVex(sc.next());
             int u = locateVex(sc.next());
-            arcs[v][u] = 1;					//矩阵不对称赋值为1
+            arcs[v][u] = 1;                    //矩阵不对称赋值为1
         }
     }
 
@@ -148,15 +151,15 @@ public class MGraph {
         vexNum = sc.nextInt();
         arcNum = sc.nextInt();
 
-        vexs = new Object[vexNum];			//创建顶点数组
+        vexs = new Object[vexNum];            //创建顶点数组
         System.out.println("请分别输入图的" + vexNum + "个顶点：");
         for (int v = 0; v < vexNum; v++) {
-            vexs[v] = sc.next();			//初始化顶点数组
+            vexs[v] = sc.next();            //初始化顶点数组
         }
-        arcs = new int[vexNum][vexNum];		//创建二维邻接矩阵
+        arcs = new int[vexNum][vexNum];        //创建二维邻接矩阵
         for (int v = 0; v < vexNum; v++) {
             for (int u = 0; u < vexNum; u++) {
-                arcs[v][u] = INFINITY;		//初始化邻接矩阵的值
+                arcs[v][u] = INFINITY;        //初始化邻接矩阵的值
             }
         }
 
@@ -164,7 +167,7 @@ public class MGraph {
         for (int k = 0; k < arcNum; k++) {
             int v = locateVex(sc.next());
             int u = locateVex(sc.next());
-            arcs[v][u] = arcs[u][v] = sc.nextInt();	//矩阵对称赋值为权值
+            arcs[v][u] = arcs[u][v] = sc.nextInt();    //矩阵对称赋值为权值
         }
     }
 
@@ -175,15 +178,15 @@ public class MGraph {
         vexNum = sc.nextInt();
         arcNum = sc.nextInt();
 
-        vexs = new Object[vexNum];			//创建顶点数组
+        vexs = new Object[vexNum];            //创建顶点数组
         System.out.println("请分别输入图的" + vexNum + "个顶点：");
         for (int v = 0; v < vexNum; v++) {
-            vexs[v] = sc.next();			//初始化顶点数组
+            vexs[v] = sc.next();            //初始化顶点数组
         }
-        arcs = new int[vexNum][vexNum];		//创建二维邻接矩阵
+        arcs = new int[vexNum][vexNum];        //创建二维邻接矩阵
         for (int v = 0; v < vexNum; v++) {
             for (int u = 0; u < vexNum; u++) {
-                arcs[v][u] = INFINITY;		//初始化邻接矩阵的值
+                arcs[v][u] = INFINITY;        //初始化邻接矩阵的值
             }
         }
 
@@ -191,7 +194,7 @@ public class MGraph {
         for (int k = 0; k < arcNum; k++) {
             int v = locateVex(sc.next());
             int u = locateVex(sc.next());
-            arcs[v][u] = sc.nextInt();		//矩阵不对称赋值为权值
+            arcs[v][u] = sc.nextInt();        //矩阵不对称赋值为权值
         }
     }
 
@@ -228,7 +231,7 @@ public class MGraph {
         if (w < 0 || w >= vexNum) {
             throw new RuntimeException("该顶点不存在:" + w);
         }
-        for (int j = w+1; j < vexNum; j++) { //遍历第v行的元素查找
+        for (int j = w + 1; j < vexNum; j++) { //遍历第v行的元素查找
             if (arcs[v][j] != 0 && arcs[v][j] < INFINITY) {
                 return j;
             }
@@ -236,7 +239,8 @@ public class MGraph {
         return -1;
     }
 
-    private static boolean[] visited;			//顶点数组访问标志位
+    private static boolean[] visited;            //顶点数组访问标志位
+
     /**
      * 广度优先遍历算法BFS
      * 类似于数的层次遍历
@@ -244,20 +248,21 @@ public class MGraph {
     public static void BFSTraverse(MGraph G) {
         visited = new boolean[G.getVexNum()];
         for (int v = 0; v < G.getVexNum(); v++) {
-            visited[v] = false;					//初始化false，表示未访问
+            visited[v] = false;                    //初始化false，表示未访问
         }
         for (int v = 0; v < G.getVexNum(); v++) {
             BFS(G, v);
         }
     }
+
     private static void BFS(MGraph G, int v) {
-        if (!visited[v]) {						//顶点v未被访问时
+        if (!visited[v]) {                        //顶点v未被访问时
             visited[v] = true;
             System.out.print(G.getVex(v).toString() + " ");
             LinkQueue Q = new LinkQueue();
             Q.insert(v);
             while (!Q.isEmpty()) {
-                int u = (Integer) Q.poll();		//队头元素出队
+                int u = (Integer) Q.poll();        //队头元素出队
                 for (int w = G.firstAdjVex(u); w >= 0; w = G.nextAdjVex(u, w)) {
                     if (!visited[w]) {
                         visited[w] = true;
@@ -276,14 +281,15 @@ public class MGraph {
     public static void DFSTraverse(MGraph G) {
         visited = new boolean[G.getVexNum()];
         for (int v = 0; v < G.getVexNum(); v++) {
-            visited[v] = false;					//初始化false，表示未访问
+            visited[v] = false;                    //初始化false，表示未访问
         }
         for (int v = 0; v < G.getVexNum(); v++) {
             DFS(G, v);
         }
     }
+
     private static void DFS(MGraph G, int v) {
-        if (!visited[v]) {						//顶点v未被访问时
+        if (!visited[v]) {                        //顶点v未被访问时
             visited[v] = true;
             System.out.print(G.getVex(v).toString() + " ");
             for (int w = G.firstAdjVex(v); w >= 0; w = G.nextAdjVex(v, w)) {

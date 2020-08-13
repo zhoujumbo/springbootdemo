@@ -16,33 +16,50 @@
     <div id="content"></div>
 </div>
 
-    <script src="/libs/jquery/jquery-1.10.1.js"></script>
-    <script>
-        ;(function($){
+<script src="/libs/jquery/jquery-1.10.1.js"></script>
+<script>
+    ;(function ($) {
 
-            $(".listWrap").on("click", "li", function(){
-                var sId = $(this).data("id");  //获取data-id的值
-                window.location.hash = sId;  //设置锚点
-                loadInner(sId);
-            });
-            function loadInner(sId){
-                var sId = window.location.hash;
-                var pathn, i;
-                switch(sId){
-                    case "#page1": pathn = "page1.html"; i = 0; break;
-                    case "#page2": pathn = "page2.html"; i = 1; break;
-                    case "#page3": pathn = "page1.html"; i = 2; break;
-                    case "#page4": pathn = "page2.html"; i = 3; break;
-                    default: pathn = "page1.html"; i = 0; break;
-                }
-                $("#content").load(pathn, function(){
-//                    $.getScript('basepage/js/*****.js');  //
-                }); //加载相对应的内容
-                $(".listMenu li").eq(i).addClass("current").siblings().removeClass("current"); //当前列表高亮
-            }
-            window.location.hash = $('.current').data("id");
-            var sId = window.location.hash;
+        $(".listWrap").on("click", "li", function () {
+            var sId = $(this).data("id");  //获取data-id的值
+            window.location.hash = sId;  //设置锚点
             loadInner(sId);
+        });
+
+        function loadInner(sId) {
+            var sId = window.location.hash;
+            var pathn, i;
+            switch (sId) {
+                case "#page1":
+                    pathn = "page1.html";
+                    i = 0;
+                    break;
+                case "#page2":
+                    pathn = "page2.html";
+                    i = 1;
+                    break;
+                case "#page3":
+                    pathn = "page1.html";
+                    i = 2;
+                    break;
+                case "#page4":
+                    pathn = "page2.html";
+                    i = 3;
+                    break;
+                default:
+                    pathn = "page1.html";
+                    i = 0;
+                    break;
+            }
+            $("#content").load(pathn, function () {
+//                    $.getScript('basepage/js/*****.js');  //
+            }); //加载相对应的内容
+            $(".listMenu li").eq(i).addClass("current").siblings().removeClass("current"); //当前列表高亮
+        }
+
+        window.location.hash = $('.current').data("id");
+        var sId = window.location.hash;
+        loadInner(sId);
 
         // 方法2
 //            $.ajax( {
@@ -61,13 +78,12 @@
 //
 //            });
         // 方法3
-            // DOM显示隐藏
+        // DOM显示隐藏
 
 
+    })(jQuery);
 
-        })(jQuery);
 
-
-    </script>
+</script>
 </body>
 </html>

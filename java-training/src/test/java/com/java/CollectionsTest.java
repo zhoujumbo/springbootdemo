@@ -20,7 +20,7 @@ public class CollectionsTest {
 
 
     @Test
-    public void test(){
+    public void test() {
 
         ArrayList<Integer> al = new ArrayList<>();
         al.add(18);
@@ -38,7 +38,7 @@ public class CollectionsTest {
         System.out.println("交换index=1,与index=2的值：" + al);
         /**获取集合元素中的最大值*/
         System.out.println("获取元素最大值：" + Collections.max(al));
-        System.out.println("获取元素最小值：" +Collections.min(al));
+        System.out.println("获取元素最小值：" + Collections.min(al));
         //元素随机化，shuffle英文意思：洗牌
         Collections.shuffle(al);
         System.out.println("元素随机：" + al);

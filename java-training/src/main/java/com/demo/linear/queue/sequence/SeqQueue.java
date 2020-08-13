@@ -2,22 +2,22 @@ package com.demo.linear.queue.sequence;
 
 /**
  * 队列-操作受限的线性表。进行删除的一端叫队头，进行插入的一端叫队尾。
- *
+ * <p>
  * 顺序队列用顺序存储。删除队首元素有两种方式：
- *
+ * <p>
  * ①不要求队首元素必须在下标为零的数组元素中；
  * 每次删除元素只需修改队首指针的位置，令front=front+1；
  * 显然优点为无须改变队列元素的位置，缺点为front值随删除元素而不断增加，
  * 整个队列向后移动，随着队尾元素的不断插入，必然会导致数组后端没有可用
  * 空间的情况，而数组前端的大量空间却被闲置。
- *
+ * <p>
  * ②要求队首元素必须在下标为零的数组元素中；
  * 每次删除队首元素，令所有元素元素向前移动一个位置，显然优点为不浪费
  * 空间，缺点为所有元素的地址都要改变，效率低。
- *
+ * <p>
  * 解决"假溢出"而在逻辑上采用循环顺序队列
  * 空队时，front = 0， rear = 0，
- *
+ * <p>
  * 出队，front顺时针移动一个位置；front = (front+1) % size；
  * 入队，rear顺时针移动一个位置； rear = (rear+1) % size；
  * Author lzz
@@ -47,7 +47,7 @@ public class SeqQueue {
     }
 
     //清空队列
-    public void clear(){
+    public void clear() {
         front = rear = count = 0;
     }
 
@@ -75,6 +75,7 @@ public class SeqQueue {
         }
         return queueArray[front];
     }
+
     /**
      * 删除队首元素(出队)
      */
@@ -83,10 +84,11 @@ public class SeqQueue {
             return null;
         }
         Object obj = queueArray[front];
-        front = (front+1) % size;
+        front = (front + 1) % size;
         count--;
         return obj;
     }
+
     /**
      * 在队尾插入元素(入队)
      */
@@ -95,7 +97,7 @@ public class SeqQueue {
             throw new RuntimeException("队列已满");
         }
         queueArray[rear] = obj;
-        rear = (rear+1) % size;	//修改队尾指针
+        rear = (rear + 1) % size;    //修改队尾指针
         count++;
     }
 

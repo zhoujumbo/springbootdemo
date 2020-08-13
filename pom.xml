@@ -21,6 +21,7 @@
 	<!-- 管理模块 -->
 	<modules>
 		<module>/java-training</module>
+		<module>/redis-server</module>
 	</modules>
 
 	<properties>
@@ -45,48 +46,11 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		<!-- mybatis-generator -->
-		<dependency>
-			<groupId>org.mybatis.generator</groupId>
-			<artifactId>mybatis-generator-maven-plugin</artifactId>
-			<version>${mybatis.generator.plugin.version}</version>
-			<scope>test</scope>
-		</dependency>
 		<dependency>
 			<groupId>commons-net</groupId>
 			<artifactId>commons-net</artifactId>
 		</dependency>
 
-		<dependency>
-			<groupId>org.apache.lucene</groupId>
-			<artifactId>lucene-highlighter</artifactId>
-			<version>7.6.0</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.lucene</groupId>
-			<artifactId>lucene-core</artifactId>
-			<version>7.6.0</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.lucene</groupId>
-			<artifactId>lucene-queryparser</artifactId>
-			<version>7.6.0</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.lucene</groupId>
-			<artifactId>lucene-analyzers-common</artifactId>
-			<version>7.6.0</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.lucene</groupId>
-			<artifactId>lucene-analyzers-common</artifactId>
-			<version>7.6.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.janeluo</groupId>
-			<artifactId>ikanalyzer</artifactId>
-			<version>2012_u6</version>
-		</dependency>
 		<!--热部署-->
 		<!--<dependency>-->
 		<!--<groupId>org.springframework.boot</groupId>-->
@@ -94,6 +58,6 @@
 		<!--<optional>true</optional>-->
 		<!--</dependency>-->
 	</dependencies>
-	
+
 
 </project>

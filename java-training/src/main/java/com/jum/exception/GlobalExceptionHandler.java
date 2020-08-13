@@ -15,6 +15,7 @@ import java.util.Map;
 
 /**
  * 全局捕获异常
+ *
  * @author zhoujumbo
  */
 @ControllerAdvice
@@ -22,23 +23,24 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler({RuntimeException.class})
     @ResponseBody  // 返回json格式
-    public Map<String, Object> resultError(){
+    public Map<String, Object> resultError() {
         Map<String, Object> result = new HashMap<String, Object>();
-        result.put("errorCode","500");
-        result.put("errorMsg","服务器错误");
+        result.put("errorCode", "500");
+        result.put("errorMsg", "服务器错误");
         return result;
     }
 
     /**
      * 丢失参数
+     *
      * @return
      */
     @ExceptionHandler({MissingServletRequestParameterException.class})
     @ResponseBody  // 返回json格式
-    public Map<String, Object> resultErrorNoParam(){
+    public Map<String, Object> resultErrorNoParam() {
         Map<String, Object> result = new HashMap<String, Object>();
-        result.put("errorCode","500");
-        result.put("errorMsg","参数为空");
+        result.put("errorCode", "500");
+        result.put("errorMsg", "参数为空");
         return result;
     }
 

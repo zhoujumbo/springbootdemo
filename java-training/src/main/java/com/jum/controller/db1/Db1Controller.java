@@ -18,7 +18,7 @@ public class Db1Controller {
 
     @RequestMapping("/get")
     @ResponseBody
-    public List<User> getUserInfo(){
+    public List<User> getUserInfo() {
         List<User> list = new ArrayList<>();
         list = userService.getUserInfo(2);
         System.out.println(list.size());

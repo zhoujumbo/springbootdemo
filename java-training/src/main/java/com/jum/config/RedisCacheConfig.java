@@ -22,7 +22,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 import java.time.Duration;
 
 /**
- *  缓存配置类
+ * 缓存配置类
  */
 @Configuration
 @EnableCaching
@@ -62,6 +62,7 @@ public class RedisCacheConfig extends CachingConfigurerSupport {
 
     /**
      * 选择redis作为默认缓存工具
+     *
      * @param
      * @return
      */
@@ -119,8 +120,6 @@ public class RedisCacheConfig extends CachingConfigurerSupport {
 //    public CacheResolver cacheResolver() {
 //        return new SimpleCacheResolver(cacheManager());
 //    }
-
-
     @Override
     @Bean
     public CacheErrorHandler errorHandler() {
@@ -138,7 +137,7 @@ public class RedisCacheConfig extends CachingConfigurerSupport {
             }
 
             @Override
-            public void handleCacheEvictError(RuntimeException e, Cache cache, Object key)    {
+            public void handleCacheEvictError(RuntimeException e, Cache cache, Object key) {
                 logger.error("Redis occur handleCacheEvictError：key -> [{}]", key, e);
             }
 

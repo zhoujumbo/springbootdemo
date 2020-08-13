@@ -8,7 +8,7 @@ import com.demo.thread.demo1.DoSomething;
  */
 public class TestRunnable {
 
-//    @Test
+    //    @Test
     public void test1() throws InterruptedException {
 
         DoSomething ds1 = new DoSomething("zhou");
@@ -22,19 +22,19 @@ public class TestRunnable {
         Thread.sleep(1000);
     }
 
-//    @Test
-    public void test2() throws InterruptedException{
+    //    @Test
+    public void test2() throws InterruptedException {
 
         DeadlockRisk deadlockRisk = new DeadlockRisk();
 
-        class ThradA extends Thread{
+        class ThradA extends Thread {
             @Override
             public void run() {
-                deadlockRisk.write(1,2);
+                deadlockRisk.write(1, 2);
             }
         }
 
-        class ThradB extends Thread{
+        class ThradB extends Thread {
             @Override
             public void run() {
                 System.out.println(deadlockRisk.read());

@@ -19,23 +19,23 @@ import java.util.List;
 public class ArraysTest {
 
     @Test
-    public void test(){
-        int[] arr = {72,52,54,63,42,65,46,12,34,6,43};
+    public void test() {
+        int[] arr = {72, 52, 54, 63, 42, 65, 46, 12, 34, 6, 43};
         String[][] str = {
-                {"A","B","C"}, {"D","E","F","G"} };
+                {"A", "B", "C"}, {"D", "E", "F", "G"}};
         //进行升序排序
         Arrays.sort(arr);
         //返回一个包含指定数组元素的字符串
-        String arrStr  = Arrays.toString(arr);
+        String arrStr = Arrays.toString(arr);
         System.out.println(arrStr);
         //降序获取数组元素
-        for(int i = arr.length-1; i >= 0 ; i--) {
+        for (int i = arr.length - 1; i >= 0; i--) {
             System.out.print(arr[i] + " ");
         }
         //把数组转成一个ArrayList对象,该对象由静态内部类维护
         List li = Arrays.asList(arr);
         //使用二分查找法(按升序)
-        System.out.println("\n查询的值所在的index:" + Arrays.binarySearch(arr,46));
+        System.out.println("\n查询的值所在的index:" + Arrays.binarySearch(arr, 46));
 //		//对二维数组进行操作会出现错误
 //		Arrays.sort(str);
 

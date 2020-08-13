@@ -14,7 +14,7 @@ import java.util.stream.IntStream;
 
 public class Java8Demo {
 
-    private  List<Person> persons = Arrays.asList(new Person("Joe", 12),
+    private List<Person> persons = Arrays.asList(new Person("Joe", 12),
             new Person("Jim", 19), new Person("John", 21));
 //    public static void main(String[] args) throws Exception {
 //        // testStreamAPI();
@@ -27,7 +27,7 @@ public class Java8Demo {
 //    }
 
     @Test
-    public void main(){
+    public void main() {
         testInt(2, 3, 4, 2, 3, 5, 1);
         testOccurrence(2, 3, 4, 2, 3, 5, 1);
         distinctSum(2, 3, 4, 2, 3, 5, 1);
@@ -43,7 +43,7 @@ public class Java8Demo {
     public void testChangeData() throws IOException {
         System.out.println(JacksonUtil.toJson(persons));
         persons.stream().forEach(p ->
-            p.setAge(100)
+                p.setAge(100)
         );
         System.out.println(JacksonUtil.toJson(persons));
 
@@ -51,7 +51,7 @@ public class Java8Demo {
     }
 
     @Test
-    public  void testStreamAPI() {
+    public void testStreamAPI() {
         // 打印年龄大于12的人
         System.out.println("使用顺序流串行打印");
         persons.stream().filter(p -> p.getAge() > 12)
@@ -68,7 +68,7 @@ public class Java8Demo {
     }
 
     @Test
-    public  void testStreamMap() {
+    public void testStreamMap() {
         // 应该用filter过滤，然后再使用map进行转换
         persons.parallelStream().map(p -> {
             if (p.getAge() > 18)
@@ -88,7 +88,7 @@ public class Java8Demo {
                 });
     }
 
-    public  void testStreamReduce() {
+    public void testStreamReduce() {
         persons.parallelStream().filter(p -> p.getAge() > 18)
                 .map(p -> new Adult(p))
                 .collect(Collectors.toCollection(ArrayList::new))
@@ -99,7 +99,7 @@ public class Java8Demo {
     }
 
     @Test
-    public  void testStreamPerformance() {
+    public void testStreamPerformance() {
         // 初始化一个范围100万整数流,求能被2整除的数字，toArray（）是终点方法
         long start1 = System.nanoTime();
         int a[] = IntStream.range(0, 1_000_000).filter(p -> p % 2 == 0)
@@ -116,7 +116,7 @@ public class Java8Demo {
         // 在100万时，并发流快些，1000万，并发流反而会慢些，估计和线程的频繁切换有关（本机是8线程CPU）
     }
 
-    public  void testInt(Integer... numbers) {
+    public void testInt(Integer... numbers) {
         List<Integer> l = Arrays.asList(numbers);
         List<Integer> r = l.stream()
                 .map(e -> new Integer(e))
@@ -126,7 +126,7 @@ public class Java8Demo {
         System.out.println("testInt result is: " + r);
     }
 
-    public  void testOccurrence(Integer... numbers) {
+    public void testOccurrence(Integer... numbers) {
         List<Integer> l = Arrays.asList(numbers);
         Map<Integer, Integer> r = l
                 .stream()
@@ -137,7 +137,7 @@ public class Java8Demo {
         System.out.println("testOccurrence result is: " + r);
     }
 
-    public  void distinctSum(Integer... numbers) {
+    public void distinctSum(Integer... numbers) {
         List<Integer> l = Arrays.asList(numbers);
         int sum = l.stream()
                 .map(e -> new Integer(e))
@@ -146,8 +146,10 @@ public class Java8Demo {
         System.out.println("distinctSum result is: " + sum);
     }
 
-    public  void testNestLambda() throws Exception{
-        Callable<Runnable> c1 = () -> () -> { System.out.println("Nested lambda"); };
+    public void testNestLambda() throws Exception {
+        Callable<Runnable> c1 = () -> () -> {
+            System.out.println("Nested lambda");
+        };
         c1.call().run();
         // 用在条件表达式中
         Callable<Integer> c2 = false ? (() -> 42) : (() -> 24);

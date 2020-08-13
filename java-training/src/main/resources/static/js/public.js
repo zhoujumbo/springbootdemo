@@ -1,10 +1,5 @@
 // 依赖于jQuery
-;(function(){
-
-
-
-
-
+;(function () {
 
 
 })(jQuery);

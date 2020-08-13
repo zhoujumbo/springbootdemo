@@ -122,8 +122,7 @@
         if (tbodyArr.length) {
             if (tbodyArr[0].nodeName === "TBODY") {
                 return tbodyArr[0];
-            }
-            else if (tbodyArr[0].nodeName === "THEAD" && tbodyArr[1] && tbodyArr[1].nodeName === "TBODY") {
+            } else if (tbodyArr[0].nodeName === "THEAD" && tbodyArr[1] && tbodyArr[1].nodeName === "TBODY") {
                 return tbodyArr[1];
             }
         }
@@ -183,7 +182,7 @@
                 // column array.
                 columnArrIdx = j + colSpan + rowSpanInc - 1;
                 if (rowSpan[columnArrIdx] &&
-                        ((i - rowSpan[columnArrIdx].rowNum) < rowSpan[columnArrIdx].row)) {
+                    ((i - rowSpan[columnArrIdx].rowNum) < rowSpan[columnArrIdx].row)) {
                     rowSpanInc += rowSpan[columnArrIdx].col;
                     columnArrIdx += rowSpan[columnArrIdx].col;
                 }
@@ -294,9 +293,9 @@
             spanTotal = 0, spanLen;
 
         if (typeof index === 'undefined') {
-        // Checking if the user has provided the index. If index has not been
-        // passed then we assume that the user does not want to give a label row
-        // or column.
+            // Checking if the user has provided the index. If index has not been
+            // passed then we assume that the user does not want to give a label row
+            // or column.
 
             // Creating custom labels for all cells in the first row/column.
             childArr = sanitizeNodesArray(nodeArr[0].childNodes);
@@ -325,16 +324,16 @@
             }
             return {'index': -1, 'labelObj': internalLabel};
         } else if (index === 0) {
-        // Checking if the user has provided the index. Since we expect row/column
-        // indices starting from 1, if index is 0 then we use our internal logic
-        // to find the label array from the given nodeArr.
+            // Checking if the user has provided the index. Since we expect row/column
+            // indices starting from 1, if index is 0 then we use our internal logic
+            // to find the label array from the given nodeArr.
             for (i = 0, l = nodeArr.length; i < l; i += 1) {
                 childArr = sanitizeNodesArray(nodeArr[i].childNodes);
                 emptyCellCount[i] = 0;
                 textCellCount = 0;
                 for (j = 0, len = childArr.length; j < len; j += 1) {
                     if (arrayContains(ignoreArr, (j + 1)) ||
-                            arrayContains(ignoreArr, (j - len))) {
+                        arrayContains(ignoreArr, (j - len))) {
                         continue;
                     }
                     temp = getTextFromNode(childArr[j]);
@@ -465,12 +464,12 @@
         opts.colLabelSource = parseInt(opts.legendSource, 10);
         // Create the labels objects for the chart.
         var rowLabelMap = opts.useLabels ?
-                            getLabels(tableRows, opts.ignoreCols, opts.rowLabelSource) :
-                            getLabels(tableRows, opts.ignoreCols);
+            getLabels(tableRows, opts.ignoreCols, opts.rowLabelSource) :
+            getLabels(tableRows, opts.ignoreCols);
 
         var columnLabelMap = opts.useLegend ?
-                                getLabels(getColumnArr(tableRows), opts.ignoreRows, opts.colLabelSource) :
-                                getLabels(getColumnArr(tableRows), opts.ignoreRows);
+            getLabels(getColumnArr(tableRows), opts.ignoreRows, opts.colLabelSource) :
+            getLabels(getColumnArr(tableRows), opts.ignoreRows);
 
         delete rowLabelMap.labelObj[columnLabelMap.index];
         delete columnLabelMap.labelObj[rowLabelMap.index];
@@ -490,7 +489,7 @@
         // Populating the dataMap.
         for (i = 0; i < l; i += 1) {
             if (rowLabelMap.index === i ||
-                    (columnLabelMap.labelObj[i] === undefined)) {
+                (columnLabelMap.labelObj[i] === undefined)) {
                 continue;
             }
 
@@ -550,7 +549,7 @@
                     }
                 }
                 if (columnLabelMap.index === mapColumnIdx ||
-                        (rowLabelMap.labelObj[mapColumnIdx] === undefined)) {
+                    (rowLabelMap.labelObj[mapColumnIdx] === undefined)) {
                     continue;
                 }
 
@@ -613,7 +612,7 @@
 
         // Default configuration for HTMLTable data-handler
         var opts = {
-            chartAttributes: { },
+            chartAttributes: {},
 
             major: 'row',
             useLabels: true,
@@ -642,10 +641,10 @@
 
         if (opts.major !== "row") {
             labelMap = dataObj.legendMap,
-            legendMap = dataObj.labelMap;
+                legendMap = dataObj.labelMap;
         } else {
             labelMap = dataObj.labelMap,
-            legendMap = dataObj.legendMap;
+                legendMap = dataObj.legendMap;
         }
 
         // chartAttributes should contain the configuration attributes for the chart
@@ -707,8 +706,10 @@
                 for (item1 in dataMap) {
                     for (item2 in dataMap[item1]) {
                         datasetArr.push(global.extend(
-                            {'label': ((labelMap.labelObj[item1].indexOf(_blankString) != "-1") ? "" : labelMap.labelObj[item1]),
-                                'value': dataMap[item1][item2]},
+                            {
+                                'label': ((labelMap.labelObj[item1].indexOf(_blankString) != "-1") ? "" : labelMap.labelObj[item1]),
+                                'value': dataMap[item1][item2]
+                            },
                             opts.labels[i]));
                         i += 1;
 
@@ -741,7 +742,6 @@
     });
 
 }());
-
 
 
 /*jslint white: true, browser: true, windows: true, forin: true,  undef: true,
@@ -787,11 +787,9 @@
             feedData: function (options) {
                 if (typeof options === 'string') {
                     return [options];
-                }
-                else if (typeof options === 'object' && options.stream) {
+                } else if (typeof options === 'object' && options.stream) {
                     return [options.stream];
-                }
-                else {
+                } else {
                     return false;
                 }
             },
@@ -799,11 +797,9 @@
                 // index is passed in case of multivalue charts.
                 if (!isNaN(options)) {
                     return [options];
-                }
-                else if (typeof options === 'object' && options.index) {
+                } else if (typeof options === 'object' && options.index) {
                     return [options.index];
-                }
-                else {
+                } else {
                     return [];
                 }
             },
@@ -811,11 +807,9 @@
                 // index is passed in case of multivalue charts.
                 if (typeof options === 'string') {
                     return [options];
-                }
-                else if (typeof options === 'object' && options.id) {
+                } else if (typeof options === 'object' && options.id) {
                     return [options.id];
-                }
-                else {
+                } else {
                     return [];
                 }
             },
@@ -823,8 +817,7 @@
                 var arr = [];
                 if (typeof options !== 'object') {
                     arr = [options, value, label];
-                }
-                else {
+                } else {
                     options.value && arr.push(options.value);
                     options.label && arr.push(options.label);
                 }
@@ -835,9 +828,8 @@
                 var arr = [];
                 if (typeof options === 'string' || typeof value === 'string' ||
                     typeof label === 'string') {
-                        arr = [options, value, label];
-                }
-                else if (typeof options === 'object') {
+                    arr = [options, value, label];
+                } else if (typeof options === 'object') {
                     options.value && arr.push(options.value);
                     options.label && arr.push(options.label);
                 }
@@ -1074,8 +1066,8 @@
             return this;
         }
         if (typeof attr === "object") {
-             // Set the charts attributes, in the passed object's keys with
-             // the corresponding values.
+            // Set the charts attributes, in the passed object's keys with
+            // the corresponding values.
 
             chartObjects.each(function () {
                 this.FusionCharts.setChartAttribute(attr);
@@ -1266,14 +1258,12 @@
                     .insertFusionCharts(chartOpts).get(0)
                 );
             });
-        }
-        else {
+        } else {
             if (typeof chartOpts.renderAt === 'string') {
                 transferObj.push(jQ("#" + chartOpts.renderAt)
                     .insertFusionCharts(chartOpts).get(0)
                 );
-            }
-            else if (typeof chartOpts.renderAt === 'object') {
+            } else if (typeof chartOpts.renderAt === 'object') {
                 transferObj.push(jQ(chartOpts.renderAt)
                     .insertFusionCharts(chartOpts).get(0)
                 );
@@ -1335,60 +1325,56 @@
      *
      * @param {Object} label. To make the API morph the data setter methods (setData, setDataForId),
      * it can also be passed the same parameters as the setter functions.
-    **/
+     **/
 
     jQ.fn.streamFusionChartsData = function (command, options, value, label) {
 
-            var fcChart,
-                method,
-                params,
-                transfer = [],
-                chartObjects = getChartObjectsFromSelection(this);
+        var fcChart,
+            method,
+            params,
+            transfer = [],
+            chartObjects = getChartObjectsFromSelection(this);
 
-            // Convert the command to lower case and fetch the proper chart method name.
-            method = realtimeCommandMap[command && command.toLowerCase()];
+        // Convert the command to lower case and fetch the proper chart method name.
+        method = realtimeCommandMap[command && command.toLowerCase()];
 
-            // Check if the command provided is valid or not.
-            if (method === undefined) {
-                // this means the command is not a getter. which in turn means that
-                // the command is a data stream string and has to be handled accordingly.
-                if (arguments.length === 1) {
-                    params = [command];
-                    method = realtimeCommandMap['feed'];
-                }
-                else {
-                    return this;
-                }
-            }
-            else if (arguments.length === 1) {
-                // command is to invoke a method without any parameters..
-                params = [];
-            }
-            else {
-                // optionsParser returns an array of parameters to be passed to the
-                // chart method.
-                params = optionsParser[method](options, value, label);
-            }
-
-            if (method === "getData" || method === "getDataForId") {
-                chartObjects.each(function () {
-                    fcChart = this.FusionCharts;
-                    if (typeof fcChart[method] === 'function') {
-                        transfer.push(fcChart[method].apply(fcChart, params));
-                    }
-                });
-                return transfer;
-            }
-            else {
-                chartObjects.each(function () {
-                    fcChart = this.FusionCharts;
-                    if (typeof fcChart[method] === 'function') {
-                        fcChart[method].apply(fcChart, params);
-                    }
-                });
+        // Check if the command provided is valid or not.
+        if (method === undefined) {
+            // this means the command is not a getter. which in turn means that
+            // the command is a data stream string and has to be handled accordingly.
+            if (arguments.length === 1) {
+                params = [command];
+                method = realtimeCommandMap['feed'];
+            } else {
                 return this;
             }
-        };
+        } else if (arguments.length === 1) {
+            // command is to invoke a method without any parameters..
+            params = [];
+        } else {
+            // optionsParser returns an array of parameters to be passed to the
+            // chart method.
+            params = optionsParser[method](options, value, label);
+        }
+
+        if (method === "getData" || method === "getDataForId") {
+            chartObjects.each(function () {
+                fcChart = this.FusionCharts;
+                if (typeof fcChart[method] === 'function') {
+                    transfer.push(fcChart[method].apply(fcChart, params));
+                }
+            });
+            return transfer;
+        } else {
+            chartObjects.each(function () {
+                fcChart = this.FusionCharts;
+                if (typeof fcChart[method] === 'function') {
+                    fcChart[method].apply(fcChart, params);
+                }
+            });
+            return this;
+        }
+    };
 
     jQ.extend(jQ.expr[":"], {
         /**

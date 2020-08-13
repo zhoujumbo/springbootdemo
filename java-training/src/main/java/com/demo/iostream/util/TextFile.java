@@ -7,72 +7,74 @@ import java.util.TreeSet;
 
 public class TextFile extends ArrayList<String> {
 
-    public static String read(String fileName){
+    public static String read(String fileName) {
         StringBuilder sb = new StringBuilder();
-        try{
+        try {
             BufferedReader in = new BufferedReader(new FileReader(new File(fileName)));
-            try{
+            try {
                 String s;
-                while ((s=in.readLine())!=null){
+                while ((s = in.readLine()) != null) {
                     sb.append(s);
                     sb.append("\n");
                 }
-            }finally {
+            } finally {
                 in.close();
             }
-        }catch (IOException e){
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
         return sb.toString();
     }
 
-    public static void write(String fileName, String text){
+    public static void write(String fileName, String text) {
 
-        try{
+        try {
             PrintWriter out = new PrintWriter(new File(fileName).getAbsoluteFile());
-            try{
+            try {
                 out.print(text);
-            }finally {
+            } finally {
                 out.close();
             }
-        }catch(IOException e){
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
     }
 
-    public TextFile(String fileName, String splitter){
+    public TextFile(String fileName, String splitter) {
 
         super(Arrays.asList(read(fileName).split(splitter)));
-        if(get(0).equals("")){remove(0);}
+        if (get(0).equals("")) {
+            remove(0);
+        }
     }
 
-    public TextFile(String fileName){
+    public TextFile(String fileName) {
 
-        this(fileName,"\n");
+        this(fileName, "\n");
     }
 
-    public void write(String fileName){
-        try{
+    public void write(String fileName) {
+        try {
             PrintWriter out = new PrintWriter(new File(fileName).getAbsoluteFile());
-            try{
-                for (String item:this)
+            try {
+                for (String item : this)
                     out.print(item);
-            }finally {
+            } finally {
                 out.close();
             }
-        }catch(IOException e){
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         String f = read("D:\\temp\\a.txt");
-        write("D:\\temp\\b.txt",f);
+        write("D:\\temp\\b.txt", f);
         TextFile text = new TextFile("D:\\temp\\b.txt");
         text.write("D:\\temp\\c.txt");
 
-        TreeSet<String> words = new  TreeSet<String>(new TextFile("D:\\temp\\c.txt","\\w+"));
+        TreeSet<String> words = new TreeSet<String>(new TextFile("D:\\temp\\c.txt", "\\w+"));
         System.out.println(words.headSet("a"));
     }
 

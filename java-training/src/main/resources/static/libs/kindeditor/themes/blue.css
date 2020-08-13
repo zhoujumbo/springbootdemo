@@ -1,13 +1,13 @@
-.ke-container{
-	border: 1px solid #3f8ab9;
+.ke-container {
+    border: 1px solid #3f8ab9;
 }
 
-.ke-toolbar{
+.ke-toolbar {
     border-bottom: 1px solid #3f8ab9;
     background-color: #082D4F;
 }
 
-.ke-statusbar{
+.ke-statusbar {
     background-color: #082D4F;
     border-top: 1px solid #3f8ab9;
 }
